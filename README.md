@@ -21,6 +21,7 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 Utilize the **Deploy to Bluemix** button below to deploy the application to your personal work space.
 
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/date-uptodate-wprichar-1559)
 
 
 ## Request external IP for container
