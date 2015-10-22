@@ -85,12 +85,25 @@ Take not of the credentials to be used for the next step.
 1. Navigate back to your http://hub.jazz.net project
 2. Select **EDIT CODE** in the top right of the screen to take you to your Web IDE
 3. Select /secor/SECOR_INSTALL_DIR/secor.common.properties file on the left
+4. Assign the fields listed below with the credentials you recieved from Object Storage (v1)
 
+		swift.get.auth=true
+		swift.auth.url=<global_account_auth_uri from object storage>
+		swift.username=<username from object storage>
+		swift.api.key=<password from object storage>
+5. Select File and **Save**
 
+![EXAMPLE](images/secorcredentials.jpg)
 
 ## Start Container portion of the pipeline
 
+1. Return to your pipeline in your jazz hub project
+2. Click the play button on the **Container Build** tile
 
+This will kick off the Container build and deploy. You can monitor the status in **View logs and history** on each pipeline tile. Once it is done return to your command line with the ICE CLI and run
+
+		ice bind <external IP put in pipeline> <name of container produced in **Container Deploy** stage>
+		
 
 ## Add external IP to Node-Red
 
