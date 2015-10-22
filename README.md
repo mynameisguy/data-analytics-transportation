@@ -58,7 +58,7 @@ This will bring up the pipeline created for your during the **Deploy to Bluemix*
 cloud foundry application should be running or finished.
 
  
-![EXAMPLE](images/pipeline.jpg)
+![EXAMPLE](images/pipelinestatus2.jpg)
 
 4. Select the edit gear of the **Container Deploy** tile of the pipeline and select **Configure Stage**.
 5. In the **Optional deploy arguments** box in the environment variable **ADVERTISED_HOST** put in the external IP you recieved from the ICE request
@@ -72,10 +72,11 @@ We need to grab to grab our credentials to the newly created Object Storage atta
 
 1. Navigate to your **DASHBOARD** at http://console.ng.bluemix.net
 2. Select your newly created application from the **Deploy to Bluemix** button which will take you to your application's dashboard
-2. Below the **Object Storage (v1)** tile select the down arrow icon to expand that shows the Object Storage credentials
+2. Below the **Object Storage (v1)** tile select the up arrow icon to expand that shows the Object Storage credentials
 
 
-![EXAMPLE](images/objectstorage.jpg) 
+![EXAMPLE](images/uparrow.jpg) 
+
 
 Take not of the credentials to be used for the next step.
 
