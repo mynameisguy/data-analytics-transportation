@@ -112,21 +112,28 @@ We now will set out to add the external IP of the newly created container to our
 
 1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
 Connect the initial node to the "Machine Traffic Info" subflow node.
-[!EXAMPLE](images/connect_start_node.png)
+![EXAMPLE](images/connect_start_node.png)
+
 2. Double click the "Machine Traffic Info" subflow from the list of subflows on the left to enter the subflow. If you double click on the “Machine Traffic Info” subflow node from the main flow, press the “Edit flow” button in the pop-up window to enter the subflow.
-[!EXAMPLE](images/mqtt_node_overview_flow.png)
+![EXAMPLE](images/mqtt_node_overview_flow.png)
+
 3. There are two mqtt nodes in the “Machine Traffic Info” subflow. Double click on the “cosmos/TrafficFlowMadrid/thePMs0” node on the right side of the flow to edit it. 
-[!EXAMPLE](images/mqtt_ip_edit.png)
+![EXAMPLE](images/mqtt_ip_edit.png)
+
 4. Click on the pencil button to the right of the of the “Broker” field to edit the current broker and replace the current IP with the external IP of the newly created container. Press the “Update” button to save the changes.
-[!EXAMPLE](images/mqtt_edit_node.png)
+![EXAMPLE](images/mqtt_edit_node.png)
 The second mqtt node, “cosmos/TrafficFlowMadrid/onlyOne”, is an optional node for testing but the IP address will need to be modified as well.
-[!EXAMPLE](images/mqtt_ip_edit_extra.png)
+![EXAMPLE](images/mqtt_ip_edit_extra.png)
+
 5. Next, double click on the “Machine Learning Techniques” subflow from the list of subflows on the left to enter the subflow. There are two kafka nodes in this subflow that need to be edited for the new IP of the newly created container.
-[!EXAMPLE](images/kafka_node_overview_flow.png)
+![EXAMPLE](images/kafka_node_overview_flow.png)
+
 6. Double click on the top kafka node to edit the node. Change the IP in the “ZK Quorum” field to the new container IP and press “Ok” to save the change.
-[!EXAMPLE](images/kafka_node_edit1.png)
+![EXAMPLE](images/kafka_node_edit1.png)
+
 7. Similarly, double click on the bottom kafka node and change the IP in the “ZK Quorum” field to the new container IP. Press “Ok” to save the change.
-[!EXAMPLE](images/kafka_node_edit2.png)
+![EXAMPLE](images/kafka_node_edit2.png)
+
 8. Press the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
 
 
