@@ -1,17 +1,76 @@
-This README.md file is displayed on your project page. You should edit this 
-file to describe your project, including instructions for building and 
-running the project, pointers to the license under which you are making the 
-project available, and anything else you think would be useful for others to
-know.
+# Workload - Data Analytics Transportation 
 
-We have created an empty license.txt file for you. Well, actually, it says,
-"<Replace this text with the license you've chosen for your project.>" We 
-recommend you edit this and include text for license terms under which you're
-making your code available. A good resource for open source licenses is the 
-[Open Source Initiative](http://opensource.org/).
 
-Be sure to update your project's profile with a short description and 
-eye-catching graphic.
+###Data Analytics Transportation application example implemented in containers and cloud foundry
 
-Finally, consider defining some sprints and work items in Track & Plan to give 
-interested developers a sense of your cadence and upcoming enhancements.
+
+The Data Analytics Transportation application demonstrates
+a data analytics workflow utilizing Bluemix's **Node-Red**.
+
+## Introduction
+
+The Data Analytics Transportation application has been created so you can deploy it into your personal space
+after signing up for Bluemix and the DevOps Services. 
+
+## Sign up for and log into Bluemix and DevOps
+
+Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net.
+When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
+
+## Deploy to Bluemix
+
+Utilize the **Deploy to Bluemix** button below to deploy the application to your personal work space.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/date-uptodate-wprichar-1559 (https://bluemix.net/deploy/button.png%29]%28https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/date-uptodate-wprichar-1559) )
+
+
+## Request external IP for container
+
+You will now bind services to your starter
+bridge application.
+
+## Put external IP into pipeline
+
+1. In the left sidebar, select **Overview** to take you into the application's dashboard where you can
+add or bind services.
+
+
+You have successfully deployed and bound an instance of Object Storage (v2) to your starter bridge application.
+
+## Retrieve Object Storage (v1) credentials
+
+
+We need to grab to grab our credentials to the newly created Object Storage attached to our application
+
+
+1. Return to the Bluemix Dashboard by selecting **DASHBOARD** at top of the page.
+2. Click your newly created application, which will take you to your application's dashboard
+
+
+
+## Add Object Storage (v1) credentials to Secor
+
+We will now add our object storage credentials to the Secor common properties so Secor can push its logs to object store retrieved from Kafka
+
+1. Go to your **Web IDE**
+
+
+## Add external IP to Node-Red
+
+We now will set out to add the external IP of the newly created container to our node red.
+
+1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
+Connect the initial node to the "Machine Traffic Info" subflow node.
+[!EXAMPLE](images/connect_start_node.png)
+2. Double click the "Machine Traffic Info" sublow
+
+
+
+## Set up Spark
+
+We will set up the Spark service to read from our object store and push back to kafka on our container.
+
+
+## Access freeboard from Node-Red to see data coming in from flow
+
+Add the end of the flow our data ends up at free board and presents us with our generated metrics. 
