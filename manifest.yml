@@ -16,8 +16,8 @@ applications:
 - path: .
   memory: 512M
   instances: 1
-  name: date-uptodate-wprichar-1559
-  host: date-uptodate-wprichar-1559
+  name: data-analytics-transportation-application
+  host: data-analytics-transportation-application
   disk_quota: 1024M
   services:
     - dat-spark
