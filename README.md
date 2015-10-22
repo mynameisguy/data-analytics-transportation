@@ -144,4 +144,4 @@ We will set up the Spark service to read from our object store and push back to 
 ## Access freeboard from Node-Red to see data coming in from flow
 
 Add the end of the flow our data ends up at free board and presents us with our generated metrics. 
->>>>>>> e469e910f9cb1730c1b7d63535f41f15b6cc2dd8
+
