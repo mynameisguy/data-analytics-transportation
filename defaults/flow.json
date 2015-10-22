@@ -1,0 +1,869 @@
+[
+    {
+      "type": "tab",
+      "id": "131a16e7.d2b649",
+      "label": "Mobility Use Case"
+    },
+    {
+      "id": "24fd5936.ab003e",
+      "type": "subflow",
+      "name": "Madrid Traffic Info",
+      "in": [
+        {
+          "x": 45,
+          "y": 204,
+          "wires": [
+            {
+              "id": "ec8ba37.9b6a0e"
+            },
+            {
+              "id": "ede90f0c.1216f"
+            },
+            {
+              "id": "32ca55d9.cd35aa"
+            }
+          ]
+        }
+      ],
+      "out": [
+        {
+          "x": 1293.27783203125,
+          "y": 553.3334350585938,
+          "wires": [
+            {
+              "id": "7e272201.22da8c",
+              "port": 0
+            }
+          ]
+        },
+        {
+          "x": 1299,
+          "y": 669,
+          "wires": [
+            {
+              "id": "6683f9fb.997c08",
+              "port": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a28c1e2e.dbe81",
+      "type": "subflow",
+      "name": "Machine Learning Techniques",
+      "in": [
+        {
+          "x": 28,
+          "y": 25,
+          "wires": []
+        }
+      ],
+      "out": [
+        {
+          "x": 88,
+          "y": 25,
+          "wires": []
+        }
+      ]
+    },
+    {
+      "id": "dc555efb.429f78",
+      "type": "subflow",
+      "name": "Prediction Component",
+      "in": [
+        {
+          "x": 70,
+          "y": 70,
+          "wires": []
+        }
+      ],
+      "out": [
+        {
+          "x": 125,
+          "y": 70,
+          "wires": []
+        }
+      ]
+    },
+    {
+      "id": "f17fae6e.973c68",
+      "type": "subflow",
+      "name": "Panel Visualization",
+      "in": [
+        {
+          "x": 142.5714111328125,
+          "y": 169,
+          "wires": [
+            {
+              "id": "c59793f3.9079b"
+            },
+            {
+              "id": "cffab31a.4d50f8"
+            }
+          ]
+        }
+      ],
+      "out": []
+    },
+    {
+      "id": "154249b3.57f20e",
+      "type": "mqtt-broker",
+      "broker": "129.41.255.181",
+      "port": "1883",
+      "clientid": ""
+    },
+    {
+      "id": "15b134c4.ad0503",
+      "type": "subflow:24fd5936.ab003e",
+      "name": "",
+      "x": 322.2222137451172,
+      "y": 138.55557250976562,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "fb2acd53.ea4ae8"
+        ],
+        [
+          "da50d2e5.25af3"
+        ]
+      ]
+    },
+    {
+      "id": "fb2acd53.ea4ae8",
+      "type": "subflow:a28c1e2e.dbe81",
+      "name": "",
+      "x": 582.2222290039062,
+      "y": 79.5555419921875,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "d4dbb549.b719c",
+      "type": "subflow:f17fae6e.973c68",
+      "name": "",
+      "x": 808.2222290039062,
+      "y": 220.55557250976562,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "ec8ba37.9b6a0e",
+      "type": "http request",
+      "name": "Get traffic status from Madrid",
+      "method": "GET",
+      "ret": "txt",
+      "url": "http://informo.munimadrid.es/informo/tmadrid/pm.xml",
+      "x": 181.50003051757812,
+      "y": 329.22222900390625,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "e985ccc9.2ada"
+        ]
+      ]
+    },
+    {
+      "id": "e985ccc9.2ada",
+      "type": "xml",
+      "name": "xml2json",
+      "attr": "$",
+      "chr": "_",
+      "x": 386.5,
+      "y": 329.22222900390625,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "f7a6604a.aa9218",
+          "14edb1ca.62274e",
+          "c1dea6a0.3e2158",
+          "3a42711e.c5bd8e"
+        ]
+      ]
+    },
+    {
+      "id": "f7a6604a.aa9218",
+      "type": "function",
+      "name": "Retrieves only those starting with \"PM\"",
+      "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn item.codigo.toString().indexOf(empiezaPor) === 0; \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
+      "outputs": 1,
+      "x": 410.5,
+      "y": 213,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "1017c813.d80608"
+        ]
+      ]
+    },
+    {
+      "id": "f5c37ed9.ca6888",
+      "type": "function",
+      "name": "Add timestamp & Remove square brackets",
+      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nmsg.payload=(msg.payload).replace(/\\\"/g,\"\");\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 761.5,
+      "y": 272,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "8f06e928.825cd"
+        ]
+      ]
+    },
+    {
+      "id": "1017c813.d80608",
+      "type": "splitter",
+      "name": "Split the array in several messages",
+      "property": "payload",
+      "x": 730.5,
+      "y": 214,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "f5c37ed9.ca6888"
+        ]
+      ]
+    },
+    {
+      "id": "8f06e928.825cd",
+      "type": "mqtt out",
+      "name": "",
+      "topic": "cosmos/TrafficFlowMadrid/thePMs0",
+      "qos": "0",
+      "retain": "false",
+      "broker": "154249b3.57f20e",
+      "x": 1117.1666870117188,
+      "y": 293.66668701171875,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "14edb1ca.62274e",
+      "type": "function",
+      "name": "Retrieves only those starting with \"PM10001\"",
+      "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn item.codigo.toString().indexOf(empiezaPor) === 0; \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM10001\"));\n\nreturn msg;",
+      "outputs": 1,
+      "x": 344.83335876464844,
+      "y": 533.7777709960938,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "257d32cb.4a4c7e"
+        ]
+      ]
+    },
+    {
+      "id": "7e272201.22da8c",
+      "type": "function",
+      "name": "Add timestamp & Remove square brackets",
+      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 1069.8333740234375,
+      "y": 532.7777709960938,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "257d32cb.4a4c7e",
+      "type": "splitter",
+      "name": "Split the array in several messages",
+      "property": "payload",
+      "x": 741.8333740234375,
+      "y": 533.7777709960938,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "7e272201.22da8c"
+        ]
+      ]
+    },
+    {
+      "id": "d58f20a2.81e2e",
+      "type": "comment",
+      "name": "------------------ From Ayuntamiento Madrid to COSMOS Storage ------------------",
+      "info": "",
+      "x": 586.4444274902344,
+      "y": 63,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "2ddc06f7.b1666a",
+      "type": "comment",
+      "name": "------------------ A single Measurement Point for the µCEP ------------------",
+      "info": "",
+      "x": 580.2777709960938,
+      "y": 477.2777805328369,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "64f0ede8.519334",
+      "type": "inject",
+      "name": "Every 1 minutes",
+      "topic": "",
+      "payload": "",
+      "payloadType": "none",
+      "repeat": "60",
+      "crontab": "",
+      "once": true,
+      "x": 114.38887023925781,
+      "y": 137.88888549804688,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "3aba69d9.8f6ca6",
+      "type": "mqtt out",
+      "name": "",
+      "topic": "cosmos/TrafficFlowMadrid/onlyOne",
+      "qos": "0",
+      "retain": "false",
+      "broker": "154249b3.57f20e",
+      "x": 1417.4444580078125,
+      "y": 716.7777709960938,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "c59793f3.9079b",
+      "type": "freeboard",
+      "name": "TrafficInfo",
+      "x": 427.71429443359375,
+      "y": 133.57144165039062,
+      "z": "f17fae6e.973c68",
+      "wires": []
+    },
+    {
+      "id": "90f8eb2f.090ca8",
+      "type": "freeboard",
+      "name": "NewThresholds",
+      "x": 673.691650390625,
+      "y": 154.941650390625,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "ccdcb90e.41fcd8",
+      "type": "function",
+      "name": "Add Timestamp",
+      "func": "var d = new Date();\nvar obj = msg.payload['value'];\nobj=(obj).replace(/\\'/g,\"\\\"\");\nvar newObj = JSON.parse(obj);\nmsg.payload = newObj;\n\nmsg.payload.tf = {};\nmsg.payload.tf = context.global.dateformat(d,\"HH:MM:ss\");\n\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 371.45831298828125,
+      "y": 127.70831298828125,
+      "z": "a28c1e2e.dbe81",
+      "wires": [
+        [
+          "90f8eb2f.090ca8",
+          "1dbedc98.8db6a3"
+        ]
+      ]
+    },
+    {
+      "id": "c80ae304.21d498",
+      "type": "freeboard",
+      "name": "NewThresholdsPM10344",
+      "x": 704.9555053710938,
+      "y": 251.45550537109375,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "623147e0.c9f718",
+      "type": "function",
+      "name": "Add Timestamp",
+      "func": "var d = new Date();\nvar obj = msg.payload['value'];\nobj=(obj).replace(/\\'/g,\"\\\"\");\nvar newObj = JSON.parse(obj);\n\nmsg.payload = newObj;\nmsg.payload.tf = {};\nmsg.payload.tf = context.global.dateformat(d,\"HH:MM:ss\");\n\ncontext.global.speedThreshold = newObj.newThresholds.ThresholdSpeed;\ncontext.global.intensityThreshold = newObj.newThresholds.ThresholdIntensity;\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 373.72216796875,
+      "y": 284.22216796875,
+      "z": "a28c1e2e.dbe81",
+      "wires": [
+        [
+          "c80ae304.21d498",
+          "dde09704.1133e"
+        ]
+      ]
+    },
+    {
+      "id": "c3742267.3c8be",
+      "type": "comment",
+      "name": "capture last 20 events",
+      "info": "",
+      "x": 295,
+      "y": 243,
+      "z": "f17fae6e.973c68",
+      "wires": []
+    },
+    {
+      "id": "c1dea6a0.3e2158",
+      "type": "function",
+      "name": "Retrieves only those starting with \"PM10005\"",
+      "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn item.codigo.toString().indexOf(empiezaPor) === 0; \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM10005\"));\n\nreturn msg;",
+      "outputs": 1,
+      "x": 337,
+      "y": 633,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "49b2a34c.b64d5c"
+        ]
+      ]
+    },
+    {
+      "id": "3a42711e.c5bd8e",
+      "type": "function",
+      "name": "Retrieves only those starting with \"PM10344\"",
+      "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn item.codigo.toString().indexOf(empiezaPor) === 0; \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM10344\"));\n\nreturn msg;",
+      "outputs": 1,
+      "x": 338,
+      "y": 685,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "49b2a34c.b64d5c"
+        ]
+      ]
+    },
+    {
+      "id": "49b2a34c.b64d5c",
+      "type": "splitter",
+      "name": "Split the array in several messages",
+      "property": "payload",
+      "x": 742,
+      "y": 653,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        [
+          "6683f9fb.997c08"
+        ]
+      ]
+    },
+    {
+      "id": "6683f9fb.997c08",
+      "type": "function",
+      "name": "Add timestamp & Remove square brackets",
+      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 1072,
+      "y": 653,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "3e26242e.c1d9dc",
+      "type": "function",
+      "name": "MakeExampleData",
+      "func": "var evento = '{\"codigo\":\"PM10005\",\"intensidad\":\"1740\",\"ocupacion\":\"5\",\"carga\":\"27\",\"nivelServicio\":\"0\",\"velocidad\":\"84\",\"error\":\"N\",\"ts\":1439888527016,\"tf\":\"11:02:07\"}';\n\nmsg.payload = evento;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 386.5,
+      "y": 440,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "406aed63.bf9514",
+      "type": "inject",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "none",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 176,
+      "y": 439.25,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "3e26242e.c1d9dc"
+        ]
+      ]
+    },
+    {
+      "id": "77235c72.88dca4",
+      "type": "debug",
+      "name": "debug1",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1325,
+      "y": 506,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "eda8947d.125768",
+      "type": "debug",
+      "name": "debug2",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1332,
+      "y": 620,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "5711827d.a8ee7c",
+      "type": "debug",
+      "name": "Madrid Traffic Info 1",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 552,
+      "y": 38,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "1b4215e1.e4bdea",
+      "type": "debug",
+      "name": "Madrid Traffic Info 2",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 552,
+      "y": 244,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "da50d2e5.25af3",
+      "type": "function",
+      "name": "emulating CEP",
+      "func": "var obj = JSON.parse(msg.payload);\nif (obj.codigo == \"PM10344\") {\n    var newObj = {};\n    newObj.tf = obj.tf;\n    newObj.ts = obj.ts;\n    if (obj.intensidad == \"-1\") {\n        return;\n    }\n    newObj.ValueIntensity = obj.intensidad;\n    newObj.ValueSpeed = obj.velocidad;\n    newObj.DiffIntensity = \"0.000000\";\n    newObj.DiffSpeed = \"0.000000\";\n    newObj.speedAbnormal = 0;\n    newObj.intensityAbnormal = 0;\n    \n    var sThreshold = context.global.speedThreshold;\n    var iThreshold = context.global.intensityThreshold;\n    \n    if (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n        newObj.speedAbnormal = \"1\";\n    }\n    if (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n        newObj.intensityAbnormal = \"1\";\n    }\n    \n    var lastObj = {};\n    lastObj.InfoTraffic = newObj;\n    \n    msg.payload = lastObj;\n    \n    return msg;\n}",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 539,
+      "y": 198,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "d4dbb549.b719c"
+        ]
+      ]
+    },
+    {
+      "id": "b5df5c44.4a20a",
+      "type": "debug",
+      "name": "CEP emulation ",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 796,
+      "y": 177,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "ede90f0c.1216f",
+      "type": "function",
+      "name": "Get Time",
+      "func": "var d = new Date();\nvar n = d.getTime();\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = context.global.dateformat(d,\"HH:MM:ss\");\n\nreturn;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 192,
+      "y": 164,
+      "z": "24fd5936.ab003e",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "454e5de8.bab1a4",
+      "type": "debug",
+      "name": "PM10001 debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 376,
+      "y": 81,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "cbce2342.3431e",
+      "type": "debug",
+      "name": "PMs",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1027,
+      "y": 254,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "32ca55d9.cd35aa",
+      "type": "debug",
+      "name": "FlowStarted",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 157,
+      "y": 116,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "8661f7fc.799e08",
+      "type": "debug",
+      "name": "PM10005",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 629,
+      "y": 613,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "4e86ccc9.b17934",
+      "type": "debug",
+      "name": "PM10344",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 628,
+      "y": 701,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "868c9a54.797368",
+      "type": "inject",
+      "name": "Init",
+      "topic": "",
+      "payload": "",
+      "payloadType": "none",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 175,
+      "y": 391,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "2dc2fff9.d23d"
+        ]
+      ]
+    },
+    {
+      "id": "2dc2fff9.d23d",
+      "type": "function",
+      "name": "ResetThreshold",
+      "func": "context.global.speedThreshold = 0;\ncontext.global.intensityThreshold = 0;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 374,
+      "y": 391,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "5ed00906.a12ff8",
+      "type": "debug",
+      "name": "PM10344 debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 380,
+      "y": 334,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "abbd1d05.5442e",
+      "type": "inject",
+      "name": "print context to debug",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 134,
+      "y": 492,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "934bbc24.6cb44"
+        ]
+      ]
+    },
+    {
+      "id": "934bbc24.6cb44",
+      "type": "function",
+      "name": "pull context",
+      "func": "msg.payload = context.global;\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 367,
+      "y": 492,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "fb797b22.048688"
+        ]
+      ]
+    },
+    {
+      "id": "fb797b22.048688",
+      "type": "debug",
+      "name": "context",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 568,
+      "y": 491,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "5ad95571.d27e0c",
+      "type": "kafka in",
+      "zkquorum": "129.41.255.181:2181",
+      "topics": "pm10001",
+      "groupId": "GroupID",
+      "x": 146,
+      "y": 103,
+      "z": "a28c1e2e.dbe81",
+      "wires": [
+        [
+          "454e5de8.bab1a4",
+          "ccdcb90e.41fcd8"
+        ]
+      ]
+    },
+    {
+      "id": "fe04e504.c80b",
+      "type": "kafka in",
+      "zkquorum": "129.41.255.181:2181",
+      "topics": "pm10344",
+      "groupId": "GroupID",
+      "x": 154,
+      "y": 307,
+      "z": "a28c1e2e.dbe81",
+      "wires": [
+        [
+          "5ed00906.a12ff8",
+          "623147e0.c9f718"
+        ]
+      ]
+    },
+    {
+      "id": "1dbedc98.8db6a3",
+      "type": "debug",
+      "name": "FreeboardInput",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 671,
+      "y": 100,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "dde09704.1133e",
+      "type": "debug",
+      "name": "Debug NewThresholdsPM10344",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 728,
+      "y": 299,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "cffab31a.4d50f8",
+      "type": "debug",
+      "name": "TrafficInfo",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 427,
+      "y": 193,
+      "z": "f17fae6e.973c68",
+      "wires": []
+    },
+    {
+      "id": "b4dc6694.6d2928",
+      "type": "comment",
+      "name": "!!!ACTION!!! Connect Here",
+      "info": "Connect here to enable flow to run at the\nspecified interval. \n\nIt is disconnected here so it does not \nautomatically start when deployed.\n\nThere are also ACTION items in the Madrid \nTraffic Info Subflow and the Machine Learning\nSubflow to update Kafka and MQTT IP addresses.",
+      "x": 215,
+      "y": 97,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "b660f30a.0ddc78",
+      "type": "comment",
+      "name": "Testing Nodes",
+      "info": "",
+      "x": 259,
+      "y": 341,
+      "z": "131a16e7.d2b649",
+      "wires": []
+    },
+    {
+      "id": "7cf4c188.c629f",
+      "type": "comment",
+      "name": "Data Input",
+      "info": "Traffic data comes in here via xml GET request.",
+      "x": 122,
+      "y": 361,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "6c67fd20.76a6a4",
+      "type": "comment",
+      "name": "!!!ACTION!!! Update Kafka IPs",
+      "info": "Update the Kafka IP addresses when \nKafka/MQTT/SECOR container is created and\ngiven an IP address.\n\nEach Kafka node needs to be updated for the IP\naddress.\n\n\n<Kafka IP>:2181",
+      "x": 151,
+      "y": 200,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "71d61023.ff1078",
+      "type": "comment",
+      "name": "!!!ACTION!!! Update MQTT IP",
+      "info": "Update the MQTT broker IP address when \nKafka/MQTT/SECOR container is created and\ngiven an IP address.\n\nEditing the current IP will update all MQTT\nnodes, but adding a new MQTT broker will need\nthe MQTT nodes in this subflow to point to the\ncorrect MQTT broker.\n\n<MQTT IP>:1883",
+      "x": 1093,
+      "y": 325,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    },
+    {
+      "id": "394a5158.003776",
+      "type": "comment",
+      "name": "!!!ACTION!!! Update MQTT IP",
+      "info": "Update the MQTT broker IP address when \nKafka/MQTT/SECOR container is created and\ngiven an IP address.\n\nEditing the current IP will update all MQTT\nnodes, but adding a new MQTT broker will need\nthe MQTT nodes in this subflow to point to the\ncorrect MQTT broker.\n\n<MQTT IP>:1883",
+      "x": 1397,
+      "y": 748,
+      "z": "24fd5936.ab003e",
+      "wires": []
+    }
+  ]

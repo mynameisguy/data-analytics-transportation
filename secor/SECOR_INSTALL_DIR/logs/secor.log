@@ -1,0 +1,178 @@
+Oct 21, 2015 9:17:55 AM com.twitter.logging.Logger log
+INFO: Starting LatchedStatsListener
+Oct 21, 2015 9:17:55 AM com.twitter.logging.Logger log
+INFO: Admin HTTP interface started on port 9998.
+2015-10-21 09:17:56,786 [Thread-6] (org.apache.hadoop.util.NativeCodeLoader:62) WARN  Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2015-10-21 09:18:11,622 [ZkClient-EventThread-22-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_13], No broker partitions consumed by consumer thread secor_partition_wchen_30643_13-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:11,627 [ZkClient-EventThread-19-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_18], No broker partitions consumed by consumer thread secor_partition_wchen_30643_18-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:11,630 [ZkClient-EventThread-21-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_17], No broker partitions consumed by consumer thread secor_partition_wchen_30643_17-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:11,649 [ZkClient-EventThread-25-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_15], No broker partitions consumed by consumer thread secor_partition_wchen_30643_15-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:11,655 [ZkClient-EventThread-23-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_16], No broker partitions consumed by consumer thread secor_partition_wchen_30643_16-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:11,658 [ZkClient-EventThread-24-localhost:2181/] (kafka.utils.Logging$class:83) WARN  [secor_partition_wchen_30643_14], No broker partitions consumed by consumer thread secor_partition_wchen_30643_14-0 for topic TrafficFlowMadridPM
+2015-10-21 09:18:47,479 [Thread-3] (org.apache.commons.httpclient.HttpMethodBase:682) WARN  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2015-10-21 09:18:49,613 [Thread-3] (org.apache.commons.httpclient.HttpMethodBase:682) WARN  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2015-10-21 09:19:50,487 [Thread-3] (com.pinterest.secor.common.ZookeeperConnector:119) WARN  path /consumers/secor_partition/offsets/TrafficFlowMadridPM/0 does not exist in zookeeper
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2015-10-21 09:19:50,670 [Thread-3] (com.pinterest.secor.common.ZookeeperConnector:119) WARN  path /consumers/secor_partition/offsets/TrafficFlowMadridPM/0 does not exist in zookeeper
+2015-10-21 09:19:51,630 [pool-1-thread-1] (org.apache.commons.httpclient.HttpMethodBase:682) WARN  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2015-10-21 09:19:53,951 [Thread-3] (com.pinterest.secor.common.FileRegistry:155) WARN  No writer found for path /mnt/secor_data/message_logs/partition/30643_12/TrafficFlowMadridPM/dt=2015-10-20/1_0_00000000000000000000.gz
+Oct 21, 2015 9:19:54 AM com.twitter.common.zookeeper.DistributedLockImpl unlock
+INFO: Cleaning up this locks ephemeral node.
+Oct 21, 2015 9:19:54 AM com.twitter.common.zookeeper.DistributedLockImpl cleanup
+INFO: Cleaning up!
+2015-10-21 09:29:43,297 [ConsumerFetcherThread-secor_partition_wchen_30643_12-0-0] (kafka.utils.Logging$class:83) WARN  Reconnect due to socket error: Received -1 when reading from channel, socket has likely been closed.
+2015-10-21 09:29:43,405 [ConsumerFetcherThread-secor_partition_wchen_30643_12-0-0] (kafka.utils.Logging$class:103) ERROR [ConsumerFetcherThread-secor_partition_wchen_30643_12-0-0], Error in fetch Name: FetchRequest; Version: 0; CorrelationId: 6690; ClientId: secor_partition-ConsumerFetcherThread-secor_partition_wchen_30643_12-0-0; ReplicaId: -1; MaxWait: 100 ms; MinBytes: 1 bytes; RequestInfo: [TrafficFlowMadridPM,0] -> PartitionFetchInfo(1,1048576)
+java.io.IOException: Connection reset by peer
+	at sun.nio.ch.FileDispatcherImpl.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:39)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:197)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at sun.nio.ch.SocketAdaptor$SocketInputStream.read(SocketAdaptor.java:223)
+	at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.nio.channels.Channels$ReadableByteChannelImpl.read(Channels.java:385)
+	at kafka.utils.Utils$.read(Utils.scala:375)
+	at kafka.network.BoundedByteBufferReceive.readFrom(BoundedByteBufferReceive.scala:54)
+	at kafka.network.Receive$class.readCompletely(Transmission.scala:56)
+	at kafka.network.BoundedByteBufferReceive.readCompletely(BoundedByteBufferReceive.scala:29)
+	at kafka.network.BlockingChannel.receive(BlockingChannel.scala:100)
+	at kafka.consumer.SimpleConsumer.liftedTree1$1(SimpleConsumer.scala:81)
+	at kafka.consumer.SimpleConsumer.kafka$consumer$SimpleConsumer$$sendRequest(SimpleConsumer.scala:71)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1$$anonfun$apply$mcV$sp$1.apply$mcV$sp(SimpleConsumer.scala:109)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1$$anonfun$apply$mcV$sp$1.apply(SimpleConsumer.scala:109)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1$$anonfun$apply$mcV$sp$1.apply(SimpleConsumer.scala:109)
+	at kafka.metrics.KafkaTimer.time(KafkaTimer.scala:33)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1.apply$mcV$sp(SimpleConsumer.scala:108)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1.apply(SimpleConsumer.scala:108)
+	at kafka.consumer.SimpleConsumer$$anonfun$fetch$1.apply(SimpleConsumer.scala:108)
+	at kafka.metrics.KafkaTimer.time(KafkaTimer.scala:33)
+	at kafka.consumer.SimpleConsumer.fetch(SimpleConsumer.scala:107)
+	at kafka.server.AbstractFetcherThread.processFetchRequest(AbstractFetcherThread.scala:96)
+	at kafka.server.AbstractFetcherThread.doWork(AbstractFetcherThread.scala:88)
+	at kafka.utils.ShutdownableThread.run(ShutdownableThread.scala:51)
+2015-10-21 09:29:44,726 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0005 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:44,866 [Thread-9-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0004 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:44,931 [Thread-7-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0001 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:45,016 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b000d for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:45,125 [Thread-5-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0006 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:45,157 [Thread-6-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0007 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:45,201 [Thread-4-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0003 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:45,299 [Thread-8-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0002 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,313 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0005 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,570 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b000d for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,590 [Thread-9-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0004 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,693 [Thread-4-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0003 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,851 [Thread-8-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0002 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:46,902 [Thread-7-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0001 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:47,027 [Thread-6-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0007 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:47,084 [Thread-5-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0006 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,066 [Thread-9-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0004 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,154 [Thread-8-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0002 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,178 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0005 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,274 [Thread-5-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0006 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,455 [Thread-4-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b0003 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+2015-10-21 09:29:48,541 [Thread-3-SendThread(localhost:2181)] (org.apache.zookeeper.ClientCnxn$SendThread:1188) WARN  Session 0x1508ac2f77b000d for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:740)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1146)
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.InternalParquetRecordWriter: Flushing mem store to file. allocated memory: 47,605,430
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 70B for [codigo] BINARY: 1 values, 11B raw, 31B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 43B for [descripcion] BINARY: 1 values, 6B raw, 26B comp, 1 pages, encodings: [PLAIN, RLE, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 43B for [accesoAsociado] INT64: 1 values, 6B raw, 26B comp, 1 pages, encodings: [PLAIN, RLE, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 57B for [intensidad] INT32: 1 values, 4B raw, 24B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 57B for [ocupacion] INT32: 1 values, 4B raw, 24B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 57B for [carga] INT32: 1 values, 4B raw, 24B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 57B for [nivelServicio] INT32: 1 values, 4B raw, 24B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 61B for [velocidad] INT32: 1 values, 10B raw, 28B comp, 1 pages, encodings: [PLAIN, RLE, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 43B for [intensidadSat] INT32: 1 values, 6B raw, 26B comp, 1 pages, encodings: [PLAIN, RLE, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 52B for [error] BINARY: 1 values, 5B raw, 25B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 43B for [subarea] INT32: 1 values, 6B raw, 26B comp, 1 pages, encodings: [PLAIN, RLE, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 67B for [ts] INT64: 1 values, 8B raw, 26B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
+Oct 21, 2015 9:19:50 AM INFO: parquet.hadoop.ColumnChunkPageWriteStore: written 73B for [tf] BINARY: 1 values, 12B raw, 32B comp, 1 pages, encodings: [PLAIN, BIT_PACKED]
