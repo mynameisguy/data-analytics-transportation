@@ -59,56 +59,6 @@ We will now add our object storage credentials to the Secor common properties so
 
 We now will set out to add the external IP of the newly created container to our node red.
 
-1. Access your node red. 
-
-
-## Set up Spark
-
-We will set up the Spark service to read from our object store and push back to kafka on our container.
-
-
-## Access freeboard from Node-Red to see data coming in from flow
-
-Add the end of the flow our data ends up at free board and presents us with our generated metrics.
-=======
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/date-uptodate-wprichar-1559 (https://bluemix.net/deploy/button.png%29]%28https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/date-uptodate-wprichar-1559) )
-
-
-## Request external IP for container
-
-You will now bind services to your starter
-bridge application.
-
-## Put external IP into pipeline
-
-1. In the left sidebar, select **Overview** to take you into the application's dashboard where you can
-add or bind services.
-
-
-You have successfully deployed and bound an instance of Object Storage (v2) to your starter bridge application.
-
-## Retrieve Object Storage (v1) credentials
-
-
-We need to grab to grab our credentials to the newly created Object Storage attached to our application
-
-
-1. Return to the Bluemix Dashboard by selecting **DASHBOARD** at top of the page.
-2. Click your newly created application, which will take you to your application's dashboard
-
-
-
-## Add Object Storage (v1) credentials to Secor
-
-We will now add our object storage credentials to the Secor common properties so Secor can push its logs to object store retrieved from Kafka
-
-1. Go to your **Web IDE**
-
-
-## Add external IP to Node-Red
-
-We now will set out to add the external IP of the newly created container to our node red.
-
 1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
 Connect the initial node to the "Machine Traffic Info" subflow node.
 ![EXAMPLE](images/connect_start_node.png)
