@@ -1,0 +1,263 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Traffic state @ Madrid City",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"5": 7
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"5": 2
+			},
+			"col_width": 2,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Last Reading",
+						"size": "regular",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"tf\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "microCEP Rules",
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 1,
+				"4": 7,
+				"5": 7
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Last Thresholds",
+						"size": "regular",
+						"value": "datasources[\"NewThresholds\"][\"tf\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 5,
+				"4": 5
+			},
+			"col": {
+				"2": 2,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Speed",
+						"size": "regular",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"ValueSpeed\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "km/h"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Alert",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+						"on_text": "Speed is abnormal",
+						"off_text": "Speed is normal"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 9,
+				"3": 5,
+				"4": 11,
+				"5": 11
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Speed Threshold",
+						"value": "datasources[\"NewThresholdsPM10344\"][\"newThresholds\"][\"ThresholdSpeed\"]",
+						"units": "km/h",
+						"min_value": 0,
+						"max_value": "200"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 13,
+				"3": 5,
+				"4": 19,
+				"5": 19
+			},
+			"col": {
+				"2": 2,
+				"3": 2,
+				"4": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Last Speed",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"ValueSpeed\"]",
+						"units": "km/h",
+						"min_value": 0,
+						"max_value": "200"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 17,
+				"3": 13,
+				"4": 11
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Intensity",
+						"size": "big",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"ValueIntensity\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "vehicles/hour"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Alert",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
+						"on_text": "Intensity is abnormal",
+						"off_text": "Intensity is normal"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 21,
+				"3": 13,
+				"4": 11,
+				"5": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 2,
+				"4": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Last intensity",
+						"value": "datasources[\"TrafficInfo\"][\"InfoTraffic\"][\"ValueIntensity\"]",
+						"units": "vehicles/hour",
+						"min_value": 0,
+						"max_value": "7000"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 25,
+				"3": 13,
+				"4": 19,
+				"5": 19
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Intensity Threshold",
+						"value": "datasources[\"NewThresholdsPM10344\"][\"newThresholds\"][\"ThresholdIntensity\"]",
+						"units": "vehicles/hour",
+						"min_value": 0,
+						"max_value": "7000"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "TrafficInfo",
+			"type": "TrafficInfo",
+			"settings": {}
+		},
+		{
+			"name": "NewThresholds",
+			"type": "NewThresholds",
+			"settings": {}
+		},
+		{
+			"name": "NewThresholdsPM10344",
+			"type": "NewThresholdsPM10344",
+			"settings": {}
+		}
+	],
+	"columns": 3
+}

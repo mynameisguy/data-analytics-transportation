@@ -108,7 +108,7 @@ This will kick off the Container build and deploy. You can monitor the status in
 
 ## Add external IP to Node-Red
 
-We now will set out to add the external IP of the newly created container to our node red.
+We now will set out to add the external IP of the newly created container to our Node-Red.
 
 1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
 Connect the initial node to the "Machine Traffic Info" subflow node.
@@ -118,12 +118,12 @@ Connect the initial node to the "Machine Traffic Info" subflow node.
 ![EXAMPLE](images/mqtt_node_overview_flow.png)
 
 3. There are two mqtt nodes in the “Machine Traffic Info” subflow. Double click on the “cosmos/TrafficFlowMadrid/thePMs0” node on the right side of the flow to edit it. 
-![EXAMPLE](images/mqtt_ip_edit.png)
+![EXAMPLE](images/mqtt_ip_edit.jpg)
 
 4. Click on the pencil button to the right of the of the “Broker” field to edit the current broker and replace the current IP with the external IP of the newly created container. Press the “Update” button to save the changes.
-![EXAMPLE](images/mqtt_edit_node.png)
+![EXAMPLE](images/mqtt_edit_node.jpg)
 The second mqtt node, “cosmos/TrafficFlowMadrid/onlyOne”, is an optional node for testing but the IP address will need to be modified as well.
-![EXAMPLE](images/mqtt_ip_edit_extra.png)
+![EXAMPLE](images/mqtt_ip_edit_extra.jpg)
 
 5. Next, double click on the “Machine Learning Techniques” subflow from the list of subflows on the left to enter the subflow. There are two kafka nodes in this subflow that need to be edited for the new IP of the newly created container.
 ![EXAMPLE](images/kafka_node_overview_flow.png)
@@ -137,6 +137,7 @@ The second mqtt node, “cosmos/TrafficFlowMadrid/onlyOne”, is an optional nod
 8. Press the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
 
 
+
 ## Set up Spark
 
 We will set up the Spark service to read from our object store and push back to kafka on our container.
@@ -144,5 +145,18 @@ We will set up the Spark service to read from our object store and push back to 
 
 ## Access freeboard from Node-Red to see data coming in from flow
 
-Add the end of the flow our data ends up at free board and presents us with our generated metrics. 
+Add the end of the flow our data ends up at freeboard and presents us with our generated metrics.
+
+1. Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. To get to freeboard, append “freeboard” to the Bluemix route. <route>/freeboard
+e.g. http://dat.mybluemix.net/freeboard/
+
+	![EXAMPLE](images/bluemix_route.jpg)
+
+2. In the empty freeboard screen, you will need to load the freeboard .json file to see a visual representation of the data analytics. Download the freeboard_start-19995.json file from the .node-red folder in this repository. This file will be used as the configuration file for freeboard.
+
+3. Press the "LOAD FREEBOARD" button to select the freeboard_start-19995.json file you previously downloaded to add to freeboard.
+![EXAMPLE](images/blank_freeboard.jpg)
+
+	You should now see the newly configured freeboard.
+![EXAMPLE](images/loaded_freeboard.png)
 
