@@ -6,7 +6,7 @@
 
 The Data Analytics Transportation application demonstrates
 a data analytics workflow utilizing Bluemix's **Node-Red**, **Object Storage (v1)**, and **Spark**. Real time data is retrieved from a transportation
-system in Madrid and goes through the flow Node-Red --> MQTT --> Kafka --> Object Storage --> Spark --> Kafka --> Secor --> FreeBoard from Node-Red
+system in Madrid and goes through the flow Node-Red --> MQTT --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> FreeBoard from Node-Red
 
 ## Introduction
 
@@ -25,7 +25,7 @@ Utilize the **Deploy to Bluemix** button below to deploy the application to your
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/data-analytics-transportation)
 
 This button will deploy the source code to your personal hub.jazz.net repo, create the bluemix services, and generate a pipeline that will be used to create the 
-Node-Red cloud foundry app and the four in one ( MQTT, Kafka, Kafka Rest Proxy, and Secor) container.
+Node-Red cloud foundry app and the four-in-one ( MQTT, Kafka, Kafka Rest Proxy, and Secor) container.
 
 Once you start the deploy you can spend your time requesting an external IP to be used in container pipeline.
 
