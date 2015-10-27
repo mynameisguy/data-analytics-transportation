@@ -109,7 +109,7 @@
     {
       "id": "154249b3.57f20e",
       "type": "mqtt-broker",
-      "broker": "129.41.255.181",
+      "broker": "134.168.20.191",
       "port": "1883",
       "clientid": ""
     },
@@ -117,13 +117,11 @@
       "id": "15b134c4.ad0503",
       "type": "subflow:24fd5936.ab003e",
       "name": "",
-      "x": 322.2222137451172,
-      "y": 138.55557250976562,
+      "x": 368.22222900390625,
+      "y": 393.5555725097656,
       "z": "131a16e7.d2b649",
       "wires": [
-        [
-          "fb2acd53.ea4ae8"
-        ],
+        [],
         [
           "da50d2e5.25af3"
         ]
@@ -133,8 +131,8 @@
       "id": "fb2acd53.ea4ae8",
       "type": "subflow:a28c1e2e.dbe81",
       "name": "",
-      "x": 582.2222290039062,
-      "y": 79.5555419921875,
+      "x": 636.2222290039062,
+      "y": 300.5555419921875,
       "z": "131a16e7.d2b649",
       "wires": [
         []
@@ -144,8 +142,8 @@
       "id": "d4dbb549.b719c",
       "type": "subflow:f17fae6e.973c68",
       "name": "",
-      "x": 808.2222290039062,
-      "y": 220.55557250976562,
+      "x": 862.2222290039062,
+      "y": 441.5555725097656,
       "z": "131a16e7.d2b649",
       "wires": []
     },
@@ -202,7 +200,7 @@
       "id": "f5c37ed9.ca6888",
       "type": "function",
       "name": "Add timestamp & Remove square brackets",
-      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nmsg.payload=(msg.payload).replace(/\\\"/g,\"\");\n\nreturn msg;",
+      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
       "outputs": 1,
       "noerr": 0,
       "x": 761.5,
@@ -210,7 +208,8 @@
       "z": "24fd5936.ab003e",
       "wires": [
         [
-          "8f06e928.825cd"
+          "8f06e928.825cd",
+          "cbce2342.3431e"
         ]
       ]
     },
@@ -307,18 +306,20 @@
     {
       "id": "64f0ede8.519334",
       "type": "inject",
-      "name": "Every 1 minutes",
+      "name": "Get Data",
       "topic": "",
       "payload": "",
       "payloadType": "none",
       "repeat": "60",
       "crontab": "",
       "once": true,
-      "x": 114.38887023925781,
-      "y": 137.88888549804688,
+      "x": 168.3888702392578,
+      "y": 358.8888854980469,
       "z": "131a16e7.d2b649",
       "wires": [
-        []
+        [
+          "15b134c4.ad0503"
+        ]
       ]
     },
     {
@@ -464,39 +465,6 @@
       ]
     },
     {
-      "id": "3e26242e.c1d9dc",
-      "type": "function",
-      "name": "MakeExampleData",
-      "func": "var evento = '{\"codigo\":\"PM10005\",\"intensidad\":\"1740\",\"ocupacion\":\"5\",\"carga\":\"27\",\"nivelServicio\":\"0\",\"velocidad\":\"84\",\"error\":\"N\",\"ts\":1439888527016,\"tf\":\"11:02:07\"}';\n\nmsg.payload = evento;\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 386.5,
-      "y": 440,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        []
-      ]
-    },
-    {
-      "id": "406aed63.bf9514",
-      "type": "inject",
-      "name": "",
-      "topic": "",
-      "payload": "",
-      "payloadType": "none",
-      "repeat": "",
-      "crontab": "",
-      "once": false,
-      "x": 176,
-      "y": 439.25,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        [
-          "3e26242e.c1d9dc"
-        ]
-      ]
-    },
-    {
       "id": "77235c72.88dca4",
       "type": "debug",
       "name": "debug1",
@@ -527,8 +495,8 @@
       "active": true,
       "console": "false",
       "complete": "payload",
-      "x": 552,
-      "y": 38,
+      "x": 606,
+      "y": 259,
       "z": "131a16e7.d2b649",
       "wires": []
     },
@@ -536,11 +504,11 @@
       "id": "1b4215e1.e4bdea",
       "type": "debug",
       "name": "Madrid Traffic Info 2",
-      "active": true,
+      "active": false,
       "console": "false",
       "complete": "payload",
-      "x": 552,
-      "y": 244,
+      "x": 606,
+      "y": 465,
       "z": "131a16e7.d2b649",
       "wires": []
     },
@@ -551,8 +519,8 @@
       "func": "var obj = JSON.parse(msg.payload);\nif (obj.codigo == \"PM10344\") {\n    var newObj = {};\n    newObj.tf = obj.tf;\n    newObj.ts = obj.ts;\n    if (obj.intensidad == \"-1\") {\n        return;\n    }\n    newObj.ValueIntensity = obj.intensidad;\n    newObj.ValueSpeed = obj.velocidad;\n    newObj.DiffIntensity = \"0.000000\";\n    newObj.DiffSpeed = \"0.000000\";\n    newObj.speedAbnormal = 0;\n    newObj.intensityAbnormal = 0;\n    \n    var sThreshold = context.global.speedThreshold;\n    var iThreshold = context.global.intensityThreshold;\n    \n    if (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n        newObj.speedAbnormal = \"1\";\n    }\n    if (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n        newObj.intensityAbnormal = \"1\";\n    }\n    \n    var lastObj = {};\n    lastObj.InfoTraffic = newObj;\n    \n    msg.payload = lastObj;\n    \n    return msg;\n}",
       "outputs": 1,
       "noerr": 0,
-      "x": 539,
-      "y": 198,
+      "x": 593,
+      "y": 419,
       "z": "131a16e7.d2b649",
       "wires": [
         [
@@ -564,11 +532,11 @@
       "id": "b5df5c44.4a20a",
       "type": "debug",
       "name": "CEP emulation ",
-      "active": true,
+      "active": false,
       "console": "false",
       "complete": "payload",
-      "x": 796,
-      "y": 177,
+      "x": 850,
+      "y": 398,
       "z": "131a16e7.d2b649",
       "wires": []
     },
@@ -647,39 +615,6 @@
       "wires": []
     },
     {
-      "id": "868c9a54.797368",
-      "type": "inject",
-      "name": "Init",
-      "topic": "",
-      "payload": "",
-      "payloadType": "none",
-      "repeat": "",
-      "crontab": "",
-      "once": true,
-      "x": 175,
-      "y": 391,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        [
-          "2dc2fff9.d23d"
-        ]
-      ]
-    },
-    {
-      "id": "2dc2fff9.d23d",
-      "type": "function",
-      "name": "ResetThreshold",
-      "func": "context.global.speedThreshold = 0;\ncontext.global.intensityThreshold = 0;\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 374,
-      "y": 391,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        []
-      ]
-    },
-    {
       "id": "5ed00906.a12ff8",
       "type": "debug",
       "name": "PM10344 debug",
@@ -690,85 +625,6 @@
       "y": 334,
       "z": "a28c1e2e.dbe81",
       "wires": []
-    },
-    {
-      "id": "abbd1d05.5442e",
-      "type": "inject",
-      "name": "print context to debug",
-      "topic": "",
-      "payload": "",
-      "payloadType": "date",
-      "repeat": "",
-      "crontab": "",
-      "once": false,
-      "x": 134,
-      "y": 492,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        [
-          "934bbc24.6cb44"
-        ]
-      ]
-    },
-    {
-      "id": "934bbc24.6cb44",
-      "type": "function",
-      "name": "pull context",
-      "func": "msg.payload = context.global;\n\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 367,
-      "y": 492,
-      "z": "131a16e7.d2b649",
-      "wires": [
-        [
-          "fb797b22.048688"
-        ]
-      ]
-    },
-    {
-      "id": "fb797b22.048688",
-      "type": "debug",
-      "name": "context",
-      "active": true,
-      "console": "false",
-      "complete": "payload",
-      "x": 568,
-      "y": 491,
-      "z": "131a16e7.d2b649",
-      "wires": []
-    },
-    {
-      "id": "5ad95571.d27e0c",
-      "type": "kafka in",
-      "zkquorum": "129.41.255.181:2181",
-      "topics": "pm10001",
-      "groupId": "GroupID",
-      "x": 146,
-      "y": 103,
-      "z": "a28c1e2e.dbe81",
-      "wires": [
-        [
-          "454e5de8.bab1a4",
-          "ccdcb90e.41fcd8"
-        ]
-      ]
-    },
-    {
-      "id": "fe04e504.c80b",
-      "type": "kafka in",
-      "zkquorum": "129.41.255.181:2181",
-      "topics": "pm10344",
-      "groupId": "GroupID",
-      "x": 154,
-      "y": 307,
-      "z": "a28c1e2e.dbe81",
-      "wires": [
-        [
-          "5ed00906.a12ff8",
-          "623147e0.c9f718"
-        ]
-      ]
     },
     {
       "id": "1dbedc98.8db6a3",
@@ -811,18 +667,8 @@
       "type": "comment",
       "name": "!!!ACTION!!! Connect Here",
       "info": "Connect here to enable flow to run at the\nspecified interval. \n\nIt is disconnected here so it does not \nautomatically start when deployed.\n\nThere are also ACTION items in the Madrid \nTraffic Info Subflow and the Machine Learning\nSubflow to update Kafka and MQTT IP addresses.",
-      "x": 215,
-      "y": 97,
-      "z": "131a16e7.d2b649",
-      "wires": []
-    },
-    {
-      "id": "b660f30a.0ddc78",
-      "type": "comment",
-      "name": "Testing Nodes",
-      "info": "",
-      "x": 259,
-      "y": 341,
+      "x": 258,
+      "y": 187,
       "z": "131a16e7.d2b649",
       "wires": []
     },
@@ -839,7 +685,7 @@
     {
       "id": "6c67fd20.76a6a4",
       "type": "comment",
-      "name": "!!!ACTION!!! Update Kafka IPs",
+      "name": "!!!ACTION!!! Listening from Spark",
       "info": "Update the Kafka IP addresses when \nKafka/MQTT/SECOR container is created and\ngiven an IP address.\n\nEach Kafka node needs to be updated for the IP\naddress.\n\n\n<Kafka IP>:2181",
       "x": 151,
       "y": 200,
@@ -865,5 +711,34 @@
       "y": 748,
       "z": "24fd5936.ab003e",
       "wires": []
+    },
+    {
+      "id": "a9bae86d.b1a258",
+      "type": "comment",
+      "name": "Note: Listening from Spark",
+      "info": "Update the Kafka IP addresses when \nKafka/MQTT/SECOR container is created and\ngiven an IP address.\n\nEach Kafka node needs to be updated for the IP\naddress.\n\n\n<Kafka IP>:2181",
+      "x": 124.5,
+      "y": 64,
+      "z": "a28c1e2e.dbe81",
+      "wires": []
+    },
+    {
+      "id": "428594ca.3191c4",
+      "type": "inject",
+      "name": "Get Data",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "28",
+      "crontab": "",
+      "once": true,
+      "x": 356,
+      "y": 242,
+      "z": "131a16e7.d2b649",
+      "wires": [
+        [
+          "fb2acd53.ea4ae8"
+        ]
+      ]
     }
   ]
