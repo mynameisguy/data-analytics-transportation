@@ -88,10 +88,9 @@ Take not of the credentials to be used for the next step.
 3. Select /secor/SECOR_INSTALL_DIR/secor.common.properties file on the left
 4. Assign the fields listed below with the credentials you recieved from Object Storage (v1)
 
-		swift.get.auth=true
-		swift.auth.url=<global_account_auth_uri from object storage>
-		swift.username=<username from object storage>
-		swift.api.key=<password from object storage>
+		swift.tenant=<projectid from object storage>
+		swift.username=<userid from object storage>
+		swift.password=<password from object storage>
 5. Select File and **Save**
 
 ![EXAMPLE](images/secorcredentials.jpg)
