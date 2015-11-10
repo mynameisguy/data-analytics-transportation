@@ -6,7 +6,7 @@
 
 The Data Analytics Transportation application demonstrates
 a data analytics workflow utilizing Bluemix's **Node-Red**, **Object Storage (v1)**, and **Spark**. Real time data is retrieved from a transportation
-system in Madrid and goes through the flow Node-Red --> MQTT --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> FreeBoard from Node-Red
+system in Madrid and goes through the flow Node-Red --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> FreeBoard from Node-Red
 
 ## Introduction
 
@@ -65,14 +65,14 @@ cloud foundry application should be running or finished.
 6. Select **SAVE**
 
 
-## Retrieve Object Storage (v1) credentials
+## Retrieve Object Storage credentials
 
 We need to grab to grab our credentials to the newly created Object Storage attached to our application
 
 
 1. Navigate to your **DASHBOARD** at http://console.ng.bluemix.net
 2. Select your newly created application from the **Deploy to Bluemix** button which will take you to your application's dashboard
-2. Below the **Object Storage (v1)** tile select the up arrow icon to expand that shows the Object Storage credentials
+2. Below the **Object Storage** tile select the up arrow icon to expand that shows the Object Storage credentials
 
 
 ![EXAMPLE](images/uparrow.jpg) 
@@ -81,7 +81,7 @@ We need to grab to grab our credentials to the newly created Object Storage atta
 Take not of the credentials to be used for the next step.
 
 
-## Add Object Storage (v1) credentials to Secor
+## Add Object Storage credentials to Secor
 
 1. Navigate back to your http://hub.jazz.net project
 2. Select **EDIT CODE** in the top right of the screen to take you to your Web IDE
