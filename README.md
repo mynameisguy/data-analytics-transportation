@@ -115,9 +115,12 @@ Connect the initial "Every 5 minutes" node to the "Get traffic status from Madri
 
 2. Double click on the "Send to Kafka" node at the far right to edit the kafka producer node. Click on the pencil button to edit the currently selected Zookeeper Server.
 
-3. In the "Edit kafka-credentials config node" window, modify the Zookeeper Server Adderess field to the new container IP. Only the IP address is required. Press "Update" to save the change, then "Ok" to close the edit window.
+3. In the "Edit kafka-credentials config node" window, modify the Zookeeper Server Address field to the new container IP. Only the IP address is required. Press "Update" to save the change. 
+Note: There is another kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
 
-4. Press the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
+4. Finally, click "Ok" button to close the "Edit kafka producer node" window.
+
+5. Click the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
 
 
 

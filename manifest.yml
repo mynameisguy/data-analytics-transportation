@@ -14,7 +14,7 @@ declared-services:
     plan: free
 applications:
 - path: .
-  memory: 512M
+  memory: 3072M
   instances: 1
   name: data-analytics-transportation-application
   host: data-analytics-transportation-application

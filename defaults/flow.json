@@ -27,7 +27,6 @@
       "wires": [
         [
           "2e7927fe.3e65f8",
-          "946354c9.4b926",
           "54a59958.d8b348"
         ]
       ]
@@ -54,8 +53,8 @@
       "method": "GET",
       "ret": "txt",
       "url": "http://informo.munimadrid.es/informo/tmadrid/pm.xml",
-      "x": 221.75,
-      "y": 191.25,
+      "x": 201.75,
+      "y": 131.25,
       "wires": [
         [
           "b9985bf2.68a58"
@@ -69,8 +68,8 @@
       "name": "xml2json",
       "attr": "",
       "chr": "",
-      "x": 433,
-      "y": 191.25,
+      "x": 413,
+      "y": 131.25,
       "wires": [
         [
           "35e5afb4.458e38",
@@ -86,7 +85,7 @@
       "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn  (item.codigo.toString().indexOf(empiezaPor) === 0  && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
       "outputs": 1,
       "noerr": 0,
-      "x": 670.5,
+      "x": 739.5,
       "y": 130,
       "wires": [
         [
@@ -100,7 +99,7 @@
       "z": "b460efb5.81d848",
       "name": "Split to multiple messages",
       "property": "payload",
-      "x": 1004.25,
+      "x": 1073.25,
       "y": 130,
       "wires": [
         [
@@ -116,7 +115,7 @@
       "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
       "outputs": 1,
       "noerr": 0,
-      "x": 1036.75,
+      "x": 1105.75,
       "y": 176.25,
       "wires": [
         [
@@ -131,7 +130,7 @@
       "address": "405d759e.73f9fc",
       "name": "Send to Kafka",
       "topic": "TrafficFlowMadridPM",
-      "x": 1285.75,
+      "x": 1354.75,
       "y": 177,
       "wires": []
     },
@@ -144,7 +143,7 @@
       "outputs": 1,
       "noerr": 0,
       "x": 259.3611145019531,
-      "y": 350.83331298828125,
+      "y": 289.83331298828125,
       "wires": [
         [
           "854e1a8e.c71148"
@@ -157,8 +156,8 @@
       "z": "b460efb5.81d848",
       "name": "Split to multiple messages",
       "property": "payload",
-      "x": 569.25,
-      "y": 351.25,
+      "x": 561.25,
+      "y": 290.25,
       "wires": [
         [
           "f5ef6e60.8e17c8"
@@ -174,7 +173,7 @@
       "outputs": 1,
       "noerr": 0,
       "x": 846.75,
-      "y": 350,
+      "y": 290,
       "wires": [
         [
           "fb7760b4.75a118"
@@ -190,7 +189,7 @@
       "outputs": "3",
       "noerr": 0,
       "x": 1089,
-      "y": 350,
+      "y": 290,
       "wires": [
         [
           "8fbddb92.e1d7c8"
@@ -207,10 +206,10 @@
       "id": "40b1da2c.5bb054",
       "type": "comment",
       "z": "b460efb5.81d848",
-      "name": "------------------ A single Measurement Point for the µCEP ------------------",
+      "name": "------------------ Specific Measurement Points for the µCEP ------------------",
       "info": "",
       "x": 709.9999999999999,
-      "y": 295.99999999999994,
+      "y": 235.99999999999994,
       "wires": []
     },
     {
@@ -229,8 +228,8 @@
       "z": "b460efb5.81d848",
       "name": "---------------Freeboard Data from Spark---------------",
       "info": "",
-      "x": 282,
-      "y": 468,
+      "x": 270.33331298828125,
+      "y": 419.0000305175781,
       "wires": []
     },
     {
@@ -241,8 +240,8 @@
       "active": true,
       "console": "false",
       "complete": "payload",
-      "x": 302,
-      "y": 106,
+      "x": 305.33331298828125,
+      "y": 20,
       "wires": []
     },
     {
@@ -251,7 +250,7 @@
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM41802",
       "x": 1344.8890991210938,
-      "y": 309.1111755371094,
+      "y": 249.11117553710938,
       "wires": []
     },
     {
@@ -259,8 +258,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM41302",
-      "x": 1344.7780151367188,
-      "y": 349.6667175292969,
+      "x": 1343.7780151367188,
+      "y": 289.6667175292969,
       "wires": []
     },
     {
@@ -269,7 +268,7 @@
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM107631",
       "x": 1348.8889770507812,
-      "y": 390.1111755371094,
+      "y": 330.1111755371094,
       "wires": []
     },
     {
@@ -277,8 +276,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "NewThresholdsPM41802",
-      "x": 656.6666870117188,
-      "y": 540,
+      "x": 655.6666870117188,
+      "y": 436,
       "wires": []
     },
     {
@@ -286,8 +285,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "NewThresholdsPM41302",
-      "x": 656.6666870117188,
-      "y": 584.9999389648438,
+      "x": 655.6666870117188,
+      "y": 480.99993896484375,
       "wires": []
     },
     {
@@ -296,7 +295,7 @@
       "z": "b460efb5.81d848",
       "name": "NewThresholdsPM107631",
       "x": 660,
-      "y": 629.9998779296875,
+      "y": 525.9998779296875,
       "wires": []
     },
     {
@@ -308,7 +307,7 @@
       "outputs": "3",
       "noerr": 0,
       "x": 400,
-      "y": 585,
+      "y": 481,
       "wires": [
         [
           "eacb3474.6181e"
@@ -329,7 +328,7 @@
       "name": "NewThresholds Consumer",
       "topic": "newThresholds",
       "x": 178.3333740234375,
-      "y": 585.3333740234375,
+      "y": 481.3333740234375,
       "wires": [
         [
           "72ae33de.e220f4"
