@@ -110,30 +110,14 @@ This will kick off the Container build and deploy. You can monitor the status in
 We now will set out to add the external IP of the newly created container to our Node-Red.
 
 1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
-Connect the initial node to the "Machine Traffic Info" subflow node.
+Connect the initial "Every 5 minutes" node to the "Get traffic status from Madrid" node.
 ![EXAMPLE](images/connect_start_node.png)
 
-2. Double click the "Machine Traffic Info" subflow from the list of subflows on the left to enter the subflow. If you double click on the “Machine Traffic Info” subflow node from the main flow, press the “Edit flow” button in the pop-up window to enter the subflow.
-![EXAMPLE](images/mqtt_node_overview_flow.png)
+2. Double click on the "Send to Kafka" node at the far right to edit the kafka producer node. Click on the pencil button to edit the currently selected Zookeeper Server.
 
-3. There are two mqtt nodes in the “Machine Traffic Info” subflow. Double click on the “cosmos/TrafficFlowMadrid/thePMs0” node on the right side of the flow to edit it. 
-![EXAMPLE](images/mqtt_ip_edit.jpg)
+3. In the "Edit kafka-credentials config node" window, modify the Zookeeper Server Adderess field to the new container IP. Only the IP address is required. Press "Update" to save the change, then "Ok" to close the edit window.
 
-4. Click on the pencil button to the right of the of the “Broker” field to edit the current broker and replace the current IP with the external IP of the newly created container. Press the “Update” button to save the changes.
-![EXAMPLE](images/mqtt_edit_node.jpg)
-The second mqtt node, “cosmos/TrafficFlowMadrid/onlyOne”, is an optional node for testing but the IP address will need to be modified as well.
-![EXAMPLE](images/mqtt_ip_edit_extra.jpg)
-
-5. Next, double click on the “Machine Learning Techniques” subflow from the list of subflows on the left to enter the subflow. There are two kafka nodes in this subflow that need to be edited for the new IP of the newly created container.
-![EXAMPLE](images/kafka_node_overview_flow.png)
-
-6. Double click on the top kafka node to edit the node. Change the IP in the “ZK Quorum” field to the new container IP and press “Ok” to save the change.
-![EXAMPLE](images/kafka_node_edit1.png)
-
-7. Similarly, double click on the bottom kafka node and change the IP in the “ZK Quorum” field to the new container IP. Press “Ok” to save the change.
-![EXAMPLE](images/kafka_node_edit2.png)
-
-8. Press the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
+4. Press the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
 
 
 
@@ -144,14 +128,17 @@ We will set up the Spark service to read from our object store and push back to 
 
 ## Access freeboard from Node-Red to see data coming in from flow
 
-Add the end of the flow our data ends up at freeboard and presents us with our generated metrics.
+At the end of the flow, our data ends up at freeboard and presents us with our generated metrics.
+Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. There is a provided dashboard included in the public/freeboard directory To get to freeboard, append “freeboard/index.html?load=dashboard.json” to the Bluemix route. <route>/freeboard/index.html?load=dashboard.json
+e.g. http://dat.mybluemix.net/freeboard/index.html?load=dashboard.json
+This dashboard can not be modified from this view, but you can manaually load the given dashboard.json file and edit it using the steps below.
 
-1. Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. To get to freeboard, append “freeboard” to the Bluemix route. <route>/freeboard
-e.g. http://dat.mybluemix.net/freeboard/
+1. To get to freeboard, append “freeboard” to the Bluemix route. <route>/freeboard
+e.g. http://dat.mybluemix.net/freeboard
 
 	![EXAMPLE](images/bluemix_route.jpg)
 
-2. In the empty freeboard screen, you will need to load the freeboard .json file to see a visual representation of the data analytics. Download the freeboard_start-19995.json file from the .node-red folder in this repository. This file will be used as the configuration file for freeboard.
+2. In the empty freeboard screen, you will need to load the freeboard .json file to see a visual representation of the data analytics. Download the dashboard.json file from the public/freeboard folder in this repository. This file will be used as the configuration file for freeboard.
 
 3. Press the "LOAD FREEBOARD" button to select the freeboard_start-19995.json file you previously downloaded to add to freeboard.
 ![EXAMPLE](images/blank_freeboard.jpg)
