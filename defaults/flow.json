@@ -129,7 +129,7 @@
       "z": "b460efb5.81d848",
       "address": "405d759e.73f9fc",
       "name": "Send to Kafka",
-      "topic": "TrafficFlowMadridPM",
+      "topic": "DataServices",
       "x": 1354.75,
       "y": 177,
       "wires": []
@@ -326,7 +326,7 @@
       "z": "b460efb5.81d848",
       "address": "405d759e.73f9fc",
       "name": "NewThresholds Consumer",
-      "topic": "newThresholds",
+      "topic": "newOutput",
       "x": 178.3333740234375,
       "y": 481.3333740234375,
       "wires": [
