@@ -18,6 +18,30 @@
 			"col_width": 4,
 			"widgets": [
 				{
+					"type": "text_widget",
+					"settings": {
+						"size": "big",
+						"value": "Transportation Operations Center",
+						"sparkline": false,
+						"animate": falseß
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 4,
+			"widgets": [
+				{
 					"type": "openMap_with_Markers",
 					"settings": {
 						"marker_latlon_0": [
