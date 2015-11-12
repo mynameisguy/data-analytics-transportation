@@ -43,6 +43,7 @@ COPY ./secor/kafka/scripts /usr/bin
 
 # secor setup
 COPY ./secor/SECOR_INSTALL_DIR /opt/secor
+RUN chmod +x /opt/secor/secor_start.sh
 WORKDIR /opt/secor
 
 # chmod kafka-configuration.sh
@@ -51,6 +52,7 @@ RUN chmod +x /usr/bin/kafka-configurations.sh
 # chmod rest proxy
 RUN chmod +x /usr/bin/rest-proxy-docker.sh
 
+RUN chmod +x /usr/bin/start-kafka.sh
 # Supervisor config
 COPY secor/kafka/supervisor /etc/supervisor/conf.d/
 ADD ./secor/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
