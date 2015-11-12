@@ -39,10 +39,10 @@ RUN wget -q http://apache.mirrors.spacedump.net/kafka/"$KAFKA_VERSION"/kafka_"$S
 
 
 # kafka directory start-kafka, logs, MQTTtoKAFKA, create-topics, rest-proxy-docker
-COPY ./kafka/scripts /usr/bin
+COPY ./secor/kafka/scripts /usr/bin
 
 # secor setup
-COPY ./SECOR_INSTALL_DIR /opt/secor
+COPY ./secor/SECOR_INSTALL_DIR /opt/secor
 WORKDIR /opt/secor
 
 # chmod kafka-configuration.sh
@@ -52,8 +52,8 @@ RUN chmod +x /usr/bin/kafka-configurations.sh
 RUN chmod +x /usr/bin/rest-proxy-docker.sh
 
 # Supervisor config
-COPY kafka/supervisor /etc/supervisor/conf.d/
-ADD SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
+COPY secor/kafka/supervisor /etc/supervisor/conf.d/
+ADD ./secor/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
 
 # 2181 is for zookeeper, 9092 is for kafka
 EXPOSE 2181
