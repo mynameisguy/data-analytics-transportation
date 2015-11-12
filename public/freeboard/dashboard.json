@@ -23,7 +23,8 @@
 						"size": "big",
 						"value": "Transportation Operations Center",
 						"sparkline": false,
-						"animate": falseß
+						"animate": false
+					}
 				}
 			]
 		},
