@@ -1,0 +1,19 @@
+{"namespace": "cosmos",
+  "type": "record",
+  "name": "TrafficFlowMadridPM",
+  "fields": [
+    {"name": "codigo", "type": "string"},
+    {"name": "descripcion",  "type": ["null","string"]},
+    {"name": "accesoAsociado", "type": ["null","long"]},
+    {"name": "intensidad", "type": "int"},
+    {"name": "ocupacion",  "type": "int"},
+    {"name": "carga", "type": "int"},
+    {"name": "nivelServicio", "type": "int"},
+	{"name": "velocidad",  "type": ["null","int"]},
+    {"name": "intensidadSat",  "type": ["null","int"]},
+    {"name": "error", "type": "string"},
+    {"name": "subarea",  "type": ["null","int"]},
+	{"name": "ts", "type": "long"},
+	{"name": "tf", "type": "string"}
+  ]
+}
