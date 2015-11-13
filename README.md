@@ -108,13 +108,13 @@ Take note of the credentials to be used for the next step.
 		swift.username=<userid from object storage>
 		swift.password=<password from object storage>
 ![EXAMPLE](images/secorcredentials.jpg)
-5. On the top left corner, click the git icon
+5. On the top left corner, click the git icon                
 ![EXAMPLE](images/add_secor_credentials1.jpg)
 
 6. On the right hand side, add the commit messages, and click commit on the top right corner
 ![EXAMPLE](images/add_secor_credentials2.jpg)
 
-7. After adding the message, click on the push button on the left panel                
+7. After adding the message, click on the push button on the left panel               
 ![EXAMPLE](images/add_secor_credentials3.jpg)
 
 8. Now you have your Secor configued with Object Storage!
