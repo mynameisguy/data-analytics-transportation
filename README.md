@@ -86,8 +86,6 @@ Now we will add our IPython notebook to Spark
 3. Select **From File** on the top, name the notebook, and give it a description
 4. Click on **Choose File**, and select the notebook downloaded to your local machine
 5. Select **CREATE NOTEBOOK** on the bottom right
-6. Click Play button on the top
-![EXAMPLE](images/spark_play_button.jpg)
 
 ## Retrieve Object Storage credentials
 
@@ -118,6 +116,7 @@ Take note of the credentials to be used for the next step.
 
 7. After adding the message, click on the push button on the left panel
 ![EXAMPLE](images/add_secor_credentials3.jpg)
+
 8. Now you have your Secor configued with Object Storage!
 
 
@@ -149,6 +148,15 @@ Note: There is another kafka node that has an IP reference, but it will also be 
 5. Click the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
 
 
+## Start the Apache Spark script
+1. Go to your project in your dashboard, and choose **Apache Spark**
+2. Click **OPEN**, and select your Apache Spark instance
+3. Click on the notebook you created
+4. In the script, please update replace the **0.0.0.0** to your own container IP address.
+![EXAMPLE](images/spark_IP_change.jpg)
+
+6. Click Play button on the top
+![EXAMPLE](images/spark_play_button.jpg)
 
 
 ## Access freeboard from Node-Red to see data coming in from flow
