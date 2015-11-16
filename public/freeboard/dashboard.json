@@ -50,19 +50,19 @@
 							"-3.742095"
 						],
 						"color_value_0": [
-							"datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_0": "<b>PM41802</b>",
+						"marker_text_0": "<b>PM41801</b>",
 						"marker_latlon_1": [
 							"40.374910",
 							"-3.693364"
 						],
 						"color_value_1": [
-							"datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_1": "<b>PM41302</b>",
+						"marker_text_1": "<b>PM41301</b>",
 						"marker_latlon_2": [
 							"40.419617",
 							"-3.658846"
@@ -80,7 +80,7 @@
 			]
 		},
 		{
-			"title": "PM41802",
+			"title": "PM41801",
 			"width": 1,
 			"row": {
 				"2": 13,
@@ -104,10 +104,10 @@
 							"-3.742095"
 						],
 						"color_value_0": [
-							"datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_0": "<b>PM41802</b>",
+						"marker_text_0": "<b>PM41801</b>",
 						"marker_latlon_1": [],
 						"center_lat": "40.409958",
 						"center_lon": "-3.742095",
@@ -118,7 +118,7 @@
 			]
 		},
 		{
-			"title": "PM41802",
+			"title": "PM41801",
 			"width": 1,
 			"row": {
 				"2": 29,
@@ -141,7 +141,7 @@
 					"settings": {
 						"title": "Speed",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"ValueSpeed\"]",
+						"value": "datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"ValueSpeed\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "km/h"
@@ -150,7 +150,7 @@
 				{
 					"type": "indicator",
 					"settings": {
-						"value": "datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"speedAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -160,7 +160,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM41802\"][\"newThresholds\"][\"ThresholdSpeed\"]",
+						"value": "datasources[\"NewThresholdsPM41801\"][\"newThresholds\"][\"ThresholdSpeed\"]",
 						"animate": true,
 						"units": "km/h"
 					}
@@ -168,7 +168,7 @@
 			]
 		},
 		{
-			"title": "PM41802",
+			"title": "PM41801",
 			"width": 1,
 			"row": {
 				"2": 17,
@@ -191,7 +191,7 @@
 					"settings": {
 						"title": "Intensity",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"ValueIntensity\"]",
+						"value": "datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"ValueIntensity\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "vehicles/hour"
@@ -201,7 +201,7 @@
 					"type": "indicator",
 					"settings": {
 						"title": "",
-						"value": "datasources[\"TrafficInfoPM41802\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -211,7 +211,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM41802\"][\"newThresholds\"][\"ThresholdIntensity\"]",
+						"value": "datasources[\"NewThresholdsPM41801\"][\"newThresholds\"][\"ThresholdIntensity\"]",
 						"animate": true,
 						"units": "vehicles/hour"
 					}
@@ -219,7 +219,7 @@
 			]
 		},
 		{
-			"title": "PM41802",
+			"title": "PM41801",
 			"width": 1,
 			"row": {
 				"2": 27,
@@ -243,7 +243,7 @@
 			]
 		},
 		{
-			"title": "PM41302",
+			"title": "PM41301",
 			"width": 1,
 			"row": {
 				"2": 37,
@@ -266,7 +266,7 @@
 					"settings": {
 						"title": "Speed",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"ValueSpeed\"]",
+						"value": "datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"ValueSpeed\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "km/h"
@@ -275,7 +275,7 @@
 				{
 					"type": "indicator",
 					"settings": {
-						"value": "datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"speedAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -285,7 +285,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM41302\"][\"newThresholds\"][\"ThresholdSpeed\"]",
+						"value": "datasources[\"NewThresholdsPM41301\"][\"newThresholds\"][\"ThresholdSpeed\"]",
 						"animate": true,
 						"units": "km/h"
 					}
@@ -293,7 +293,7 @@
 			]
 		},
 		{
-			"title": "PM41302",
+			"title": "PM41301",
 			"width": 1,
 			"row": {
 				"2": 39,
@@ -319,10 +319,10 @@
 							"-3.693364"
 						],
 						"color_value_0": [
-							"datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_0": "<b>PM41302</b>",
+						"marker_text_0": "<b>PM41301</b>",
 						"center_lat": "40.374910",
 						"center_lon": "-3.693364",
 						"map_zoom": "15",
@@ -332,7 +332,7 @@
 			]
 		},
 		{
-			"title": "PM41302",
+			"title": "PM41301",
 			"width": 1,
 			"row": {
 				"2": 47,
@@ -355,7 +355,7 @@
 					"settings": {
 						"title": "Intensity",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"ValueIntensity\"]",
+						"value": "datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"ValueIntensity\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "vehicles/hour"
@@ -364,7 +364,7 @@
 				{
 					"type": "indicator",
 					"settings": {
-						"value": "datasources[\"TrafficInfoPM41302\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -374,7 +374,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM41302\"][\"newThresholds\"][\"ThresholdIntensity\"]",
+						"value": "datasources[\"NewThresholdsPM41301\"][\"newThresholds\"][\"ThresholdIntensity\"]",
 						"animate": true,
 						"units": "vehicles/hour"
 					}
@@ -382,7 +382,7 @@
 			]
 		},
 		{
-			"title": "PM41302",
+			"title": "PM41301",
 			"width": 1,
 			"row": {
 				"2": 49,
@@ -571,13 +571,13 @@
 	],
 	"datasources": [
 		{
-			"name": "TrafficInfoPM41802",
-			"type": "TrafficInfoPM41802",
+			"name": "TrafficInfoPM41801",
+			"type": "TrafficInfoPM41801",
 			"settings": {}
 		},
 		{
-			"name": "TrafficInfoPM41302",
-			"type": "TrafficInfoPM41302",
+			"name": "TrafficInfoPM41301",
+			"type": "TrafficInfoPM41301",
 			"settings": {}
 		},
 		{
@@ -586,13 +586,13 @@
 			"settings": {}
 		},
 		{
-			"name": "NewThresholdsPM41802",
-			"type": "NewThresholdsPM41802",
+			"name": "NewThresholdsPM41801",
+			"type": "NewThresholdsPM41801",
 			"settings": {}
 		},
 		{
-			"name": "NewThresholdsPM41302",
-			"type": "NewThresholdsPM41302",
+			"name": "NewThresholdsPM41301",
+			"type": "NewThresholdsPM41301",
 			"settings": {}
 		},
 		{
