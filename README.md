@@ -162,19 +162,14 @@ Note: There is another kafka node that has an IP reference, but it will also be 
 ## Access freeboard from Node-Red to see data coming in from flow
 
 At the end of the flow, our data ends up at freeboard and presents us with our generated metrics.
-Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. There is a provided dashboard included in the public/freeboard directory To get to freeboard, append “freeboard/index.html?load=dashboard.json” to the Bluemix route. <route>/freeboard/index.html?load=dashboard.json
-e.g. http://dat.mybluemix.net/freeboard/index.html?load=dashboard.json
-This dashboard can not be modified from this view, but you can manaually load the given dashboard.json file and edit it using the steps below.
+Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. 
 
-1. To get to freeboard, append “freeboard” to the Bluemix route. <route>/freeboard
-e.g. http://dat.mybluemix.net/freeboard
+1. To get to freeboard, go to the Bluemix route.
+e.g. http://dat.mybluemix.net/
 
 	![EXAMPLE](images/bluemix_route.jpg)
 
-2. In the empty freeboard screen, you will need to load the freeboard .json file to see a visual representation of the data analytics. Download the dashboard.json file from the public/freeboard folder in this repository. This file will be used as the configuration file for freeboard.
-
-3. Press the "LOAD FREEBOARD" button to select the freeboard_start-19995.json file you previously downloaded to add to freeboard.
-![EXAMPLE](images/blank_freeboard.jpg)
+2. On the loaded webpage, you will see a "Go to your Freeboard dashboard" button. Press the button to load the provided freeboard dashboard.
 
 	You should now see the newly configured freeboard.
 ![EXAMPLE](images/loaded_freeboard.png)
