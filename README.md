@@ -179,4 +179,4 @@ e.g. http://dat.mybluemix.net/
 
 2. Once the webpage loads, push **Go to your Freeboard dashboard** to load your newly configured Freeboard.
 
-  ![EXAMPLE](images/loaded_Freeboard.png)
+  ![EXAMPLE](images/loaded_freeboard.png)
