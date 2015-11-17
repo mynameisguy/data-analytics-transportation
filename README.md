@@ -10,7 +10,7 @@ system in Madrid and goes through the flow: Node-Red --> Kafka --> Secor --> Obj
 
 ## Introduction
 
-After signing up for Bluemix and DevOps Services, you can deploy the Data Analytics Transportation app into your personal space.
+After registering for Bluemix and DevOps Services, you can deploy the Data Analytics Transportation app into your personal DevOps space.
 
 ## Sign up and log into Bluemix and DevOps
 
@@ -40,7 +40,7 @@ Once installed:
 
 		ice login
 
-2. Request an external IP address. This will be used later in the Container Pipeline.
+2. Request an external IP address. This will be used later in the container pipeline.
 
 		ice ip request
 
@@ -55,7 +55,7 @@ Once the **Deploy to Bluemix** process has finished you'll complete the followin
 This will bring up the pipeline created for you during the **Deploy to Bluemix** process. At this point, the part of the pipeline that creates the Node-Red Cloud Foundry app should be running or finished.
 
  ![EXAMPLE](images/pipelinestatus2.jpg)
-4. Select the **edit gear** of the **Container Deploy** tile on the pipeline and select **Configure Stage**.
+4. Select **Edit** on the **Container Deploy** tile on the pipeline and then select **Configure Stage**.
 5. In the **Optional deploy arguments** box in the environment variable **ADVERTISED_HOST** put in the external IP you received from the ICE request.
 6. Select **SAVE**.
 
@@ -64,7 +64,7 @@ This will bring up the pipeline created for you during the **Deploy to Bluemix**
 
 First, you're going to create an instance of object storage.
 1. From your app's dashboard, select the **Apache Spark** service.
-2. Select **Open** from the top right.
+2. Select **Open** at the top right.
 3. On the top, select **Object Storage**.
 4. Click **Add Object Storage**.
 5. Name your Object Storage instance, and change your **Container Name** to **DataServices**.
@@ -125,7 +125,6 @@ You'll need to attach your service credentials to your newly created Object Stor
 
 8. Now you have your Secor configured with Object Storage!
 
-
 ## Start Container portion of the pipeline
 
 1. Return to the pipeline in your DevOps Services project.
@@ -150,7 +149,7 @@ Connect the initial **Every 5 minutes** node to the **Get traffic status from Ma
 3. In the **Edit kafka-credentials config node** window, modify the Zookeeper Server Address field to the new container IP address. Only the IP address is required. Press **Update** to save the change.
 Note: There is another Kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
 
-4. Finally, click **Ok** to close the **Edit Kafka producer node** window.
+4. Finally, click **OK** to close the **Edit Kafka producer node** window.
 
 5. Click **Deploy** in the upper right to deploy the updated flow to Node-Red.
 
@@ -168,25 +167,17 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
  ![EXAMPLE](images/spark_play_button.jpg)
 
 
+
 ## Access freeboard from Node-Red to see data coming in from the flow
 
-At the end of the flow, data ends up at freeboard and presents you with your generated metrics.
-Once the data is processed through the flow and the rest of the solution, the results can be seen in freeboard. There is a provided dashboard included in the public/freeboard directory To get to freeboard, append **freeboard/index.html?load=dashboard.json** to the Bluemix route.  
-e.g. http://dat.mybluemix.net/freeboard/index.html?load=dashboard.json
+At the end of the flow, the data ends up in Freeboard and presents you with your generated metrics.
+Once data is processed through the flow and the rest of the solution, the results can be seen in your Freeboard.
 
-The dashboard can not be modified from this view, but you can manually load the given dashboard.json file and edit it using the steps below.
-
-1. To get to freeboard, append **freeboard** to the Bluemix route.
-e.g. http://dat.mybluemix.net/freeboard
+1. To get to your Freeboard, go to the Bluemix route.
+e.g. http://dat.mybluemix.net/
 
 	![EXAMPLE](images/bluemix_route.jpg)
 
-2. You'll need to load the **freeboard.json** file into the empty screen to see a visual representation of the data analytics. Download the **dashboard.json** file from the public/freeboard folder in this repository. This file will be used as the configuration file for freeboard.
-
-3. Press **LOAD FREEBOARD** to select the **freeboard_start-19995.json** file you previously downloaded to add to freeboard.
-
-  ![EXAMPLE](images/blank_freeboard.jpg)
-
- You should now see the newly configured freeboard.
+2. Once the webpage loads, push **Go to your Freeboard dashboard** to load your newly configured Freeboard.
 
   ![EXAMPLE](images/loaded_freeboard.png)
