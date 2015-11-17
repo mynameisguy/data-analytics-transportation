@@ -131,7 +131,7 @@ You'll need to attach your service credentials to your new instance of Object St
 
 This will kick off the container build and deployment. You can monitor the status in **View logs and history** on each pipeline tile. Once it's done, return to your command line with the ICE CLI and run:
 
-		ice bind <external IP put in pipeline> <name of container produced in the **Container Deploy** stage>
+		ice bind <external IP put in pipeline> <name of container produced in the Container Deploy stage>
 
 
 ## Add the external IP address of your container to Node-RED
