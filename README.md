@@ -1,181 +1,192 @@
-# Workload - Data Analytics Transportation 
+# Workload - Data Analytics Transportation
 
 
-###Data Analytics Transportation application example implemented in containers and cloud foundry
+### Data Analytics Transportation application example implemented in containers and cloud foundry
 
 
-The Data Analytics Transportation application demonstrates
-a data analytics workflow utilizing Bluemix's **Node-Red**, **Object Storage (v1)**, and **Spark**. Real time data is retrieved from a transportation
-system in Madrid and goes through the flow Node-Red --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> FreeBoard from Node-Red
+The Data Analytics Transportation app demonstrates
+a data analytics workflow that uses Bluemix's **Node-Red**, **Object Storage (v1)**, and **Spark**. Real-time data is retrieved from a transportation
+system in Madrid and goes through the flow: Node-Red --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> FreeBoard from Node-Red.
 
 ## Introduction
 
-The Data Analytics Transportation application has been created so you can deploy it into your personal space
-after signing up for Bluemix and the DevOps Services. 
+After signing up for Bluemix and DevOps Services, you can deploy the Data Analytics Transportation app into your personal space.
 
-## Sign up for and log into Bluemix and DevOps
+## Sign up and log into Bluemix and DevOps
 
 Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net.
 When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
 
 ## Deploy to Bluemix
 
-Utilize the **Deploy to Bluemix** button below to deploy the application to your personal work space.
+You can use the **Deploy to Bluemix** button below to deploy the app to your personal work space.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/data-analytics-transportation)
+ [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/data-analytics-transportation)
 
-This button will deploy the source code to your personal hub.jazz.net repo, create the bluemix services, and generate a pipeline that will be used to create the 
-Node-Red cloud foundry app and the four-in-one ( MQTT, Kafka, Kafka Rest Proxy, and Secor) container.
+This button will deploy the source code to your personal DevOps space, create the Bluemix services, and generate a pipeline. The pipeline will be used to create the
+Node-Red Cloud Foundry app and the four-in-one ( MQTT, Kafka, Kafka Rest Proxy, and Secor) container.
 
-Once you start the deploy you can spend your time requesting an external IP to be used in container pipeline.
+After you start the deploy, request an external IP address that will be used in the container pipeline.
 
-## Request external IP for container
+## Request an external IP address for your container
 
-For this step you will need the ICE cli provided by Bluemix to request an external IP. To install this follow the ice installation section at - 
+To request an external IP address you will need to install the ICE CLI provided by Bluemix. The ICE CLI can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
 
-Once installed -
+Once installed:
 
-1. Log into your Bluemix account and space 
+1. Log into your Bluemix account and space.
 
 		ice login
-2. Request an external IP to be used later in container pipeline
+
+2. Request an external IP address. This will be used later in the Container Pipeline.
+
 		ice ip request
-		
-Take note of the external IP recieved for later use
 
 
-## Put external IP into pipeline
+## Put your external IP address into the pipeline
 
-Once your **deploy to bluemix** button process has finished - 
+Once the **Deploy to Bluemix** process has finished you'll complete the following steps.
 
-1. Navigate to http://hub.jazz.net and select MY PROJECTS at the top right of screen
-2. Select the project with the host name your provided during the **Deploy to Bluemix** button process.
-3. Select **BUILD & DEPLOY** at the top right
-This will bring up the pipeline created for your during the **Deploy to Bluemix** button process. The first half of the pipeline that creates the Node-Red
-cloud foundry application should be running or finished. 
-![EXAMPLE](images/pipelinestatus2.jpg)
-4. Select the edit gear of the **Container Deploy** tile of the pipeline and select **Configure Stage**.
-5. In the **Optional deploy arguments** box in the environment variable **ADVERTISED_HOST** put in the external IP you recieved from the ICE request
-6. Select **SAVE**
+1. From within IBM DevOps Services, select **My Projects** at the top right of your screen.
+2. Select the project with the host name you provided during the **Deploy to Bluemix** process.
+3. Select **Build & Deploy** at the top right.
+This will bring up the pipeline created for you during the **Deploy to Bluemix** process. At this point, the part of the pipeline that creates the Node-Red Cloud Foundry app should be running or finished.
+
+ ![EXAMPLE](images/pipelinestatus2.jpg)
+4. Select the **edit gear** of the **Container Deploy** tile on the pipeline and select **Configure Stage**.
+5. In the **Optional deploy arguments** box in the environment variable **ADVERTISED_HOST** put in the external IP you received from the ICE request.
+6. Select **SAVE**.
 
 
 ## Set up Spark
 
-First, we are going to craete an instance of object storage
-1. From your application's dashboard, select **Apache Spark** service
-2. Select **Open** on the top right
-3. On the top, select **Object Storage**
-4. Click **Add Object Storage**
-5. Name your Object Storage, and change the **Container Name** to **DataServices**
-![EXAMPLE](images/object_storage_setup.jpg)
-6. Select **CREATE**
-7. Click on the new created Object Storage instance
-8. In the **Actions** drop down menu on the top left, select **Add Container**, and name it **secorSchema**
-![EXAMPLE](images/add_schema_container.jpg)
-9. Go back to your web IDE at hub.jazz.net, select your project, and download **secor/TrafficFlowMadridPM.metaKeys** and **secor/TrafficFlowMadridPM.schema** to your local machine
-10. Return to your Object Storage, select your **secorSchema** container, and in the **Actions drop down menu**, select **Add File
-11. Select **TrafficFlowMadridPM.metaKeys** file you downloaded to your local machine
-12. Follow the same steps to upload **TrafficFlowMadridPM.schema**
-![EXAMPLE](images/upload_secor_schema_files.jpg)
+First, you're going to create an instance of object storage.
+1. From your app's dashboard, select the **Apache Spark** service.
+2. Select **Open** from the top right.
+3. On the top, select **Object Storage**.
+4. Click **Add Object Storage**.
+5. Name your Object Storage instance, and change your **Container Name** to **DataServices**.
 
-Now we will add our IPython notebook to Spark
-1. Go back to your web IDE at hub.jazz.net, select your project, and download **dat_notebook.ipynb** to your local machine
-2. Return to your Spark instance, select **OPEN**, and select **NEW NOTEBOOK** 
-3. Select **From File** on the top, name the notebook, and give it a description
-4. Click on **Choose File**, and select the notebook downloaded to your local machine
-5. Select **CREATE NOTEBOOK** on the bottom right
+ ![EXAMPLE](images/object_storage_setup.jpg)
+6. Select **CREATE**.
+7. Click on the recently created Object Storage instance.
+8. From the **Actions** drop down menu on the top left, select **Add Container**, and name it **secorSchema**.
+
+ ![EXAMPLE](images/add_schema_container.jpg)
+9. Go back to your personal DevOps space, select your project, and download **secor/TrafficFlowMadridPM.metaKeys** and **secor/TrafficFlowMadridPM.schema** to your local machine.
+10. Return to your Object Storage, select your **secorSchema** container, and in the **Actions drop down menu**, select **Add File**.
+11. Select **TrafficFlowMadridPM.metaKeys** file you downloaded to your local machine.
+12. Follow the same steps to upload **TrafficFlowMadridPM.schema**.
+
+ ![EXAMPLE](images/upload_secor_schema_files.jpg)
+
+##### Add your IPython notebook to Spark.
+1. In DevOps Services, select your project, and download **dat_notebook.ipynb** to your local machine.
+2. Return to your Spark instance, select **Open**, and select **New Notebook**.
+3. Select **From File** from the top. Name the notebook, and give it a description.
+4. Click on **Choose File**, and select the notebook downloaded to your local machine.
+5. Select **CREATE Notebook** from the bottom right.
 
 ## Retrieve Object Storage credentials
 
-We need to grab to grab our credentials to the newly created Object Storage attached to our application
+You'll need to attach your service credentials to your newly created Object Storage.
 
+1. Navigate to your **DASHBOARD** at http://console.ng.bluemix.net.
+2. Select your newly created Object Storage in the Services category, and click on **Service Credentials** on the left panel.
 
-1. Navigate to your **DASHBOARD** at http://console.ng.bluemix.net
-2. Select your newly created OBject Storage in the Services category, and click on **Service Credentials** on the left panel
-
-Take note of the credentials to be used for the next step.
+ You'll need the credentials in the next step.
 
 
 ## Add Object Storage credentials to Secor
 
-1. Navigate back to your http://hub.jazz.net project
-2. Select **EDIT CODE** in the top right of the screen to take you to your Web IDE
-3. Select /secor/SECOR_INSTALL_DIR/secor.common.properties file on the left
-4. Assign the fields listed below with the credentials you recieved from Object Storage
+1. Navigate to your project within IBM DevOps Services.
+2. Select **EDIT CODE** in the top right of the screen to take you to the Web IDE.
+3. Select the **/secor/SECOR_INSTALL_DIR/secor.common.properties** file on the left.
+4. Use the credentials you received from Object Storage to assign the fields listed below.
 		swift.tenant=<projectid from object storage>
 		swift.username=<userid from object storage>
 		swift.password=<password from object storage>
-![EXAMPLE](images/secorcredentials.jpg)
-5. On the top left corner, click the git icon                
-![EXAMPLE](images/add_secor_credentials1.jpg)
 
-6. On the right hand side, add the commit messages, and click commit on the top right corner
-![EXAMPLE](images/add_secor_credentials2.jpg)
+ ![EXAMPLE](images/secorcredentials.jpg)
 
-7. After adding the message, click on the push button on the left panel               
-![EXAMPLE](images/add_secor_credentials3.jpg)
+5. At the top left corner, click the **Git** icon.
 
-8. Now you have your Secor configued with Object Storage!
+ ![EXAMPLE](images/add_secor_credentials1.jpg)
+
+6. Add a commit message, and click **Commit** on the top right corner.
+
+ ![EXAMPLE](images/add_secor_credentials2.jpg)
+
+7. After adding a message, click the **Push** button on the left panel.
+
+ ![EXAMPLE](images/add_secor_credentials3.jpg)
+
+8. Now you have your Secor configured with Object Storage!
 
 
 ## Start Container portion of the pipeline
 
-1. Return to your pipeline in your hub jazz project
-2. Click the play button on the **Container Build** tile
+1. Return to the pipeline in your DevOps Services project.
+2. Click the **Run Stage** icon on the **Container Build** tile.
 
-This will kick off the Container build and deploy. You can monitor the status in **View logs and history** on each pipeline tile. Once it is done return to your command line with the ICE CLI and run
+This will kick off the Container build and deploy. You can monitor the status in **View logs and history** on each pipeline tile. Once it's done return to your command line with the ICE CLI and run:
 
-		ice bind <external IP put in pipeline> <name of container produced in **Container Deploy** stage>
-		
+		ice bind <external IP put in pipeline> <name of container produced in the **Container Deploy** stage>
 
-## Add external IP of container to Node-Red
 
-We now will set out to add the external IP of the newly created container to our Node-Red.
+## Add the external IP address of your container to Node-Red
 
-1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not intialized before the newly created container IP is updated in the flow.
-Connect the initial "Every 5 minutes" node to the "Get traffic status from Madrid" node.
-![EXAMPLE](images/connect_start_node.png)
+Now, you'll add the external IP address of the newly created container to your Node-Red.
 
-2. Double click on the "Send to Kafka" node at the far right to edit the kafka producer node. Click on the pencil button to edit the currently selected Zookeeper Server.
+1. Access your Node-Red. You will see the customized flow. The initial node is not connected so the flow is not initialized before the newly created container IP is updated in the flow.
+Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 
-3. In the "Edit kafka-credentials config node" window, modify the Zookeeper Server Address field to the new container IP. Only the IP address is required. Press "Update" to save the change.
-Note: There is another kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
+ ![EXAMPLE](images/connect_start_node.png)
 
-4. Finally, click "Ok" button to close the "Edit kafka producer node" window.
+2. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click on the pencil button to edit the currently selected Zookeeper Server.
 
-5. Click the “Deploy” button at the upper right to deploy the updated flow to Node-Red.
+3. In the **Edit kafka-credentials config node** window, modify the Zookeeper Server Address field to the new container IP address. Only the IP address is required. Press **Update** to save the change.
+Note: There is another Kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
+
+4. Finally, click **Ok** to close the **Edit Kafka producer node** window.
+
+5. Click **Deploy** in the upper right to deploy the updated flow to Node-Red.
 
 
 ## Start the Apache Spark script
-1. Go to your project in your dashboard, and choose **Apache Spark**
-2. Click **OPEN**, and select your Apache Spark instance
-3. Click on the notebook you created
-4. In the script, please update replace the **0.0.0.0** to your own container IP address.
-![EXAMPLE](images/spark_IP_change.jpg)
+1. Go to the project in your dashboard, and choose **Apache Spark**.
+2. Click **OPEN**, and select your Apache Spark instance.
+3. Click on the notebook you created.
+4. In the script, please update the **0.0.0.0** to your own container IP address.
 
-6. Click Play button on the top
-![EXAMPLE](images/spark_play_button.jpg)
+ ![EXAMPLE](images/spark_IP_change.jpg)
+
+6. Click **Play** on the top.
+
+ ![EXAMPLE](images/spark_play_button.jpg)
 
 
-## Access freeboard from Node-Red to see data coming in from flow
+## Access freeboard from Node-Red to see data coming in from the flow
 
-At the end of the flow, our data ends up at freeboard and presents us with our generated metrics.
-Once data is processed through the flow and the rest of the solution, the results can be seen in freeboard. There is a provided dashboard included in the public/freeboard directory To get to freeboard, append “freeboard/index.html?load=dashboard.json” to the Bluemix route. <route>/freeboard/index.html?load=dashboard.json
+At the end of the flow, data ends up at freeboard and presents you with your generated metrics.
+Once the data is processed through the flow and the rest of the solution, the results can be seen in freeboard. There is a provided dashboard included in the public/freeboard directory To get to freeboard, append **freeboard/index.html?load=dashboard.json** to the Bluemix route.  
 e.g. http://dat.mybluemix.net/freeboard/index.html?load=dashboard.json
-This dashboard can not be modified from this view, but you can manaually load the given dashboard.json file and edit it using the steps below.
 
-1. To get to freeboard, append “freeboard” to the Bluemix route. <route>/freeboard
+The dashboard can not be modified from this view, but you can manually load the given dashboard.json file and edit it using the steps below.
+
+1. To get to freeboard, append **freeboard** to the Bluemix route.
 e.g. http://dat.mybluemix.net/freeboard
 
 	![EXAMPLE](images/bluemix_route.jpg)
 
-2. In the empty freeboard screen, you will need to load the freeboard .json file to see a visual representation of the data analytics. Download the dashboard.json file from the public/freeboard folder in this repository. This file will be used as the configuration file for freeboard.
+2. You'll need to load the **freeboard.json** file into the empty screen to see a visual representation of the data analytics. Download the **dashboard.json** file from the public/freeboard folder in this repository. This file will be used as the configuration file for freeboard.
 
-3. Press the "LOAD FREEBOARD" button to select the freeboard_start-19995.json file you previously downloaded to add to freeboard.
-![EXAMPLE](images/blank_freeboard.jpg)
+3. Press **LOAD FREEBOARD** to select the **freeboard_start-19995.json** file you previously downloaded to add to freeboard.
 
-	You should now see the newly configured freeboard.
-![EXAMPLE](images/loaded_freeboard.png)
+  ![EXAMPLE](images/blank_freeboard.jpg)
 
+ You should now see the newly configured freeboard.
+
+  ![EXAMPLE](images/loaded_freeboard.png)
