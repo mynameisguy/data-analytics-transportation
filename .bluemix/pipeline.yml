@@ -1,6 +1,6 @@
 ---
 stages:
-- name: Build Stage
+- name: Cloud Foundry Build
   inputs:
   - type: git
     branch: master
@@ -9,10 +9,11 @@ stages:
   jobs:
   - name: Build
     type: builder
-- name: Deploy Stage
+    artifact_dir: ''
+- name: Cloud Foundry Deploy
   inputs:
   - type: job
-    stage: Build Stage
+    stage: Cloud Foundry Build
     job: Build
   triggers:
   - type: stage
@@ -21,29 +22,23 @@ stages:
     type: deployer
     target:
       url: https://api.ng.bluemix.net
-      organization: wprichar@us.ibm.com
+      organization: cfsworkload
       space: dev
-      application: date-uptodate-wprichar-1559
-    script: |-
+    script: |
       #!/bin/bash
       cf push "${CF_APP}"
-
-      # View logs
-      #cf logs "${CF_APP}" --recent
 - name: Container Build
   inputs:
   - type: git
     branch: master
-  triggers:
-  - type: commit
   jobs:
   - name: Build
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
       url: https://api.ng.bluemix.net
-      organization: wprichar@us.ibm.com
-      space: container
+      organization: cfsworkload
+      space: dev
     IMAGE_NAME: quadthreat
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
@@ -91,12 +86,12 @@ stages:
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
       url: https://api.ng.bluemix.net
-      organization: wprichar@us.ibm.com
-      space: container
-    PORT: 9443,2181,9092,1883
-    OPTIONAL_ARGS: --env ADVERTISED_HOST="134.168.8.59" --env ADVERTISED_PORT="9092"
-    DEPLOY_TYPE: red_black
+      organization: cfsworkload
+      space: dev
+    PORT: 9092,9443,1883,2181
+    OPTIONAL_ARGS: --env ADVERTISED_HOST=134.168.1.164  --env ADVERTISED_PORT=9092
     CONTAINER_NAME: quadthreat
+    DEPLOY_TYPE: red_black
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
       \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
       \ deployment script${no_color}\"\n\n\n# To view/fork this script goto: https://github.com/Osthanes/deployscripts\n\
