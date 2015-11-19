@@ -21,7 +21,7 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 You can use the **Deploy to Bluemix** button below to deploy the app to DevOps Services.
 
- [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/data-analytics-transportation)
+ [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation-application)
 
 This button will deploy the source code to your personal DevOps space, attach the Bluemix services. It will also create a container with the MQTT, Kafka, Kafka Rest Proxy, and Secor services using the Continuous Delivery Pipeline.
 
