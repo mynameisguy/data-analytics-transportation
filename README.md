@@ -156,7 +156,7 @@ At the end of the flow, the data ends up in Freeboard and presents you with your
 Once data is processed through the flow and the rest of the solution, the results can be seen in your Freeboard.
 
 1. To get to your Freeboard, go to the Bluemix route.
-e.g. http://dat.mybluemix.net/
+e.g. http://data-analytics-transportation-application.mybluemix.net/
 
 	![EXAMPLE](images/bluemix_route.jpg)
 
