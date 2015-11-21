@@ -131,7 +131,7 @@
       "name": "Send to Kafka",
       "topic": "DataServices",
       "x": 1354.75,
-      "y": 177,
+      "y": 176,
       "wires": []
     },
     {
@@ -195,10 +195,10 @@
           "8fbddb92.e1d7c8"
         ],
         [
-          "59e5c562.9e3844"
+          "a806a90d.24eb4"
         ],
         [
-          "315c6b66.ef8cc4"
+          "bcd2e867.7aee1"
         ]
       ]
     },
@@ -249,8 +249,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM41801",
-      "x": 1344.8890991210938,
-      "y": 249.11117553710938,
+      "x": 1529.88916015625,
+      "y": 250.11117553710938,
       "wires": []
     },
     {
@@ -258,8 +258,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM41301",
-      "x": 1343.7780151367188,
-      "y": 289.6667175292969,
+      "x": 1528.778076171875,
+      "y": 290.6667175292969,
       "wires": []
     },
     {
@@ -267,8 +267,8 @@
       "type": "freeboard",
       "z": "b460efb5.81d848",
       "name": "TrafficInfoPM107631",
-      "x": 1348.8889770507812,
-      "y": 330.1111755371094,
+      "x": 1531.888916015625,
+      "y": 333.1111755371094,
       "wires": []
     },
     {
@@ -332,6 +332,50 @@
       "wires": [
         [
           "72ae33de.e220f4"
+        ]
+      ]
+    },
+    {
+      "id": "a806a90d.24eb4",
+      "type": "delay",
+      "z": "b460efb5.81d848",
+      "name": "8 second delay",
+      "pauseType": "delay",
+      "timeout": "8",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "rateUnits": "second",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": false,
+      "x": 1340.25,
+      "y": 291.25,
+      "wires": [
+        [
+          "59e5c562.9e3844"
+        ]
+      ]
+    },
+    {
+      "id": "bcd2e867.7aee1",
+      "type": "delay",
+      "z": "b460efb5.81d848",
+      "name": "16 second delay",
+      "pauseType": "delay",
+      "timeout": "16",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "rateUnits": "second",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": false,
+      "x": 1339.25,
+      "y": 333.25,
+      "wires": [
+        [
+          "315c6b66.ef8cc4"
         ]
       ]
     }
