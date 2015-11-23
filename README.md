@@ -5,7 +5,7 @@
 
 
 The Data Analytics Transportation app demonstrates
-a data analytics workflow that uses Bluemix's **Node-RED**, **Object Storage (v1)**, and **Spark**. Real-time data is retrieved from a transportation
+a data analytics workflow that uses Bluemix's **Node-RED**, **Object Storage**, and **Spark**. Real-time data is retrieved from a transportation
 system in Madrid and goes through the flow: Node-RED --> Kafka --> Secor --> Object Storage --> Spark --> Kafka --> Freeboard from Node-RED.
 
 ## Introduction
