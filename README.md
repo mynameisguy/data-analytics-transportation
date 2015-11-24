@@ -154,18 +154,17 @@ The Data and Analytics Transportation sample app combines several different Blue
 
 ##### Open source
 
-<dl>Apache Kafka: a message hub that provides a commit log of updates.
-
-<dl>Secor: a reliable logging service that takes information, and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
+<dl> Apache Kafka: a message hub that provides a commit log of updates. </dl>
+<dl> Secor: a reliable logging service that takes information, and converts it into parquet files. Those files are then placed into Object Storage within Bluemix. </dl>
 
 ##### Bluemix
 
-<dl>Apache Spark: a data processing engine.
+<dl> Apache Spark: a data processing engine. </dl>
 
-<dl>IPython: an interactive computational environment where you can combine coding, text, math, and media.
+<dl> IPython: an interactive computational environment where you can combine coding, text, math, and media. </dl>
 
-<dl>Node-RED: a tool for wiring together the Internet of Things.
+<dl> Node-RED: a tool for wiring together the Internet of Things. </dl>
 
-<dl>Node-RED Freeboard: a data visualization dashboard.
+<dl> Node-RED Freeboard: a data visualization dashboard. </dl>
 
-<dl>Object Storage: uses unique ID's and containers to store information in a scalable way.
+<dl> Object Storage: uses unique ID's and containers to store information in a scalable way. </dl>
