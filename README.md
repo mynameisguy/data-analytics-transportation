@@ -120,11 +120,11 @@ Now, you'll add the external IP address of your container to Node-RED.
 Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 
  ![EXAMPLE](images/connect_start_node.png)
-2. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click on the pencil button to edit the currently selected Zookeeper Server.
-3. In the **Edit kafka-credentials config node** window, modify the Zookeeper Server Address field to the IP address of your new container. Only the IP address is required.
+2. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the currently selected Zookeeper Server.
+3. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the IP address of your new container. Only the IP address is required.
 4. Press **Update**.
 Note: There is another Kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
-4. Click **OK** to close the **Edit Kafka producer node** window.
+4. Click **OK** to close the window.
 5. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
 
 
@@ -139,7 +139,7 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
 
 ## Access Freeboard from Node-RED
 
-Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. On the Freeboard you are able to see the speed and intensity of traffic, as well as, the live feed from traffic cameras in three separate areas of Madrid.
+Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. On the Freeboard you are able to see the analyzed thresholds of the speed and intensity of traffic, as well as, the live feed from traffic cameras in three separate areas of Madrid.
 
 1. To get to your Freeboard, go to the Bluemix route.
 e.g. http://data-analytics-transportation-application.mybluemix.net/
@@ -158,7 +158,7 @@ The Data and Analytics Transportation sample app combines several different Blue
 
 Apache Kafka: a message hub that provides a commit log of updates.
 
-Secor: a reliable logging service that takes information, and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
+Secor: a reliable logging service that takes information from Kafka and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
 
 ##### Bluemix
 
