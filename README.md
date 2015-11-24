@@ -95,6 +95,8 @@ swift.username=<userid from object storage>
 swift.password=<password from object storage>
 ```
 6. At the top left corner, click the **Git** icon.
+
+  ![EXAMPLE](images/gitButton.jpg)
 7. Add a commit message, and click **Commit** on the top right corner.
 8. After adding a message, click the **Push** button on the left panel.
 
