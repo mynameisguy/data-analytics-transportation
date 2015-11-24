@@ -101,7 +101,7 @@ swift.password=<password from object storage>
 
   Now you have your Secor configured with Object Storage!
 
-## Start the container portion of the pipeline
+#### Start the container portion of the pipeline
 
 1. Return to the Delivery Pipeline in your DevOps Services project.
 2. Click the **Run Stage** icon on the **Container Build** tile. This will kick off the container build and deployment. You can monitor the status in **View logs and history** on each pipeline tile.
@@ -110,7 +110,7 @@ swift.password=<password from object storage>
 ice bind <external IP put in pipeline> <name of container produced in the Container Deploy stage>
 ```
 
-## Set up your external IP with Node-RED
+#### Set up your external IP with Node-RED
 
 Now, you'll add the external IP address of your container to Node-RED.
 
@@ -126,7 +126,7 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
 5. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
 
 
-## Start the Apache Spark script
+#### Start the Apache Spark script
 
 1. Go to the project in your Dashboard, and choose **Apache Spark**.
 2. Click **OPEN** and select your Apache Spark instance.
@@ -154,18 +154,18 @@ The Data and Analytics Transportation sample app combines several different Blue
 
 ##### Open source
 
->Apache Kafka: a message hub that provides a commit log of updates.
+<dl>Apache Kafka: a message hub that provides a commit log of updates.
 
->Secor: a reliable logging service that takes information, and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
+<dl>Secor: a reliable logging service that takes information, and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
 
 ##### Bluemix
 
->Apache Spark: a data processing engine.
+<dl>Apache Spark: a data processing engine.
 
->IPython: an interactive computational environment where you can combine coding, text, math, and media.
+<dl>IPython: an interactive computational environment where you can combine coding, text, math, and media.
 
->Node-RED: a tool for wiring together the Internet of Things.
+<dl>Node-RED: a tool for wiring together the Internet of Things.
 
->Node-RED Freeboard: a data visualization dashboard.
+<dl>Node-RED Freeboard: a data visualization dashboard.
 
->Object Storage: uses unique ID's and containers to store information in a scalable way.
+<dl>Object Storage: uses unique ID's and containers to store information in a scalable way.
