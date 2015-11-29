@@ -30,7 +30,7 @@ After you start the deployment, request an external IP address to use in the con
 
 ## Set up your external IP with the container pipeline
 
-The ICE CLI allows you to work with containers on your computer from the command line. In order to request an external IP address, you'll need to install the ICE CLI, which can be found at the website below.
+ In order to request an external IP address, you'll need to install the ICE CLI, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
 
@@ -56,7 +56,7 @@ This will bring up the pipeline created for you during the Deploy to Bluemix pro
 
 #### Set up Object Storage
 
-Because you'll need a place to store the data you want to analyze, first you'll need to create an instance of Object Storage.
+First you'll need to create an instance of Object Storage.
 
 1. In your Bluemix Dashboard, select your app. This will take you to your app-specific dashboard.
 2. Select the **Apache Spark** service.
@@ -139,7 +139,7 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
 
 ## Access Freeboard from Node-RED
 
-Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. On the Freeboard you are able to see the analyzed thresholds of the speed and intensity of traffic, as well as, the live feed from traffic cameras in three separate areas of Madrid.
+Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. The information on the Freeboard is collected from three separate areas of Madrid and the three data points are simultaneously displayed. You are able to see the live feed from traffic cameras, as well as, the speed and intensity of traffic and their analyzed thresholds.
 
 1. To get to your Freeboard, go to the Bluemix route.
 e.g. http://data-analytics-transportation-application.mybluemix.net/
