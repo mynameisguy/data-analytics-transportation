@@ -4,10 +4,14 @@
 ### Data and Analytics Transportation sample app
 
 
+<<<<<<< Upstream, based on 6f3c00f5d039cc55b43eeeee54747299ccef9c16
 The Data and Analytics Transportation app demonstrates
 a data analytics workflow that uses a combination of Bluemix and open source applications to create a visualization of information.
 The data is retrieved from a transportation system in Madrid, filtered and then saved in Object Storage. The information is then analyzed, and the results are presented in a Node-RED Freeboard.
 
+=======
+The Data Analytics Transportation app demonstrates a data analytics workflow that uses Bluemix's <b>Node-RED</b>, <b>Object Storage</b>, and <b>Spark</b>. Real-time data is retrieved from a transportation system in Madrid by the Node-Red instance. from Node-RED. ...  node-red publishes this data to a Kafka server which is constantly being read by Secor.  Secor takes that information, and converts it into parquet files which are then placed in Object Storage within Bluemix.  A spark notebook is used to retrieve all of the data in object store and provides the appropriate analysis, these results are then messaged to the Kafka server which is being constantly monitored by Node-Red.  The results appear in a Freeboard plugin for Node-Red. **KATE HELP**
+>>>>>>> 494dd03 changes to pipeline.yml
 
 ## Introduction
 
