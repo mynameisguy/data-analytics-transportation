@@ -24,6 +24,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
+      application: '${CF_APP}'
     script: |
       #!/bin/bash
       cf push "${CF_APP}"
@@ -39,6 +40,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
+      application: '${CF_APP}'
     IMAGE_NAME: quadthreat
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
@@ -88,6 +90,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
+      application: '${CF_APP}'
     PORT: 9092,9443,1883,2181
     OPTIONAL_ARGS: --env ADVERTISED_HOST=134.168.1.164  --env ADVERTISED_PORT=9092
     CONTAINER_NAME: quadthreat
