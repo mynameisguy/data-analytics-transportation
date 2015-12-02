@@ -21,9 +21,9 @@ stages:
   - name: Deploy to dev
     type: deployer
     target:
-      url: https://api.ng.bluemix.net
-      organization: cfsworkload
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     script: |
       #!/bin/bash
       cf push "${CF_APP}"
@@ -36,9 +36,9 @@ stages:
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
-      url: https://api.ng.bluemix.net
-      organization: cfsworkload
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     IMAGE_NAME: quadthreat
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
@@ -85,9 +85,9 @@ stages:
     type: deployer
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
-      url: https://api.ng.bluemix.net
-      organization: cfsworkload
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     PORT: 9092,9443,1883,2181
     OPTIONAL_ARGS: --env ADVERTISED_HOST=134.168.1.164  --env ADVERTISED_PORT=9092
     CONTAINER_NAME: quadthreat
