@@ -1,6 +1,6 @@
 applications:
 - path: .
-  memory: 3072M
+  memory: 1536M
   instances: 1
   name: data-analytics-transportation-application
   host: data-analytics-transportation-application
