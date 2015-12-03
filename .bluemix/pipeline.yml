@@ -24,10 +24,15 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-      application: '${CF_APP}'
-    script: |
+      application: ${CF_APP}
+    script: |-
       #!/bin/bash
-      cf push "${CF_APP}"
+      cf create-service cloudantNoSQLDB Shared DAT-cloudant
+      cf create-service spark ibm.SparkService.PayGoPersonalInteractive DAT-spark
+      cf push "${CF_APP}" --no-start
+      cf bind-service DAT-cloudant
+      cf bind-service DAT-spark
+      cf start "{CF_APP}"
 - name: Container Build
   inputs:
   - type: git
@@ -40,7 +45,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-      application: '${CF_APP}'
+      application: ${CF_APP}
     IMAGE_NAME: quadthreat
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
@@ -90,9 +95,9 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-      application: '${CF_APP}'
+      application: ${CF_APP}
     PORT: 9092,9443,1883,2181
-    OPTIONAL_ARGS: --env ADVERTISED_HOST=134.168.1.164  --env ADVERTISED_PORT=9092
+    OPTIONAL_ARGS: --env ADVERTISED_HOST=  --env ADVERTISED_PORT=9092
     CONTAINER_NAME: quadthreat
     DEPLOY_TYPE: red_black
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
