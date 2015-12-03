@@ -30,8 +30,8 @@ stages:
       cf create-service cloudantNoSQLDB Shared DAT-cloudant
       cf create-service spark ibm.SparkService.PayGoPersonalInteractive DAT-spark
       cf push "${CF_APP}" --no-start
-      cf bind-service DAT-cloudant
-      cf bind-service DAT-spark
+      cf bind-service ${CF_APP} DAT-cloudant
+      cf bind-service ${CF_APP} DAT-spark
       cf start "{CF_APP}"
 - name: Container Build
   inputs:
