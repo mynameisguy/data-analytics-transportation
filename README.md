@@ -42,7 +42,7 @@ This will list ur current Public IPs assigned to your bluemix space. You need at
 To release an IP, to make room , you can type -
 
 
- 	ice ip release < public IP 
+ 	ice ip release <public IP>
  	
 Example in a case where our max quota is 2 public IPs for **Containers**
 
