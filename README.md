@@ -34,6 +34,7 @@ ice login
 2. List your current external IPs.
 ```
 ice ip list
+```
 
 
 This will list the current Public IP addresses assigned to your Bluemix space. You need at least one less IP address than your spaces max quota, which can be found in your Bluemix dashboard in the **Containers** tile.
