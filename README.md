@@ -13,7 +13,7 @@ The data is retrieved from a transportation system in Madrid, filtered and then 
 
 After registering for Bluemix and DevOps Services, you can deploy the Data and Analytics Transportation app into your personal DevOps space.
 
-## Sign up and log into Bluemix and DevOpss
+## Sign up and log into Bluemix and DevOps
 
 Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net.
 When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
@@ -21,53 +21,52 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 ## Make sure a Public IP is avaiable in your Bluemix space
  
-  When you use the Deploy to Bluemix button, later in the guide, it will try and request a new public IP. We need to make sure we have an available IP using the ICE CLI
-
- In order to check your public IP addresses, you'll need to install the ICE CLI, which can be found at the website below.
+When you use the Deploy to Bluemix button, later in the guide, it will try and request a new public IP. In order to check your public IP addresses, install the ICE CLI, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
 
 Once installed:
 
-1. Log into your Bluemix account and space that you will deploy DAT to.
+1. Log into your Bluemix account and space.
 ```
 ice login
 ```
-2. List your current external IPs
+2. List your current external IPs.
 ```
 ice ip list
+
+
+
+This will list the current Public IP addresses assigned to your Bluemix space. You need at least one less IP address than your spaces max quota, which can be found in your Bluemix dashboard in the **Containers** tile.
+In order to make room for the new IP address, release an IP by using the following command:
 ```
-
-This will list ur current Public IPs assigned to your bluemix space. You need atleast one less than you max quota for your space, which can be found in your bluemix dashboard under **Containers** at the top.
-To release an IP, to make room , you can type -
-
-
- 	ice ip release <public IP>
- 	
-Example in a case where our max quota is 2 public IPs for **Containers**
+ice ip release < public IP >
+```
+	
+The following images are an example where the max quota is 2 public IPs for **Containers**.
 
 ![Example](images/iplist.jpg)
 
-This case shows two IPs already allocated and our pipeline needs one available, so we need to release one.
+This case shows two IP Addresses already allocated and the pipeline needs one available, to release one.
 
 ![Example](images/iprelease.jpg)
 
-We have completed everything needed to start our **Deploy to Bluemix** button
+Once you have an IP address available you're ready to **Deploy to Bluemix**.
 
 ## Deploy to Bluemix
 
-Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services and create the needed Cloud Foundry and Container applications. This deployment will also create the services **Object-Storage**, **Cloudant**, and **Spark** and bind them to your Cloud Foundry application that will run **Node-RED**
+Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services and create the needed Cloud Foundry and Container applications. This deployment creates instances of Object-Storage, Cloudant, and Spark and binds them to your application.
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/wprichar/data-analytics-transportation-application-wprichar-119)
 
-After the deployment page has passed **Configuring pipeline...** you can monitor the deployment by selecting your newly created project in your DevOps Services in **MY PROJECTS** and select **BUILD & DEPLOY** at top right. This will show your newly created pipeline being used for the deployment. You can monitor the stages by selecting **View logs and history**
+After the pipeline has been configured, you can monitor the deployment by selecting your newly created project in DevOps Services. Go to **MY PROJECTS** and select **BUILD & DEPLOY** at top right. You can monitor the stages by selecting **View logs and history**.
 
 
 ## Set up Object Storage
 
-1. From your Cloud Foundry's dashboard select **DAT-objectstorage**
+1. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
 2. From the **Actions** drop down menu on the top left, select **Add Container** and name it **secorSchema**.
-3. Do step 2 again with the container name **DataServices** this time
+3. For the container, repeat step 2 and give it the name **DataServices**.
 3. Go back to your project in DevOps Services, and download **secor/DataServices.metaKeys** and **secor/DataServices.schema** to your local machine.
 4. Return to your Object Storage, select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**.
 5. Select the **DataServices.metaKeys** file you downloaded to your local machine.
@@ -77,33 +76,33 @@ After the deployment page has passed **Configuring pipeline...** you can monitor
 ## Add your Object Storage and IPython notebook to Spark
 
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
-2. Inside the **Spark** service click **Open** at the top right.
-3. Select your newly created **DAT-spark** instance
-3. At the top select **Object Storage** and select **ADD OBJECT STORAGE**
-5. Select **Bluemix** and the top 
-6. Select **DAT-objectstorage** in the options and the container **DataServices** and press **SELECT**
-2. Click **My Notebooks** at the top and select **New Notebook**.
-3. Select **From File** at the top. Name the notebook and give it a description.
-4. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
-5. Select **Create Notebook** from the bottom right.
+2. Inside the **Spark** service, click **Open** at the top right.
+3. Select your newly created **DAT-spark** instance.
+4. At the top select **Object Storage** and select **ADD OBJECT STORAGE**.
+5. Select **Bluemix** at the top.
+6. Select **DAT-objectstorage** from the options. Select the container **DataServices** and press **SELECT**.
+7. Click **My Notebooks** at the top and select **New Notebook**.
+8. Select **From File** at the top. Name the notebook and give it a description.
+9. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
+10. Select **Create Notebook** from the bottom right.
 
-We have now set up your spark.
+You have now set up Spark.
 
 ## Set up your external IP with Node-RED
 
 Now, you'll add the external IP address of your container to Node-RED.
 
 1. Return to your application dashboard and select the route for your application at top to access your Node-RED.
-2. Click go to your Node-RED flow editor. You will see the customized flow. The initial node is not connected, so the flow is not initialized until the external IP of your container is added.
+2. Click **Go to your Node-RED flow editor**. You will see the customized flow. The initial node is not connected, so the flow is not initialized until the external IP of your container is added.
 3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 
  ![EXAMPLE](images/connect_start_node.png)
-2. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the currently selected Zookeeper Server.
-3. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of your new container found in your Bluemix DASHBOARD under **Containers** with the naming scheme **Quadthreat_<a number>**. Only the IP address is required.
-4. Press **Update**.
+4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the currently selected Zookeeper Server.
+5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of your new container found in your Bluemix Dashboard under **Containers** with the naming scheme **Quadthreat_<a number>**. Only the IP address is required.
+6. Press **Update**.
 Note: There is another Kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
-4. Click **OK** to close the window.
-5. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
+7. Click **OK** to close the window.
+8. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
 
 
 #### Start the Apache Spark script
