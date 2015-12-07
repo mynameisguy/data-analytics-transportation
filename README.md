@@ -19,7 +19,7 @@ Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at htt
 When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
 
 
-## Make sure a Public IP is avaiable in your Bluemix space
+## Make sure a Public IP is available in your Bluemix space
  
 When you use the Deploy to Bluemix button, later in the guide, it will try and request a new public IP. In order to check your public IP addresses, install the ICE CLI, which can be found at the website below.
 
