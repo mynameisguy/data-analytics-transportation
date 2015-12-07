@@ -18,27 +18,52 @@ stages:
   triggers:
   - type: stage
   jobs:
-  - name: Deploy to dev
+  - name: Deploy to production
     type: deployer
     target:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
-    script: |-
-      #!/bin/bash
-      cf create-service cloudantNoSQLDB Shared DAT-cloudant
-      cf create-service spark ibm.SparkService.PayGoPersonalInteractive DAT-spark
-      cf push "${CF_APP}" --no-start
-      cf bind-service "${CF_APP}" DAT-cloudant
-      cf bind-service "${CF_APP}" DAT-spark
-      cf start "${CF_APP}"
+    script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Shared DAT-cloudant\n\
+      cf create-service spark ibm.SparkService.PayGoPersonalInteractive DAT-spark\n\
+      cf create-service Object-Storage Beta DAT-objectstorage \ncf push \"${CF_APP}\"\
+      \ --no-start\ncf bind-service \"${CF_APP}\" DAT-cloudant\ncf bind-service \"\
+      ${CF_APP}\" DAT-spark\ncf bind-service \"${CF_APP}\" DAT-objectstorage\ncf start\
+      \ \"${CF_APP}\""
 - name: Container Build
   inputs:
   - type: git
     branch: master
+  triggers:
+  - type: stage
+  properties:
+  - name: tenant
+    value: ''
+    type: text
+  - name: username
+    value: ''
+    type: text
+  - name: password
+    value: ''
+    type: text
   jobs:
-  - name: Build
+  - name: Get object storage credentials
+    type: deployer
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+      application: ${CF_APP}
+    script: |
+      #!/bin/bash
+      output=`cf env ${CF_APP} | grep projectId | awk '{print $2}'`
+      export tenant=${output:1:${#output}-3}
+      output=`cf env ${CF_APP} | grep password -m 1 | awk '{print $2}'`
+      export password=${output:1:${#output}-3}
+      output=`cf env ${CF_APP} | grep userId -m 1 | awk '{print $2}'`
+      export username=${output:1:${#output}-3}
+  - name: Container Build
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
@@ -49,13 +74,17 @@ stages:
     IMAGE_NAME: quadthreat
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
-      \ of logs: green, red, label_color, no_color.  \nlog_and_echo \"$LABEL\" \"\
-      Starting build script\"\n\n# The IBM Container Service CLI (ice), Git client\
-      \ (git), IDS Inventory CLI (ids-inv) and Python 2.7.3 (python) have been installed.\n\
-      # Based on the organization and space selected in the Job credentials are in\
-      \ place for both IBM Container Service and IBM Bluemix \n#####################\n\
-      # Run unit tests    #\n#####################\nlog_and_echo \"$LABEL\" \"No unit\
-      \ tests cases have been checked in\"\n\n######################################\n\
+      \ of logs: green, red, label_color, no_color.  \n\necho \"swift.tenant=${tenant}\"\
+      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.username=${username}\"\
+      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
+      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\n\necho \"\
+      the value just added is\"\ncat ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\n\
+      \n\n\nlog_and_echo \"$LABEL\" \"Starting build script\"\n\n# The IBM Container\
+      \ Service CLI (ice), Git client (git), IDS Inventory CLI (ids-inv) and Python\
+      \ 2.7.3 (python) have been installed.\n# Based on the organization and space\
+      \ selected in the Job credentials are in place for both IBM Container Service\
+      \ and IBM Bluemix \n#####################\n# Run unit tests    #\n#####################\n\
+      log_and_echo \"$LABEL\" \"No unit tests cases have been checked in\"\n\n######################################\n\
       # Build Container via Dockerfile     #\n######################################\n\
       \n# REGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\n# FULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\
       # If you wish to receive slack notifications, set SLACK_WEBHOOK_PATH as a property\
@@ -84,11 +113,11 @@ stages:
   inputs:
   - type: job
     stage: Container Build
-    job: Build
+    job: Container Build
   triggers:
   - type: stage
   jobs:
-  - name: Deploy
+  - name: Container Deploy
     type: deployer
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
@@ -97,14 +126,17 @@ stages:
       space: ${CF_SPACE}
       application: ${CF_APP}
     PORT: 9092,9443,1883,2181
-    OPTIONAL_ARGS: --env ADVERTISED_HOST=  --env ADVERTISED_PORT=9092
-    CONTAINER_NAME: quadthreat
+    OPTIONAL_ARGS: --env ADVERTISED_HOST= --env ADVERTISED_PORT=9092
     DEPLOY_TYPE: red_black
+    CONTAINER_NAME: quadthreat
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
-      \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
-      \ deployment script${no_color}\"\n\n\n# To view/fork this script goto: https://github.com/Osthanes/deployscripts\n\
-      # git_retry will retry git calls to prevent pipeline failure on temporary github\
-      \ problems\n# the code can be found in git_util.sh at https://github.com/Osthanes/container_deployer\n\
+      \ these as is or fork them and include your updates here:\noutput=`ice ip request\
+      \ | awk '{print $4}'`\noutput=${output:1:${#output}-2}\nexport OPTIONAL_ARGS=\"\
+      --env ADVERTISED_HOST=$output  --env ADVERTISED_PORT=9092\"\nexport REQUESTED_FLOATING_IP=$output\n\
+      \necho -e \"${label_color}Starting deployment script${no_color}\"\n\n\n# To\
+      \ view/fork this script goto: https://github.com/Osthanes/deployscripts\n# git_retry\
+      \ will retry git calls to prevent pipeline failure on temporary github problems\n\
+      # the code can be found in git_util.sh at https://github.com/Osthanes/container_deployer\n\
       git_retry clone https://github.com/Osthanes/deployscripts.git deployscripts\n\
       \n\n# You can deploy your Image as either a single Container or as a Container\
       \ \n# Group.  A Container Group deploys a number of containers to enhance\n\
@@ -154,4 +186,5 @@ stages:
       # The following colors have been defined to help with presentation of logs:\
       \ green, red, label_color, no_color.\nif [ $RESULT -ne 0 ]; then\n    echo -e\
       \ \"${red}Executed failed or had warnings ${no_color}\"\n    ${EXT_DIR}/print_help.sh\n\
-      \    exit $RESULT\nfi\necho -e \"${green}Execution complete${no_label}\""
+      \    exit $RESULT\nfi\nice ip bind $output ${MY_CONTAINER_NAME}\necho -e \"\
+      ${green}Execution complete${no_label}\"\n"
