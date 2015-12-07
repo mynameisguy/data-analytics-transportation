@@ -36,7 +36,6 @@ ice login
 ice ip list
 
 
-
 This will list the current Public IP addresses assigned to your Bluemix space. You need at least one less IP address than your spaces max quota, which can be found in your Bluemix dashboard in the **Containers** tile.
 In order to make room for the new IP address, release an IP by using the following command:
 ```
