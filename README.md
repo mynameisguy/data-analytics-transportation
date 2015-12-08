@@ -64,15 +64,17 @@ After the pipeline has been configured, you can monitor the deployment by select
 
 ## Set up Object Storage
 
-We need to create the containers within our newly created Object Storage so Secor can find where to write it's data from Kafka and Spark knows where to read from. To do this we will need to upload the schemas hosted in the code repository. 
+Download data schemas from the IDS project and upload them to your container. The schemas define what information Secor pulls from Kafka and allows Spark read the stored data.
 
-1. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
-2. From the **Actions** drop down menu on the top left, select **Add Container** and name it **secorSchema**.
-3. For the container, repeat step 2 and give it the name **DataServices**.
-3. Go back to your project in DevOps Services, and download **secor/DataServices.metaKeys** and **secor/DataServices.schema** to your local machine.
-4. Return to your Object Storage, select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**.
-5. Select the **DataServices.metaKeys** file you downloaded to your local machine.
-6. Follow the same steps to upload **DataServices.schema**.
+1. Go to your project in DevOps Services, and download **secor/DataServices.metaKeys** and **secor/DataServices.schema** to your local machine.
+2. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
+3. From the **Actions** drop down menu at the top left, select **Add Container** and name it **secorSchema**.
+4. Create another container and name it **DataServices**.
+5. Select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**
+
+A. Select the **DataServices.metaKeys** file you downloaded to your local machine.
+
+B. Select the **DataServices.metaKeys** file you downloaded to your local machine.
 
 
 ## Add your Object Storage and IPython notebook to Spark
@@ -88,23 +90,21 @@ To get spark set working we need to link our Object Storage and IPython notebook
 7. Click **My Notebooks** at the top and select **New Notebook**.
 8. Select **From File** at the top. Name the notebook and give it a description.
 9. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
-10. Select **Create Notebook** from the bottom right.
+10. Select **Create Notebook**.
 
-You have now set up Spark.
+Spark is now ready to be run, but first we need to put our container's public IP into Node-RED
 
 ## Set up your external IP with Node-RED
 
-Now, you'll add the external IP address of your container to Node-RED.
+Add the external IP address of your container to Node-RED.
 
-1. Return to your application dashboard and select the route for your application at top to access your Node-RED.
-2. Click **Go to your Node-RED flow editor**. You will see the customized flow. The initial node is not connected, so the flow is not initialized until the external IP of your container is added.
+1. Obtain the public IP of your DAT-container on the container's tile at your Bluemix Dashboard
+1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
+2. Click **Go to your Node-RED flow editor**. You will see the customized flow. 
 3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
-
- ![EXAMPLE](images/connect_start_node.png)
 4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the currently selected Zookeeper Server.
-5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of your new container found in your Bluemix Dashboard under **Containers** with the naming scheme **Quadthreat_<a number>**. Only the IP address is required.
+5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of DAT-container_<number>
 6. Press **Update**.
-Note: There is another Kafka node that has an IP reference, but it will also be changed here if you are only editing the default Zookeeper Server Address.
 7. Click **OK** to close the window.
 8. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
 
@@ -114,7 +114,7 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
 1. Go to the project in your Dashboard, and choose **Apache Spark**.
 2. Click **OPEN** and select your Apache Spark instance.
 3. Click on the notebook you created.
-4. In the script, update **0.0.0.0** to your own container public IP address.
+4. In the script, update **0.0.0.0** to your container's public IP address.
 5. Click **Play** at the top.
 
 
@@ -122,11 +122,7 @@ Note: There is another Kafka node that has an IP reference, but it will also be 
 
 Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. The information on the Freeboard is collected from three separate areas of Madrid and the three data points are simultaneously displayed. You are able to see the live feed from traffic cameras, as well as, the speed and intensity of traffic and their analyzed thresholds.
 
-1. To get to your Freeboard, go to the Bluemix route.
-e.g. http://data-analytics-transportation-application.mybluemix.net/
-
-	![EXAMPLE](images/bluemix_route.jpg)
-
+1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
 2. Once the webpage loads, click **Go to your Freeboard dashboard** to load your newly configured Freeboard.
 
   ![EXAMPLE](images/loaded_freeboard.png)

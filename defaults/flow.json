@@ -8,7 +8,7 @@
       "id": "405d759e.73f9fc",
       "type": "kafka-credentials",
       "z": "",
-      "name": "134.168.20.191",
+      "name": "Your Kafka IP",
       "zookeeperServer": "134.168.20.191"
     },
     {
