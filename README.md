@@ -21,7 +21,7 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 ## Make sure a Public IP is available in your Bluemix space
  
-When you use the Deploy to Bluemix button, later in the guide, it will try and request a new public IP. In order to check your public IP addresses, install the ICE CLI, which can be found at the website below.
+This solution requires a free public IP. In order to check your public IP addresses, install the ICE CLI, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
 
@@ -34,11 +34,9 @@ ice login
 2. List your current external IPs.
 ```
 ice ip list
-```
-
-
-This will list the current Public IP addresses assigned to your Bluemix space. You need at least one less IP address than your spaces max quota, which can be found in your Bluemix dashboard in the **Containers** tile.
+You need at least one available IP address. Your max amount  which can be found in your Bluemix dashboard in the Containers tile.
 In order to make room for the new IP address, release an IP by using the following command:
+
 ```
 ice ip release < public IP >
 ```
@@ -61,6 +59,7 @@ Click the **Deploy to Bluemix** button below to deploy the source code to DevOps
 
 After the pipeline has been configured, you can monitor the deployment by selecting your newly created project in DevOps Services. Go to **MY PROJECTS** and select **BUILD & DEPLOY** at top right. You can monitor the stages by selecting **View logs and history**.
 
+** These need to be steps ***
 
 ## Set up Object Storage
 
@@ -72,14 +71,13 @@ Download data schemas from the IDS project and upload them to your container. Th
 4. Create another container and name it **DataServices**.
 5. Select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**
 
-A. Select the **DataServices.metaKeys** file you downloaded to your local machine.
-
-B. Select the **DataServices.metaKeys** file you downloaded to your local machine.
+	-  Select the **DataServices.metaKeys** file you downloaded to your local machine.
+	-  Select the **DataServices.metaKeys** file you downloaded to your local machine.
 
 
 ## Add your Object Storage and IPython notebook to Spark
 
-To get spark set working we need to link our Object Storage and IPython notebook, which contains our script to process the data from Object Storage.
+To get spark set working we need to link our Object Storage and IPython notebook, which contains our script to process the data from Object Storage. ** Needs update **
 
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
 2. Inside the **Spark** service, click **Open** at the top right.
