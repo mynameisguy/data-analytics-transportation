@@ -123,7 +123,7 @@ Add the external IP address of your container to Node-RED.
 Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. The information on the Freeboard is collected from three separate areas of Madrid and the three data points are simultaneously displayed. You are able to see the live feed from traffic cameras, as well as, the speed and intensity of traffic and their analyzed thresholds.
 
 1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
-2. Once the webpage loads, click **Go to your Freeboard dashboard** to load your newly configured Freeboard.
+2. Click **Go to your Freeboard dashboard** to load your newly configured Freeboard.
 
   ![EXAMPLE](images/loaded_freeboard.png)
 
