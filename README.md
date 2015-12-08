@@ -64,6 +64,8 @@ After the pipeline has been configured, you can monitor the deployment by select
 
 ## Set up Object Storage
 
+We need to create the containers within our newly created Object Storage so Secor can find where to write it's data from Kafka and Spark knows where to read from. To do this we will need to upload the schemas hosted in the code repository. 
+
 1. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
 2. From the **Actions** drop down menu on the top left, select **Add Container** and name it **secorSchema**.
 3. For the container, repeat step 2 and give it the name **DataServices**.
@@ -74,6 +76,8 @@ After the pipeline has been configured, you can monitor the deployment by select
 
 
 ## Add your Object Storage and IPython notebook to Spark
+
+To get spark set working we need to link our Object Storage and IPython notebook, which contains our script to process the data from Object Storage.
 
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
 2. Inside the **Spark** service, click **Open** at the top right.
