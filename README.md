@@ -30,25 +30,27 @@ To find out this information
 4. In the **Containers** tile you will see information about your IPs
 5. The **Public IPs Requested** field needs to not be at its max. 
 
-In order to release an public IP, install the ICE CLI, which can be found at the website below.
+In order to release an public IP, install the CF IC plugin, which can be found at the website below.
 
-https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
+https://www.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_install
 
 Once installed:
 
 1. Log into your Bluemix account and space.
 ```
-ice login
+cf ic login
 ```
 2. List your current external IPs.
 ```
-ice ip list
-```
-
+cf ic ip list
 
 
 You need at least one available IP address. Your max amount  which can be found in your Bluemix dashboard in the Containers tile.
 In order to make room for the new IP address, release an IP by using the following command:
+
+
+	cf ic ip release < public IP >
+
 
 
 ## Deploy to Bluemix
@@ -115,7 +117,7 @@ Add the external IP address of your container to Node-RED.
 1. Go to the project in your Dashboard, and choose **Apache Spark**.
 2. Click **OPEN** and select your Apache Spark instance.
 3. Click on the notebook you created.
-4. In the script, update **0.0.0.0** to your container's public IP address.
+4. Update the variable "containerIP" to your own container's public IP address
 5. Click **Play** at the top.
 
 
