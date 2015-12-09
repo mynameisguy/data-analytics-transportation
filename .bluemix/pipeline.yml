@@ -128,7 +128,7 @@ stages:
     PORT: 9092,9443,1883,2181
     OPTIONAL_ARGS: --env ADVERTISED_HOST= --env ADVERTISED_PORT=9092
     DEPLOY_TYPE: red_black
-    CONTAINER_NAME: quadthreat
+    CONTAINER_NAME: DAT-container
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
       \ these as is or fork them and include your updates here:\noutput=`ice ip request\
       \ | awk '{print $4}'`\noutput=${output:1:${#output}-2}\nexport OPTIONAL_ARGS=\"\

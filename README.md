@@ -104,7 +104,7 @@ Add the external IP address of your container to Node-RED.
 2. Click **Go to your Node-RED flow editor**. You will see the customized flow. 
 3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the DAT Kafka Zookeeper Server.
-5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of DAT-container_<number>
+5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of DAT-container
 6. Press **Update**.
 7. Click **OK** to close the window.
 8. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
