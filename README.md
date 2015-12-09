@@ -80,7 +80,7 @@ Download data schemas from the IDS project and upload them to your container. Th
 
 ## Add your Object Storage and IPython notebook to Spark
 
-To get spark set working we need to link our Object Storage and IPython notebook, which contains our script to process the data from Object Storage. ** Needs update **
+To complete our spark confiuration we will add our Object Storage and IPython notebook to the service.
 
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
 2. Inside the **Spark** service, click **Open** at the top right.
