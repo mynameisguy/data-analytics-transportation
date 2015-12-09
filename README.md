@@ -27,8 +27,8 @@ To find out this information
 1. Log into your Dashboard at https://console.ng.bluemix.net.
 2. Select **DASHBOARD**
 3. Select the space you will deploy DAT to
-4. In the **Containers** tile you will given information about your IPs
-5. The **Public IPs Requested** needs to not be at its max. 
+4. In the **Containers** tile you will see information about your IPs
+5. The **Public IPs Requested** field needs to not be at its max. 
 
 In order to release an public IP, install the ICE CLI, which can be found at the website below.
 
