@@ -21,7 +21,17 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 ## Make sure a Public IP is available in your Bluemix space
  
-This solution requires a free public IP. In order to check your public IP addresses, install the ICE CLI, which can be found at the website below.
+This solution requires a free public IP. To first determine if a public IP is available we will need to find your used and max quota of IPs for your space.
+To find out this information 
+
+1. Log into your Dashboard at https://console.ng.bluemix.net.
+2. Select **DASHBOARD**
+3. Select the space your will deploy DAT to
+4. In the **Containers** tile you will given your information about IPs
+5. The Public IPs Requested needs to not be at its max. One needs to be availabe.
+
+In order to release an public IP, install the ICE CLI, which can be found at the website below.
+
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html
 
@@ -34,22 +44,13 @@ ice login
 2. List your current external IPs.
 ```
 ice ip list
+```
+
+
+
 You need at least one available IP address. Your max amount  which can be found in your Bluemix dashboard in the Containers tile.
 In order to make room for the new IP address, release an IP by using the following command:
 
-```
-ice ip release < public IP >
-```
-	
-The following images are an example where the max quota is 2 public IPs for **Containers**.
-
-![Example](images/iplist.jpg)
-
-This case shows two IP Addresses already allocated and the pipeline needs one available, to release one.
-
-![Example](images/iprelease.jpg)
-
-Once you have an IP address available you're ready to **Deploy to Bluemix**.
 
 ## Deploy to Bluemix
 
@@ -57,9 +58,12 @@ Click the **Deploy to Bluemix** button below to deploy the source code to DevOps
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation)
 
-After the pipeline has been configured, you can monitor the deployment by selecting your newly created project in DevOps Services. Go to **MY PROJECTS** and select **BUILD & DEPLOY** at top right. You can monitor the stages by selecting **View logs and history**.
+After the pipeline has been configured, you can monitor the deployment by doing the following steps 
 
-** These need to be steps ***
+1. Select your newly created project in DevOps Services. 
+2. Go to **MY PROJECTS**
+3. Select **BUILD & DEPLOY**
+4. You can monitor the stages by selecting **View logs and history**.
 
 ## Set up Object Storage
 
