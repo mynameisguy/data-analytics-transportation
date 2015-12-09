@@ -43,7 +43,7 @@ cf ic login
 2. List your current external IPs.
 ```
 cf ic ip list
-
+```
 
 You need at least one available IP address. Your max amount  which can be found in your Bluemix dashboard in the Containers tile.
 In order to make room for the new IP address, release an IP by using the following command:
