@@ -186,5 +186,5 @@ stages:
       # The following colors have been defined to help with presentation of logs:\
       \ green, red, label_color, no_color.\nif [ $RESULT -ne 0 ]; then\n    echo -e\
       \ \"${red}Executed failed or had warnings ${no_color}\"\n    ${EXT_DIR}/print_help.sh\n\
-      \    exit $RESULT\nfi\nice ip bind $output ${MY_CONTAINER_NAME}\necho -e \"\
+      \    exit $RESULT\nfi\necho -e \"\
       ${green}Execution complete${no_label}\"\n"
