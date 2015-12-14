@@ -11,7 +11,7 @@ The data is retrieved from a transportation system in Madrid, filtered and then 
 
 ## Introduction
 
-After registering for Bluemix and DevOps Services, you can deploy the Data and Analytics Transportation (DAT) app into your personal DevOps space.
+After registering for Bluemix and DevOps Services, you can deploy the Data and Analytics Transportation app (DAT) into your personal DevOps space.
 
 ## Sign up and log into Bluemix and DevOps
 
@@ -21,16 +21,16 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 ## Make sure a Public IP is available in your Bluemix space
 
-This solution requires a free public IP. To first determine if a public IP is available we will need to find your used and max quota of IPs for your space.
-To find out this information
+This solution requires a free public IP. In order to determine if a public IP is available, you will need to find your used and max quota of IPs for your space.
+To find this information, follow these steps:
 
 1. Log into your Dashboard at https://console.ng.bluemix.net.
-2. Select **DASHBOARD**
-3. Select the space where you will deploy DAT.
-4. In the **Containers** tile you will see information about your IPs.
-5. The **Public IPs Requested** field needs to not be at its max.
+2. Select **DASHBOARD**.
+3. Select the space you where you would like DAT to deploy.
+4. In the **Containers** tile you will see information about your IP addresses.
+5. The **Public IPs Requested** field needs to have at least one IP address available.
 
-In order to release an public IP, install the CF IC plugin, which can be found at the website below.
+If you have an IP address available, you are ready to Deploy to Bluemix. If all of your public IP addresses have been used, you will need to release one prior to deploying. In order to release a public IP, install the CF IC plugin, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_install
 
@@ -40,22 +40,19 @@ Once installed:
 ```
 cf ic login
 ```
-2. List your current external IPs.
+2. List your current external IP addresses.
 ```
 cf ic ip list
 ```
-
-You need at least one available IP address. Your max amount  which can be found in your Bluemix dashboard in the Containers tile.
-In order to make room for the new IP address, release an IP by using the following command:
-
-
-	cf ic ip release < public IP >
-
+3. Release an IP address.
+```
+cf ic ip release < public IP >
+```
 
 
 ## Deploy to Bluemix
 
-Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services and create the needed Cloud Foundry and Container applications. This deployment creates instances of Object-Storage, Cloudant, and Spark and binds them to your application.
+Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services. This creates the needed Cloud Foundry and Container applications as well as instances of Object-Storage, Cloudant, and Spark. These instances are then bound to your application.
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation)
 
@@ -72,17 +69,17 @@ Download data schemas from the IDS project and upload them to your container. Th
 
 1. Go to your project in DevOps Services, and download **secor/DataServices.metaKeys** and **secor/DataServices.schema** to your local machine.
 2. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
-3. From the **Actions** drop down menu at the top left, select **Add Container** and name it **secorSchema**.
+3. From the **Actions** drop down menu, select **Add Container** and name it **secorSchema**.
 4. Create another container and name it **DataServices**.
-5. Select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**
+5. Select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**.
 
 	-  Select the **DataServices.metaKeys** file you downloaded to your local machine.
-	-  Select the **DataServices.metaKeys** file you downloaded to your local machine.
+	-  Select the **DataServices.schema** file you downloaded to your local machine.
 
 
 ## Add your Object Storage and IPython notebook to Spark
 
-To complete our spark confiuration we will add our Object Storage and IPython notebook to the service.
+To complete Spark configuration, add your Object Storage and IPython notebook to the service.
 
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
 2. Inside the **Spark** service, click **Open** at the top right.
@@ -101,29 +98,29 @@ Spark is now ready to be run, but first we need to put our container's public IP
 
 Add the external IP address of your container to Node-RED.
 
-1. Obtain the public IP of your DAT-container on the container's tile at your Bluemix Dashboard
-1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
-2. Click **Go to your Node-RED flow editor**. You will see the customized flow.
+1. Obtain the public IP of your DAT-container on the container's tile at your Bluemix Dashboard.
+1. Return to your application's dashboard and click the route at the top of the page to access the Node-RED website.
+2. Click **Go to your Node-RED flow editor**. Once there, you will see the customized flow.
 3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the DAT Kafka Zookeeper Server.
-5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of DAT-container
+5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of your DAT container.
 6. Press **Update**.
 7. Click **OK** to close the window.
-8. Click **Deploy** in the upper right to deploy the updated flow to Node-RED.
+8. Click **Deploy** at the upper right to deploy the updated flow to Node-RED.
 
 
 #### Start the Apache Spark script
 
-1. Go to the project in your Dashboard, and choose **Apache Spark**.
+1. Go to the project in your Bluemix Dashboard, and choose **Apache Spark**.
 2. Click **OPEN** and select your Apache Spark instance.
 3. Click on the notebook you created.
-4. Update the variable "containerIP" to your own container's public IP address
+4. Update the variable "containerIP" to your own container's public IP address.
 5. Click **Play** at the top.
 
 
 ## Access Freeboard from Node-RED
 
-Once data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. The information on the Freeboard is collected from three separate areas of Madrid and the three data points are simultaneously displayed. You are able to see the live feed from traffic cameras, as well as, the speed and intensity of traffic and their analyzed thresholds.
+Once the data is processed, you will be able to see a visual representation of real-time traffic information displayed in a Node-RED Freeboard. The information on the Freeboard is collected from three separate areas of Madrid and the three data points are simultaneously displayed. You are able to see the live feed from traffic cameras, as well as, the speed and intensity of traffic and their analyzed thresholds.
 
 1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
 2. Click **Go to your Freeboard dashboard** to load your newly configured Freeboard.
