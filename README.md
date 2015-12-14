@@ -21,14 +21,14 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 ## Make sure a Public IP is available in your Bluemix space
 
-This solution requires a free public IP. In order to determine if a public IP is available, you will need to find your used and max quota of IPs for your space.
+This solution requires a free public IP. In order to determine if a public IP is available, you will need to find the number of  used and your max quota of IP addresses allowed for your space.
 To find this information, follow these steps:
 
 1. Log into your Dashboard at https://console.ng.bluemix.net.
 2. Select **DASHBOARD**.
 3. Select the space you where you would like DAT to deploy.
 4. In the **Containers** tile you will see information about your IP addresses.
-5. The **Public IPs Requested** field needs to have at least one IP address available.
+5. Check that the **Public IPs Requested** field has at least one available IP address.
 
 If you have an IP address available, you are ready to Deploy to Bluemix. If all of your public IP addresses have been used, you will need to release one prior to deploying. In order to release a public IP, install the CF IC plugin, which can be found at the website below.
 
@@ -56,19 +56,19 @@ Click the **Deploy to Bluemix** button below to deploy the source code to DevOps
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation)
 
-After the pipeline has been configured, you can monitor the deployment by doing the following steps
+After the pipeline has been configured, you can monitor the deployment by following these steps:
 
 1. Select your newly created project in DevOps Services.
-2. Go to **MY PROJECTS**
-3. Select **BUILD & DEPLOY**
+2. Go to **MY PROJECTS**.
+3. Select **BUILD & DEPLOY**.
 4. You can monitor the stages by selecting **View logs and history**.
 
 ## Set up Object Storage
 
-Download data schemas from the IDS project and upload them to your container. The schemas define what information Secor pulls from Kafka and allows Spark read the stored data.
+Download data schemas from the IDS project and upload them to your container. The schemas define what information Secor pulls from Kafka and allow Spark to read the stored data.
 
 1. Go to your project in DevOps Services, and download **secor/DataServices.metaKeys** and **secor/DataServices.schema** to your local machine.
-2. From your Cloud Foundry's dashboard select **DAT-objectstorage**.
+2. From your application's dashboard select **DAT-objectstorage**.
 3. From the **Actions** drop down menu, select **Add Container** and name it **secorSchema**.
 4. Create another container and name it **DataServices**.
 5. Select your **secorSchema** container, and from the **Actions** drop down menu, select **Add File**.
@@ -92,7 +92,6 @@ To complete Spark configuration, add your Object Storage and IPython notebook to
 9. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
 10. Select **Create Notebook**.
 
-Spark is now ready to be run, but first we need to put our container's public IP into Node-RED
 
 ## Set up your external IP with Node-RED
 
