@@ -11,7 +11,7 @@ The data is retrieved from a transportation system in Madrid, filtered and then 
 
 ## Introduction
 
-After registering for Bluemix and DevOps Services, you can deploy the Data and Analytics Transportation app into your personal DevOps space.
+After registering for Bluemix and DevOps Services, you can deploy the Data and Analytics Transportation (DAT) app into your personal DevOps space.
 
 ## Sign up and log into Bluemix and DevOps
 
@@ -20,15 +20,15 @@ When you sign up, you'll create an IBM ID, create an alias, and register with Bl
 
 
 ## Make sure a Public IP is available in your Bluemix space
- 
+
 This solution requires a free public IP. To first determine if a public IP is available we will need to find your used and max quota of IPs for your space.
-To find out this information 
+To find out this information
 
 1. Log into your Dashboard at https://console.ng.bluemix.net.
 2. Select **DASHBOARD**
-3. Select the space you will deploy DAT to
-4. In the **Containers** tile you will see information about your IPs
-5. The **Public IPs Requested** field needs to not be at its max. 
+3. Select the space where you will deploy DAT.
+4. In the **Containers** tile you will see information about your IPs.
+5. The **Public IPs Requested** field needs to not be at its max.
 
 In order to release an public IP, install the CF IC plugin, which can be found at the website below.
 
@@ -59,9 +59,9 @@ Click the **Deploy to Bluemix** button below to deploy the source code to DevOps
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation)
 
-After the pipeline has been configured, you can monitor the deployment by doing the following steps 
+After the pipeline has been configured, you can monitor the deployment by doing the following steps
 
-1. Select your newly created project in DevOps Services. 
+1. Select your newly created project in DevOps Services.
 2. Go to **MY PROJECTS**
 3. Select **BUILD & DEPLOY**
 4. You can monitor the stages by selecting **View logs and history**.
@@ -103,7 +103,7 @@ Add the external IP address of your container to Node-RED.
 
 1. Obtain the public IP of your DAT-container on the container's tile at your Bluemix Dashboard
 1. Return to your Cloud Foundry's application dashboard and select the route for your application to access Node-RED.
-2. Click **Go to your Node-RED flow editor**. You will see the customized flow. 
+2. Click **Go to your Node-RED flow editor**. You will see the customized flow.
 3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
 4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the DAT Kafka Zookeeper Server.
 5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of DAT-container
