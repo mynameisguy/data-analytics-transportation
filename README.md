@@ -52,7 +52,7 @@ cf ic ip release < public IP >
 
 ## Deploy to Bluemix
 
-Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services. This creates the needed Cloud Foundry and Container applications as well as instances of Object-Storage, Cloudant, and Spark. These instances are then bound to your application.
+Click the **Deploy to Bluemix** button below to deploy the source code to DevOps Services. This creates the needed Cloud Foundry and Container applications as well as instances of Object-Storage, Cloudant, and Spark. These instances are then bound to your application. **Note: The service plan for Spark may have additional monthly charges.**
 
  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/cfsworkload/data-analytics-transportation)
 
