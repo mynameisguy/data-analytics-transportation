@@ -1,0 +1,80 @@
+log4j: Trying to find [log4j.prod.properties] using context classloader sun.misc.Launcher$AppClassLoader@5c647e05.
+log4j: Using URL [jar:file:/root/secor_v3_keystonev3/DataServices/SECOR_INSTALL_DIR/secor-0.1-SNAPSHOT.jar!/log4j.prod.properties] for automatic log4j configuration.
+log4j: Reading configuration from URL jar:file:/root/secor_v3_keystonev3/DataServices/SECOR_INSTALL_DIR/secor-0.1-SNAPSHOT.jar!/log4j.prod.properties
+log4j: Parsing for [root] with value=[DEBUG, CONSOLE, ROLLINGFILE].
+log4j: Level token is [DEBUG].
+log4j: Category root set to DEBUG
+log4j: Parsing appender named "CONSOLE".
+log4j: Parsing layout options for "CONSOLE".
+log4j: Setting property [conversionPattern] to [%d{ISO8601} [%t] (%C:%L) %-5p %m%n].
+log4j: End of parsing for "CONSOLE".
+log4j: Setting property [threshold] to [WARN].
+log4j: Parsed "CONSOLE" options.
+log4j: Parsing appender named "ROLLINGFILE".
+log4j: Parsing layout options for "ROLLINGFILE".
+log4j: Setting property [conversionPattern] to [%d{ISO8601} [%t] (%C:%L) %-5p %m%n].
+log4j: End of parsing for "ROLLINGFILE".
+log4j: Setting property [file] to [/mnt/secor_data/logs/secor-secor_backup.log].
+log4j: Setting property [threshold] to [INFO].
+log4j: Setting property [maxFileSize] to [20MB].
+log4j: Setting property [maxBackupIndex] to [50].
+log4j: setFile called: /mnt/secor_data/logs/secor-secor_backup.log, true
+log4j: setFile ended
+log4j: Parsed "ROLLINGFILE" options.
+log4j: Finished configuring.
+2016-02-29 10:26:39,415 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,416 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_12 was supplied but isn't a known config.
+2016-02-29 10:26:39,416 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,416 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,426 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,429 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,429 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,430 [Thread-4] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,432 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,432 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_11 was supplied but isn't a known config.
+2016-02-29 10:26:39,433 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,433 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,433 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,434 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,434 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,434 [Thread-3] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,436 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,437 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_9 was supplied but isn't a known config.
+2016-02-29 10:26:39,437 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,437 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,438 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,441 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,441 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,442 [Thread-1] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,450 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,450 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_14 was supplied but isn't a known config.
+2016-02-29 10:26:39,450 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,451 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,454 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,454 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,455 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,455 [Thread-6] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,461 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,452 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,470 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_13 was supplied but isn't a known config.
+2016-02-29 10:26:39,470 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,470 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,470 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,471 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,471 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,471 [Thread-5] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,473 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration ssl.truststore.identification.algorithm = HTTPS was supplied but isn't a known config.
+2016-02-29 10:26:39,473 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_10 was supplied but isn't a known config.
+2016-02-29 10:26:39,473 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,473 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,474 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,474 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,474 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,474 [Thread-2] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
+2016-02-29 10:26:39,469 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.id = wchen_4264_15 was supplied but isn't a known config.
+2016-02-29 10:26:39,482 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration consumer.timeout.ms = 10000 was supplied but isn't a known config.
+2016-02-29 10:26:39,482 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.session.timeout.ms = 3000 was supplied but isn't a known config.
+2016-02-29 10:26:39,482 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.connect = localhost:2181/ was supplied but isn't a known config.
+2016-02-29 10:26:39,482 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration zookeeper.sync.time.ms = 200 was supplied but isn't a known config.
+2016-02-29 10:26:39,483 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration metadata.broker.list = kafka01-prod01.messagehub.services.us-south.bluemix.net:9093,kafka02-prod01.messagehub.services.us-south.bluemix.net:9093,kafka03-prod01.messagehub.services.us-south.bluemix.net:9093,kafka04-prod01.messagehub.services.us-south.bluemix.net:9093,kafka05-prod01.messagehub.services.us-south.bluemix.net:9093 was supplied but isn't a known config.
+2016-02-29 10:26:39,483 [Thread-7] (org.apache.kafka.common.config.AbstractConfig:173) WARN  The configuration auto.commit.enable = false was supplied but isn't a known config.
