@@ -13,10 +13,9 @@ RUN apt-get update && \
 ENV BUILD_DEPS git openjdk-7-jdk maven
 ENV RUNTIME_DEPS openjdk-7-jre-headless
 
-RUN apt-get update && apt-get install -y $BUILD_DEPS $RUNTIME_DEPS --no-install-recommends
-
+RUN apt-get install -y $BUILD_DEPS $RUNTIME_DEPS --no-install-recommends
 #supervisor
-RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
+RUN apt-get install -y openssh-server apache2 supervisor
 
 # secor setup
 COPY ./secor/DataServices/SECOR_INSTALL_DIR /opt/secor
