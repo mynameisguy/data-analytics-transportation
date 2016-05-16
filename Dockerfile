@@ -13,21 +13,19 @@ RUN apt-get update && \
 ENV BUILD_DEPS git openjdk-7-jdk maven
 ENV RUNTIME_DEPS openjdk-7-jre-headless
 
-RUN apt-get update \
-        && apt-get install -y $BUILD_DEPS $RUNTIME_DEPS --no-install-recommends
+RUN apt-get update && apt-get install -y $BUILD_DEPS $RUNTIME_DEPS --no-install-recommends
 
 #supervisor
 RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
 
 # secor setup
-COPY ./SECOR_INSTALL_DIR /opt/secor
+COPY ./secor/DataServices/SECOR_INSTALL_DIR /opt/secor
 WORKDIR /opt/secor
 
 # Supervisor config
-ADD SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
+ADD secor/DataServices/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
 
 # 2181 is for zookeeper, 9092 is for kafka
 EXPOSE 2181
 
 CMD ["supervisord", "-n"]
-
