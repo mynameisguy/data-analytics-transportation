@@ -75,10 +75,10 @@ stages:
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \n\necho \"swift.tenant=${tenant}\"\
-      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.username=${username}\"\
-      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
-      \ >> ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\n\necho \"\
-      the value just added is\"\ncat ${WORKSPACE}/secor/SECOR_INSTALL_DIR/secor.common.properties\n\
+      \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.username=${username}\"\
+      \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
+      \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\necho \"\
+      the value just added is\"\ncat ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\
       \n\n\nlog_and_echo \"$LABEL\" \"Starting build script\"\n\n# The IBM Container\
       \ Service CLI (ice), Git client (git), IDS Inventory CLI (ids-inv) and Python\
       \ 2.7.3 (python) have been installed.\n# Based on the organization and space\
