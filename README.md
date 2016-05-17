@@ -91,7 +91,7 @@ To complete Spark configuration, add your Object Storage and IPython notebook to
 4. At the top select **Object Storage** and select **ADD OBJECT STORAGE**.
 5. Select **Bluemix** at the top.
 6. Select **DAT-objectstorage** from the options. Select the container **DataServices** and press **SELECT**.
-7. Click **My Notebooks** at the top and select **New Notebook**.
+7. Click **NOTEBOOKS** and select **New Notebook**.
 8. Select **From File** at the top. Name the notebook and give it a description.
 9. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
 10. Select **Create Notebook**.
