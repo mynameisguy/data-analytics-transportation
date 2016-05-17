@@ -1,5 +1,4 @@
-#!/bin/bash
-FROM ubuntu
+FROM ubuntu:15.10
 
 ENV SCALA_VERSION="2.10.4"
 ENV JAVA_VERSION="7"
@@ -14,6 +13,7 @@ ENV BUILD_DEPS git openjdk-7-jdk maven
 ENV RUNTIME_DEPS openjdk-7-jre-headless
 
 RUN apt-get install -y $BUILD_DEPS $RUNTIME_DEPS --no-install-recommends
+
 #supervisor
 RUN apt-get install -y openssh-server apache2 supervisor
 
@@ -28,3 +28,4 @@ ADD secor/DataServices/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/c
 EXPOSE 2181
 
 CMD ["supervisord", "-n"]
+
