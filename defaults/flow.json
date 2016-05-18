@@ -5,13 +5,6 @@
       "label": "DAT Use Case"
     },
     {
-      "id": "405d759e.73f9fc",
-      "type": "kafka-credentials",
-      "z": "",
-      "name": "DAT Kafka",
-      "zookeeperServer": "134.168.20.191"
-    },
-    {
       "id": "38444c73.26100c",
       "type": "inject",
       "z": "b460efb5.81d848",
@@ -125,11 +118,12 @@
     },
     {
       "id": "d52bba9c.1b2f18",
-      "type": "kafka producer",
+      "type": "messagehub out",
       "z": "b460efb5.81d848",
-      "address": "405d759e.73f9fc",
-      "name": "Send to Kafka",
+      "name": "Send to Message Hub",
       "topic": "DataServices",
+      "apikey": "",
+      "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
       "x": 1354.75,
       "y": 176,
       "wires": []
@@ -322,11 +316,12 @@
     },
     {
       "id": "718f4e05.47134",
-      "type": "kafka consumer",
+      "type": "messagehub in",
       "z": "b460efb5.81d848",
-      "address": "405d759e.73f9fc",
       "name": "NewThresholds Consumer",
       "topic": "newOutput",
+      "apikey": "",
+      "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
       "x": 178.3333740234375,
       "y": 481.3333740234375,
       "wires": [
