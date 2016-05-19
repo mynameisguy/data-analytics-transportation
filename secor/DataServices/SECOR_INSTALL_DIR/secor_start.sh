@@ -2,6 +2,9 @@
 
 export PATH=/opt/ibm/java-x86_64-71/jre/bin/:$PATH
 
+echo "downloading dependencies"
+mvn package
+
 echo "starting zookeeper"
 scripts/run_kafka_class.sh \
             org.apache.zookeeper.server.quorum.QuorumPeerMain zookeeper.test.properties > \
