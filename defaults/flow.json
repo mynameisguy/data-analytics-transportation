@@ -29,7 +29,7 @@
       "type": "function",
       "z": "b460efb5.81d848",
       "name": "Get Time",
-      "func": "var d = new Date();\nvar n = d.getTime();\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = context.global.dateformat(d,\"HH:MM:ss\");\n\nreturn;",
+    "func": "var d = new Date();\nvar n = d.getTime();\nvar hour    = d.getHours();\nvar minute  = d.getMinutes();\nvar second  = d.getSeconds(); \n\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = hour + \":\" + minute + \":\" + second;\nreturn;",
       "outputs": 1,
       "noerr": 0,
       "x": 306,
@@ -37,6 +37,16 @@
       "wires": [
         []
       ]
+    },
+    {
+      "id": "e0369b49.12b128",
+      "type": "catch",
+      "z": "b460efb5.81d848",
+      "name": "",
+      "scope": null,
+      "x": 159.5,
+      "y": 598.5,
+      "wires": [[]]
     },
     {
       "id": "946354c9.4b926",
@@ -315,13 +325,11 @@
       ]
     },
     {
-      "id": "718f4e05.47134",
-      "type": "messagehub in",
-      "z": "b460efb5.81d848",
-      "name": "NewThresholds Consumer",
-      "topic": "newOutput",
-      "apikey": "",
-      "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
+    "id": "31a05614.7e006a",
+    "type": "comment",
+    "z": "b460efb5.81d848",
+    "name": "replace with messagehub in node",
+    "info": "",
       "x": 178.3333740234375,
       "y": 481.3333740234375,
       "wires": [
