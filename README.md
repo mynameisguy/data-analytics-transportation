@@ -88,10 +88,10 @@ To complete Spark configuration, add your Object Storage and IPython notebook to
 1. In DevOps Services, select your project and download **dat_notebook.ipynb** to your local machine.
 2. Inside the **Spark** service, click **Open** at the top right.
 3. Select your newly created **DAT-spark** instance.
-4. At the top select **Object Storage** and select **ADD OBJECT STORAGE**.
+4. Click **NOTEBOOKS** and at the top select **Object Storage** and select **Add Object StorageE**.
 5. Select **Bluemix** at the top.
 6. Select **DAT-objectstorage** from the options. Select the container **DataServices** and press **SELECT**.
-7. Click **NOTEBOOKS** and select **New Notebook**.
+7. Click **My Notebooks** at the top and select **New Notebook**.
 8. Select **From File** at the top. Name the notebook and give it a description.
 9. Click on **Choose File** and select the **dat_notebook.ipynb** downloaded to your local machine.
 10. Select **Create Notebook**.
