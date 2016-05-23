@@ -20,6 +20,7 @@ RUN apt-get install -y openssh-server apache2 supervisor
 # secor setup
 COPY ./secor/DataServices/SECOR_INSTALL_DIR /opt/secor
 WORKDIR /opt/secor
+RUN chmod +x /opt/secor/secor_start.sh
 
 # Supervisor config
 ADD secor/DataServices/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
