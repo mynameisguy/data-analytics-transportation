@@ -9,8 +9,7 @@ RUN apt-get update && \
 	sudo
 
 #install vim
-RUN apt-get update && \
-	apt-get -y --force-yes install \
+RUN apt-get -y --force-yes install \
 	vim
 
 # secor ENV variables
