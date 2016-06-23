@@ -3,6 +3,11 @@ FROM ubuntu:15.10
 ENV SCALA_VERSION="2.10.4"
 ENV JAVA_VERSION="7"
 
+#install sudo
+RUN apt-get update && \
+	apt-get -y --force-yes install \
+	sudo
+
 #install vim
 RUN apt-get update && \
 	apt-get -y --force-yes install \
