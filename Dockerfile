@@ -25,6 +25,7 @@ RUN apt-get install -y openssh-server apache2 supervisor
 COPY ./secor/DataServices/SECOR_INSTALL_DIR /opt/secor
 WORKDIR /opt/secor
 RUN chmod +x /opt/secor/secor_start.sh
+RUN chmod +x /opt/secor/scripts/run_kafka_class.sh
 
 # Supervisor config
 ADD secor/DataServices/SECOR_INSTALL_DIR/supervisor/secor.conf /etc/supervisor/conf.d/secor.conf
