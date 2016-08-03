@@ -27,9 +27,10 @@ stages:
       application: ${CF_APP}
     script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Shared DAT-cloudant\n\
       cf create-service spark ibm.SparkService.PayGoPersonal DAT-spark\n\
-      cf create-service Object-Storage Free DAT-objectstorage \ncf push \"${CF_APP}\"\
+      cf create-service Object-Storage Free DAT-objectstorage \n\
+      cf create-service messagehub standard Message Hub-e2\ncf push \"${CF_APP}\"\
       \ --no-start\ncf bind-service \"${CF_APP}\" DAT-cloudant\ncf bind-service \"\
-      ${CF_APP}\" DAT-spark\ncf bind-service \"${CF_APP}\" DAT-objectstorage\ncf start\
+      ${CF_APP}\" DAT-spark\ncf bind-service \"${CF_APP}\" DAT-objectstorage\ncf bind-service \"${CF_APP}\" Message Hub-e2\ncf start\
       \ \"${CF_APP}\""
 - name: Container Build
   inputs:
