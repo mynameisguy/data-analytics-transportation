@@ -7,7 +7,7 @@
         description : "Some sort of description <strong>openMap with Markers</strong>",
 
         external_scripts: [
-            "js/leaflet.js", "js/Leaflet.MakiMarkers.js"
+            "js/leaflet.js", "js/Leaflet.MakiMarkers.js", "https://www.mapquestapi.com/sdk/leaflet/v2.s/mq-map.js?key=99qPhavuqAsqaIpAH2uKEDsJGdQsikwf"
         ],
  
         fill_size   : true,
@@ -111,7 +111,7 @@
         var ATTRIBUTION = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,' +
                           '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors,' +
                           '<a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>';
-        var TILE_LAYER = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png'
+        //var TILE_LAYER =     'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png'
         
         var self = this;
         var currentSettings = settings;
@@ -130,12 +130,16 @@
         
         var mapElement = $("<div id='" + mapName + "' style='width: 100%; height: 100%'></div>");
                 
-        var map;
+        var mapLayer = MQ.satelliteLayer(), map;
 
         var updateMap = function() {
-            map = L.map(mapName).setView([currentSettings.center_lat, currentSettings.center_lon], currentSettings.map_zoom);
+            map = L.map(mapName, {
+                layers: mapLayer,
+                center: [ currentSettings.center_lat, currentSettings.center_lon ],
+                zoom: currentSettings.map_zoom
+            });
 
-            L.tileLayer(TILE_LAYER, {
+            L.tileLayer(mapLayer, {
                 subdomains: ['otile1','otile2','otile3','otile4'],
                 maxZoom: 18,
                 attribution: ATTRIBUTION 
