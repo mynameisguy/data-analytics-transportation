@@ -28,7 +28,7 @@ stages:
     script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Shared DAT-cloudant\n\
       cf create-service spark ibm.SparkService.PayGoPersonal DAT-spark\n\
       cf create-service Object-Storage Free DAT-objectstorage \n\
-      cf create-service messagehub standard Message Hub-e2\ncf push \"${CF_APP}\"\
+      cf create-service messagehub standard \"Message Hub-e2\"\ncf push \"${CF_APP}\"\
       \ --no-start\ncf bind-service \"${CF_APP}\" DAT-cloudant\ncf bind-service \"\
       ${CF_APP}\" DAT-spark\ncf bind-service \"${CF_APP}\" DAT-objectstorage\ncf bind-service \"${CF_APP}\" Message Hub-e2\ncf start\
       \ \"${CF_APP}\""
@@ -86,10 +86,12 @@ stages:
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \n\necho \"swift.tenant=${tenant}\"\
-      \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.username=${username}\"\
+      \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n
+      \ echo \"KafkaClient { \n     com.ibm.messagehub.login.MessageHubLoginModule required \n     serviceName=\"kafka\" \n     username=\"${msghubUser}\" \n     password=\"${msghubPassword}\"; \n };\"\
+      \ > ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/jaas.conf\n\
+      \ echo \"swift.username=${username}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\necho \"\
-      \ > ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/jaas.conf\necho \"KafkaClient { \n     com.ibm.messagehub.login.MessageHubLoginModule required \n     serviceName=\"kafka\" \n     username=\"${msghubUser}\" \n     password=\"${msghubPassword}\"; \n };\"\
       the value just added is\"\ncat ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\
       \n\n\nlog_and_echo \"$LABEL\" \"Starting build script\"\n\n# The IBM Container\
       \ Service CLI (ice), Git client (git), IDS Inventory CLI (ids-inv) and Python\
