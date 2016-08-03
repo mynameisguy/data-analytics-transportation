@@ -38,6 +38,12 @@ stages:
   triggers:
   - type: stage
   properties:
+  - name: msghubUser
+    value: ''
+    type: text
+  - name: msghubPassword
+    value: ''
+    type: text
   - name: tenant
     value: ''
     type: text
@@ -63,6 +69,10 @@ stages:
       export password=${output:1:${#output}-3}
       output=`cf env ${CF_APP} | grep userId -m 1 | awk '{print $2}'`
       export username=${output:1:${#output}-3}
+      output=`cf env data-analytics-transportation-guyger-1319 | grep password  | awk 'NR == 3' |  awk '{print $2}'`
+      export msghubPassword=${output:1:${#output}-3}
+      output=`cf env data-analytics-transportation-guyger-1319 | grep -w user -m 1 |  awk '{print $2}'`
+      export msghubUser=${output:1:${#output}-2}
   - name: Container Build
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
@@ -78,6 +88,7 @@ stages:
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.username=${username}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\necho \"\
+      \ > ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/jaas.conf\necho \"KafkaClient { \n     com.ibm.messagehub.login.MessageHubLoginModule required \n     serviceName=\"kafka\" \n     username=\"${msghubUser}\" \n     password=\"${msghubPassword}\"; \n };\"\
       the value just added is\"\ncat ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n\
       \n\n\nlog_and_echo \"$LABEL\" \"Starting build script\"\n\n# The IBM Container\
       \ Service CLI (ice), Git client (git), IDS Inventory CLI (ids-inv) and Python\
