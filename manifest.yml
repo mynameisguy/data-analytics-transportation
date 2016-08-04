@@ -1,8 +1,9 @@
+---
 applications:
 - path: .
   memory: 1536M
   instances: 1
-  name: data-analytics-transportation-application
-  host: data-analytics-transportation-application
+  name: data-analytics-transportation-cfsworkload-845
+  host: data-analytics-transportation-cfsworkload-845
   disk_quota: 1024M
   command: node --max-old-space-size=384 node_modules/node-red/red.js --settings ./bluemix-settings.js -v
