@@ -139,11 +139,11 @@
                 zoom: currentSettings.map_zoom
             });
 
-            L.tileLayer(mapLayer, {
-                subdomains: ['otile1','otile2','otile3','otile4'],
-                maxZoom: 18,
-                attribution: ATTRIBUTION 
-            }).addTo(map);
+            // L.tileLayer(mapLayer, {
+            //     subdomains: ['otile1','otile2','otile3','otile4'],
+            //     maxZoom: 18,
+            //     attribution: ATTRIBUTION 
+            // }).addTo(map);
             
 
             for (i = 0 ; i<3 ; i++) {
