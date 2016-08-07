@@ -70,9 +70,9 @@ stages:
       export password=${output:1:${#output}-3}
       output=`cf env ${CF_APP} | grep userId -m 1 | awk '{print $2}'`
       export username=${output:1:${#output}-3}
-      output=`cf env data-analytics-transportation-guyger-1319 | grep password  | awk 'NR == 3' |  awk '{print $2}'`
+      output=`cf env ${CF_APP} | grep password  | awk 'NR == 3' |  awk '{print $2}'`
       export msghubPassword=${output:1:${#output}-3}
-      output=`cf env data-analytics-transportation-guyger-1319 | grep -w user -m 1 |  awk '{print $2}'`
+      output=`cf env ${CF_APP} | grep -w user -m 1 |  awk '{print $2}'`
       export msghubUser=${output:1:${#output}-2}
   - name: Container Build
     type: builder
