@@ -87,7 +87,7 @@ stages:
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \n\necho \"swift.tenant=${tenant}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\n
-      \ echo \"KafkaClient { \n     com.ibm.messagehub.login.MessageHubLoginModule required \n     serviceName=\"kafka\" \n     username=\"${msghubUser}\" \n     password=\"${msghubPassword}\"; \n };\"\
+      \ echo \"KafkaClient { \n     com.ibm.messagehub.login.MessageHubLoginModule required \n     serviceName="kafka"\n     username="${msghubUser}"\n     password="${msghubPassword}";\n };\"\
       \ > ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/jaas.conf\n\
       \ echo \"swift.username=${username}\"\
       \ >> ${WORKSPACE}/secor/DataServices/SECOR_INSTALL_DIR/secor.common.properties\necho \"swift.password=${password}\"\
