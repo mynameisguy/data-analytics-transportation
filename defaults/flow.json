@@ -1,385 +1,467 @@
 [
-    {
-      "type": "tab",
-      "id": "b460efb5.81d848",
-      "label": "DAT Use Case"
-    },
-    {
-      "id": "38444c73.26100c",
-      "type": "inject",
-      "z": "b460efb5.81d848",
-      "name": "Every 5 minutes",
-      "topic": "",
-      "payload": "",
-      "payloadType": "none",
-      "repeat": "300",
-      "crontab": "",
-      "once": true,
-      "x": 118,
-      "y": 57,
-      "wires": [
-        [
-          "2e7927fe.3e65f8",
-          "54a59958.d8b348"
-        ]
+  {
+    "id": "38444c73.26100c",
+    "type": "inject",
+    "z": "b460efb5.81d848",
+    "name": "Every 5 minutes",
+    "topic": "",
+    "payload": "",
+    "payloadType": "none",
+    "repeat": "300",
+    "crontab": "",
+    "once": true,
+    "x": 95,
+    "y": 46,
+    "wires": [
+      [
+        "2e7927fe.3e65f8",
+        "946354c9.4b926"
       ]
-    },
-    {
-      "id": "2e7927fe.3e65f8",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Get Time",
+    ]
+  },
+  {
+    "id": "2e7927fe.3e65f8",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Get Time",
     "func": "var d = new Date();\nvar n = d.getTime();\nvar hour    = d.getHours();\nvar minute  = d.getMinutes();\nvar second  = d.getSeconds(); \n\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = hour + \":\" + minute + \":\" + second;\nreturn;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 306,
-      "y": 57,
-      "wires": [
-        []
+    "outputs": 1,
+    "noerr": 0,
+    "x": 306,
+    "y": 57,
+    "wires": [
+      [
+        
       ]
-    },
-    {
-      "id": "e0369b49.12b128",
-      "type": "catch",
-      "z": "b460efb5.81d848",
-      "name": "",
-      "scope": null,
-      "x": 159.5,
-      "y": 598.5,
-      "wires": [[]]
-    },
-    {
-      "id": "946354c9.4b926",
-      "type": "http request",
-      "z": "b460efb5.81d848",
-      "name": "Get traffic status from Madrid",
-      "method": "GET",
-      "ret": "txt",
-      "url": "http://informo.munimadrid.es/informo/tmadrid/pm.xml",
-      "x": 201.75,
-      "y": 131.25,
-      "wires": [
-        [
-          "b9985bf2.68a58"
-        ]
+    ]
+  },
+  {
+    "id": "e0369b49.12b128",
+    "type": "catch",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "scope": null,
+    "x": 159.5,
+    "y": 598.5,
+    "wires": [
+      [
+        
       ]
-    },
-    {
-      "id": "b9985bf2.68a58",
-      "type": "xml",
-      "z": "b460efb5.81d848",
-      "name": "xml2json",
-      "attr": "",
-      "chr": "",
-      "x": 413,
-      "y": 131.25,
-      "wires": [
-        [
-          "35e5afb4.458e38",
-          "6aaf7c48.47341c"
-        ]
+    ]
+  },
+  {
+    "id": "946354c9.4b926",
+    "type": "http request",
+    "z": "b460efb5.81d848",
+    "name": "Get traffic status from Madrid",
+    "method": "GET",
+    "ret": "txt",
+    "url": "http://informo.munimadrid.es/informo/tmadrid/pm.xml",
+    "x": 201.75,
+    "y": 131.25,
+    "wires": [
+      [
+        "b9985bf2.68a58"
       ]
-    },
-    {
-      "id": "6aaf7c48.47341c",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Filter for starting with \"PM\" without \"Error\"",
-      "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn  (item.codigo.toString().indexOf(empiezaPor) === 0  && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 739.5,
-      "y": 130,
-      "wires": [
-        [
-          "5850a26f.21d234"
-        ]
+    ]
+  },
+  {
+    "id": "b9985bf2.68a58",
+    "type": "xml",
+    "z": "b460efb5.81d848",
+    "name": "xml2json",
+    "attr": "",
+    "chr": "",
+    "x": 413,
+    "y": 131.25,
+    "wires": [
+      [
+        "35e5afb4.458e38",
+        "6aaf7c48.47341c"
       ]
-    },
-    {
-      "id": "5850a26f.21d234",
-      "type": "splitter",
-      "z": "b460efb5.81d848",
-      "name": "Split to multiple messages",
-      "property": "payload",
-      "x": 1073.25,
-      "y": 130,
-      "wires": [
-        [
-          "43622871.e67178"
-        ]
+    ]
+  },
+  {
+    "id": "6aaf7c48.47341c",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Filter for starting with \"PM\" without \"Error\"",
+    "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn  (item.codigo.toString().indexOf(empiezaPor) === 0  && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 739.5,
+    "y": 130,
+    "wires": [
+      [
+        "5850a26f.21d234"
       ]
-    },
-    {
-      "id": "43622871.e67178",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Add Timestamp and remove brackets",
-      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 1105.75,
-      "y": 176.25,
-      "wires": [
-        [
-          "d52bba9c.1b2f18"
-        ]
+    ]
+  },
+  {
+    "id": "5850a26f.21d234",
+    "type": "splitter",
+    "z": "b460efb5.81d848",
+    "name": "Split to multiple messages",
+    "property": "payload",
+    "x": 1073.25,
+    "y": 130,
+    "wires": [
+      [
+        "43622871.e67178"
       ]
-    },
-    {
-      "id": "d52bba9c.1b2f18",
-      "type": "messagehub out",
-      "z": "b460efb5.81d848",
-      "name": "Send to Message Hub",
-      "topic": "DataServices",
-      "apikey": "",
-      "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "x": 1354.75,
-      "y": 176,
-      "wires": []
-    },
-    {
-      "id": "35e5afb4.458e38",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Filter for Specific Sensors without \"Error\"",
-      "func": "var sensors = [\"PM41801\",\"PM41301\",\"PM107631\"];\n\nfunction elQueEmpiezaPor(){\n\t\treturn function(item){ \n\t\t        return  (sensors.indexOf(item.codigo.toString()) >= 0 && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor());\n\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 259.3611145019531,
-      "y": 289.83331298828125,
-      "wires": [
-        [
-          "854e1a8e.c71148"
-        ]
+    ]
+  },
+  {
+    "id": "43622871.e67178",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Add Timestamp and remove brackets",
+    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1105.75,
+    "y": 176.25,
+    "wires": [
+      [
+        "d52bba9c.1b2f18",
+        "7a52412.e3949c"
       ]
-    },
-    {
-      "id": "854e1a8e.c71148",
-      "type": "splitter",
-      "z": "b460efb5.81d848",
-      "name": "Split to multiple messages",
-      "property": "payload",
-      "x": 561.25,
-      "y": 290.25,
-      "wires": [
-        [
-          "f5ef6e60.8e17c8"
-        ]
+    ]
+  },
+  {
+    "id": "d52bba9c.1b2f18",
+    "type": "messagehub out",
+    "z": "b460efb5.81d848",
+    "apikey": "",
+    "topic": "DataServices",
+    "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
+    "x": 1393.75,
+    "y": 178,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "35e5afb4.458e38",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Filter for Specific Sensors without \"Error\"",
+    "func": "var sensors = [\"PM41801\",\"PM41301\",\"PM107631\"];\n\nfunction elQueEmpiezaPor(){\n\t\treturn function(item){ \n\t\t        return  (sensors.indexOf(item.codigo.toString()) >= 0 && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor());\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 259.3611145019531,
+    "y": 289.83331298828125,
+    "wires": [
+      [
+        "854e1a8e.c71148"
       ]
-    },
-    {
-      "id": "f5ef6e60.8e17c8",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Add Timestamp and remove brackets",
-      "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 846.75,
-      "y": 290,
-      "wires": [
-        [
-          "fb7760b4.75a118"
-        ]
+    ]
+  },
+  {
+    "id": "854e1a8e.c71148",
+    "type": "splitter",
+    "z": "b460efb5.81d848",
+    "name": "Split to multiple messages",
+    "property": "payload",
+    "x": 561.25,
+    "y": 290.25,
+    "wires": [
+      [
+        "f5ef6e60.8e17c8"
       ]
-    },
-    {
-      "id": "fb7760b4.75a118",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Clean Data",
-      "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n    \nvar sThreshold = context.global.speedThreshold;\nvar iThreshold = context.global.intensityThreshold;\n    \nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n    \nmsg.payload = lastObj;\n    \nswitch(obj.codigo){\n    case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM107631\":\n        return [null,null,msg];\n    default:\n        return [null,null,null]\n}",
-      "outputs": "3",
-      "noerr": 0,
-      "x": 1089,
-      "y": 290,
-      "wires": [
-        [
-          "8fbddb92.e1d7c8"
-        ],
-        [
-          "a806a90d.24eb4"
-        ],
-        [
-          "bcd2e867.7aee1"
-        ]
+    ]
+  },
+  {
+    "id": "f5ef6e60.8e17c8",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Add Timestamp and remove brackets",
+    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 846.75,
+    "y": 290,
+    "wires": [
+      [
+        "fb7760b4.75a118"
       ]
-    },
-    {
-      "id": "40b1da2c.5bb054",
-      "type": "comment",
-      "z": "b460efb5.81d848",
-      "name": "------------------ Specific Measurement Points for Freeboard ------------------",
-      "info": "",
-      "x": 709.9999999999999,
-      "y": 235.99999999999994,
-      "wires": []
-    },
-    {
-      "id": "28e2fc7.84ff204",
-      "type": "comment",
-      "z": "b460efb5.81d848",
-      "name": "------------------ From Ayuntamiento Madrid to Object Storage ------------------",
-      "info": "",
-      "x": 827.9999999999999,
-      "y": 83.99999999999997,
-      "wires": []
-    },
-    {
-      "id": "6988f75.d058c88",
-      "type": "comment",
-      "z": "b460efb5.81d848",
-      "name": "---------------Freeboard Data from Spark---------------",
-      "info": "",
-      "x": 270.33331298828125,
-      "y": 419.0000305175781,
-      "wires": []
-    },
-    {
-      "id": "54a59958.d8b348",
-      "type": "debug",
-      "z": "b460efb5.81d848",
-      "name": "StartFlow",
-      "active": true,
-      "console": "false",
-      "complete": "payload",
-      "x": 305.33331298828125,
-      "y": 20,
-      "wires": []
-    },
-    {
-      "id": "8fbddb92.e1d7c8",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "TrafficInfoPM41801",
-      "x": 1529.88916015625,
-      "y": 250.11117553710938,
-      "wires": []
-    },
-    {
-      "id": "59e5c562.9e3844",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "TrafficInfoPM41301",
-      "x": 1528.778076171875,
-      "y": 290.6667175292969,
-      "wires": []
-    },
-    {
-      "id": "315c6b66.ef8cc4",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "TrafficInfoPM107631",
-      "x": 1531.888916015625,
-      "y": 333.1111755371094,
-      "wires": []
-    },
-    {
-      "id": "eacb3474.6181e",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "NewThresholdsPM41801",
-      "x": 655.6666870117188,
-      "y": 436,
-      "wires": []
-    },
-    {
-      "id": "62a08f1b.bfb758",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "NewThresholdsPM41301",
-      "x": 655.6666870117188,
-      "y": 480.99993896484375,
-      "wires": []
-    },
-    {
-      "id": "e0c72657.7dd228",
-      "type": "freeboard",
-      "z": "b460efb5.81d848",
-      "name": "NewThresholdsPM107631",
-      "x": 660,
-      "y": 525.9998779296875,
-      "wires": []
-    },
-    {
-      "id": "72ae33de.e220f4",
-      "type": "function",
-      "z": "b460efb5.81d848",
-      "name": "Sort TrafficInfo",
-      "func": "var obj = msg.value;\nobj=(obj).replace(/\\'/g,\"\\\"\");\nvar newObj = JSON.parse(obj);\nmsg.payload = newObj;\n\nswitch(newObj.codigo){\n    case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM107631\":\n        return [null,null,msg];\n    default:\n        return [null,null,null]\n}",
-      "outputs": "3",
-      "noerr": 0,
-      "x": 400,
-      "y": 481,
-      "wires": [
-        [
-          "eacb3474.6181e"
-        ],
-        [
-          "62a08f1b.bfb758"
-        ],
-        [
-          "e0c72657.7dd228"
-        ]
+    ]
+  },
+  {
+    "id": "fb7760b4.75a118",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Clean Data",
+    "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n    \nmsg.payload = lastObj;\n    \nswitch(obj.codigo){\n    case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM107631\":\n        return [null,null,msg];\n    default:\n        return [null,null,null]\n}",
+    "outputs": "3",
+    "noerr": 0,
+    "x": 1089,
+    "y": 290,
+    "wires": [
+      [
+        "8fbddb92.e1d7c8",
+        "d1215bd2.25628"
+      ],
+      [
+        "a806a90d.24eb4"
+      ],
+      [
+        "bcd2e867.7aee1"
       ]
-    },
-    {
-    "id": "31a05614.7e006a",
+    ]
+  },
+  {
+    "id": "40b1da2c.5bb054",
     "type": "comment",
     "z": "b460efb5.81d848",
-    "name": "replace with messagehub in node",
+    "name": "------------------ Specific Measurement Points for Freeboard ------------------",
     "info": "",
-      "x": 178.3333740234375,
-      "y": 481.3333740234375,
-      "wires": [
-        [
-          "72ae33de.e220f4"
-        ]
+    "x": 709.9999999999999,
+    "y": 235.99999999999994,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "28e2fc7.84ff204",
+    "type": "comment",
+    "z": "b460efb5.81d848",
+    "name": "------------------ From Ayuntamiento Madrid to Object Storage ------------------",
+    "info": "",
+    "x": 827.9999999999999,
+    "y": 83.99999999999997,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "6988f75.d058c88",
+    "type": "comment",
+    "z": "b460efb5.81d848",
+    "name": "---------------Freeboard Data from Spark---------------",
+    "info": "",
+    "x": 270.33331298828125,
+    "y": 419.0000305175781,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "8fbddb92.e1d7c8",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "TrafficInfoPM41801",
+    "x": 1529.88916015625,
+    "y": 250.11117553710938,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "59e5c562.9e3844",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "TrafficInfoPM41301",
+    "x": 1528.778076171875,
+    "y": 290.6667175292969,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "315c6b66.ef8cc4",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "TrafficInfoPM107631",
+    "x": 1531.888916015625,
+    "y": 333.1111755371094,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "eacb3474.6181e",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "NewThresholdsPM41801",
+    "x": 655.6666870117188,
+    "y": 436,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "62a08f1b.bfb758",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "NewThresholdsPM41301",
+    "x": 655.6666870117188,
+    "y": 480.99993896484375,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "e0c72657.7dd228",
+    "type": "freeboard",
+    "z": "b460efb5.81d848",
+    "name": "NewThresholdsPM107631",
+    "x": 660,
+    "y": 525.9998779296875,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "72ae33de.e220f4",
+    "type": "function",
+    "z": "b460efb5.81d848",
+    "name": "Sort TrafficInfo",
+    "func": "var obj = msg.payload;\n\nvar newThresholds = obj.newThresholds;\n\nvar lastObj = {};\nlastObj.newThresholds = newThresholds;\nmsg.payload = lastObj\n//store a maping codigo -> thresholds to use in other nodes\nif (obj.codigo) context.global.set(obj.codigo,newThresholds);\n\nswitch(obj.codigo){\n     case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM107631\":\n        return [null,null,msg];\n    default:\n        return [null,null,null];\n\n}",
+    "outputs": "3",
+    "noerr": 0,
+    "x": 418,
+    "y": 475,
+    "wires": [
+      [
+        "eacb3474.6181e",
+        "aab8b2c9.b9c9b8"
+      ],
+      [
+        "62a08f1b.bfb758"
+      ],
+      [
+        "e0c72657.7dd228"
       ]
-    },
-    {
-      "id": "a806a90d.24eb4",
-      "type": "delay",
-      "z": "b460efb5.81d848",
-      "name": "8 second delay",
-      "pauseType": "delay",
-      "timeout": "8",
-      "timeoutUnits": "seconds",
-      "rate": "1",
-      "rateUnits": "second",
-      "randomFirst": "1",
-      "randomLast": "5",
-      "randomUnits": "seconds",
-      "drop": false,
-      "x": 1340.25,
-      "y": 291.25,
-      "wires": [
-        [
-          "59e5c562.9e3844"
-        ]
+    ]
+  },
+  {
+    "id": "a806a90d.24eb4",
+    "type": "delay",
+    "z": "b460efb5.81d848",
+    "name": "8 second delay",
+    "pauseType": "delay",
+    "timeout": "8",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 1340.25,
+    "y": 291.25,
+    "wires": [
+      [
+        "59e5c562.9e3844"
       ]
-    },
-    {
-      "id": "bcd2e867.7aee1",
-      "type": "delay",
-      "z": "b460efb5.81d848",
-      "name": "16 second delay",
-      "pauseType": "delay",
-      "timeout": "16",
-      "timeoutUnits": "seconds",
-      "rate": "1",
-      "rateUnits": "second",
-      "randomFirst": "1",
-      "randomLast": "5",
-      "randomUnits": "seconds",
-      "drop": false,
-      "x": 1339.25,
-      "y": 333.25,
-      "wires": [
-        [
-          "315c6b66.ef8cc4"
-        ]
+    ]
+  },
+  {
+    "id": "bcd2e867.7aee1",
+    "type": "delay",
+    "z": "b460efb5.81d848",
+    "name": "16 second delay",
+    "pauseType": "delay",
+    "timeout": "16",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 1339.25,
+    "y": 333.25,
+    "wires": [
+      [
+        "315c6b66.ef8cc4"
       ]
-    }
-  ]
+    ]
+  },
+  {
+    "id": "7a52412.e3949c",
+    "type": "debug",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 1342,
+    "y": 111,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "d6e40991.3af838",
+    "type": "messagehub in",
+    "z": "b460efb5.81d848",
+    "apikey": "",
+    "topic": "newOutput",
+    "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
+    "x": 95,
+    "y": 477,
+    "wires": [
+      [
+        "72d00a0f.d93b84"
+      ]
+    ]
+  },
+  {
+    "id": "b6319b67.c3ebf8",
+    "type": "debug",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 385,
+    "y": 634,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "aab8b2c9.b9c9b8",
+    "type": "debug",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "payload",
+    "x": 624,
+    "y": 640,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "72d00a0f.d93b84",
+    "type": "json",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "x": 256,
+    "y": 486,
+    "wires": [
+      [
+        "72ae33de.e220f4",
+        "b6319b67.c3ebf8"
+      ]
+    ]
+  },
+  {
+    "id": "d1215bd2.25628",
+    "type": "debug",
+    "z": "b460efb5.81d848",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 1240,
+    "y": 425,
+    "wires": [
+      
+    ]
+  }
+]
