@@ -97,28 +97,27 @@ To complete Spark configuration, add your Object Storage and IPython notebook to
 10. Select **Create Notebook**.
 
 
-## Set up your external IP with Node-RED
+## Set up Message Hub credentials in Node-RED
 
-Add the external IP address of your container to Node-RED.
+Add the API key of your Message Hub service to Node-RED.
 
-1. Obtain the public IP of your DAT-container on the container's tile at your Bluemix Dashboard.
-1. Return to your cf application's dashboard and click the route at the top of the page to launch the Node-RED website.
-2. Click **Go to your Node-RED flow editor**. Once there, you will see the customized flow.
-3. Connect the initial **Every 5 minutes** node to the **Get traffic status from Madrid** node.
-4. Double click on the **Send to Kafka** node at the far right to edit the Kafka producer node. Click the **pencil** icon to edit the DAT Kafka Zookeeper Server.
-5. In the **Edit kafka-credentials config node** window, modify the **Zookeeper Server Address** field to the public IP address of your DAT container.
-6. Press **Update**.
-7. Click **OK** to close the window.
-8. Click **Deploy** at the upper right to deploy the updated flow to Node-RED.
+1. Obtain the **API key**: goto Bluemix project Dashboard ->  Message Hub service tile -> click on **show credentials** dropdown ->  copy ```api_key```  
+2. Return to your cf application's dashboard and click the route at the top of the page to launch the Node-RED website.
+3. Click **Go to your Node-RED flow editor**. Once there, you will see the customized flow.
+4. Double click on the **messgehub out** node at the far right to edit the messgehub producer node -> insert your **API key**
+5. Double click on the **messgehub in** node at the far left to edit the messgehub consumer node -> insert your **API key**
+6. Click **OK** to close the window.
+7. Click **Deploy** at the upper right to deploy the updated flow to Node-RED.
 
 
 #### Start the Apache Spark script
 
-1. Go to the project in your Bluemix Dashboard, and choose **Apache Spark**.
-2. Click **OPEN** and select your Apache Spark instance.
-3. Click on the notebook you created.
-4. Update the variable "containerIP" to your own container's public IP address.
-5. Click **Play** at the top.
+1. obtain Message Hub **user** and **password**: goto Bluemix project Dashboard ->  Message Hub service tile -> click on **show credentials** dropdown ->  copy ```user``` and ```password```
+2. Go to the project in your Bluemix Dashboard, and choose **Apache Spark**.
+3. Click **OPEN** and select your Apache Spark instance.
+4. Click on the notebook you created.
+5. Update the variables "MSGHUB_USERNAME" and "MSGHUB_PASSWORD" to your own Message Hub **user** and **password**.
+6. Click **Play** at the top.
 
 
 ## Access Freeboard from Node-RED
@@ -136,13 +135,13 @@ The Data and Analytics Transportation sample app combines several different Blue
 
 ##### Open source
 
-Apache Kafka: a message hub that provides a commit log of updates.
-
 Secor: a reliable logging service that takes information from Kafka and converts it into parquet files. Those files are then placed into Object Storage within Bluemix.
 
 ##### Bluemix
 
 Apache Spark: a data processing engine.
+
+Message Hub: kafka based message bus service.
 
 IPython: an interactive computational environment where you can combine coding, text, math, and media.
 
