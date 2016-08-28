@@ -68,12 +68,12 @@
 							"-3.658846"
 						],
 						"color_value_2": [
-							"datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_2": "<b>PM107631</b>",
-						"center_lat": "40.399958",
-						"center_lon": "-3.692095",
+						"marker_text_2": "<b>PM10611</b>",
+						"center_lat": "40.4289174",
+						"center_lon": "-3.6562762",
 						"map_zoom": "11"
 					}
 				}
@@ -406,7 +406,7 @@
 			]
 		},
 		{
-			"title": "PM107631",
+			"title": "PM10611",
 			"width": 1,
 			"row": {
 				"2": 57,
@@ -429,7 +429,7 @@
 					"settings": {
 						"title": "Speed",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"ValueSpeed\"]",
+						"value": "datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"ValueSpeed\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "km/h"
@@ -438,7 +438,7 @@
 				{
 					"type": "indicator",
 					"settings": {
-						"value": "datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -448,7 +448,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM107631\"][\"newThresholds\"][\"ThresholdSpeed\"]",
+						"value": "datasources[\"NewThresholdsPM10611\"][\"newThresholds\"][\"ThresholdSpeed\"]",
 						"animate": true,
 						"units": "km/h"
 					}
@@ -456,7 +456,7 @@
 			]
 		},
 		{
-			"title": "PM107631",
+			"title": "PM10611",
 			"width": 1,
 			"row": {
 				"2": 59,
@@ -478,16 +478,16 @@
 					"type": "openMap_with_Markers",
 					"settings": {
 						"marker_latlon_0": [
-							"40.419617",
-							"-3.658846"
+							"40.4289174",
+							"-3.6562762"
 						],
 						"color_value_0": [
-							"datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"speedAbnormal\"]",
-							"datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
+							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
+							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
-						"marker_text_0": "<b>PM107631</b>",
-						"center_lat": "40.419617",
-						"center_lon": "-3.658846",
+						"marker_text_0": "<b>PM10611</b>",
+						"center_lat": "40.4289174",
+						"center_lon": "-3.6562762",
 						"map_zoom": "15",
 						"popup_opened": true
 					}
@@ -495,7 +495,7 @@
 			]
 		},
 		{
-			"title": "PM107631",
+			"title": "PM10611",
 			"width": 1,
 			"row": {
 				"2": 67,
@@ -518,7 +518,7 @@
 					"settings": {
 						"title": "Intensity",
 						"size": "big",
-						"value": "datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"ValueIntensity\"]",
+						"value": "datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"ValueIntensity\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "vehicles/hour"
@@ -527,7 +527,7 @@
 				{
 					"type": "indicator",
 					"settings": {
-						"value": "datasources[\"TrafficInfoPM107631\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
+						"value": "datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"intensityAbnormal\"]",
 						"on_text": "Abnormal",
 						"off_text": "Normal"
 					}
@@ -537,7 +537,7 @@
 					"settings": {
 						"title": "Threshold",
 						"size": "regular",
-						"value": "datasources[\"NewThresholdsPM107631\"][\"newThresholds\"][\"ThresholdIntensity\"]",
+						"value": "datasources[\"NewThresholdsPM10611\"][\"newThresholds\"][\"ThresholdIntensity\"]",
 						"animate": true,
 						"units": "vehicles/hour"
 					}
@@ -545,7 +545,7 @@
 			]
 		},
 		{
-			"title": "PM107631",
+			"title": "PM10611",
 			"width": 1,
 			"row": {
 				"2": 69,
@@ -562,7 +562,7 @@
 				{
 					"type": "picture",
 					"settings": {
-						"src": "http://informo.munimadrid.es/informo/Camaras/Camara00041_mdf.jpg",
+						"src": "http://informo.munimadrid.es/informo/Camaras/Camara00085_mdf.jpg",
 						"refresh": 180
 					}
 				}
@@ -581,8 +581,8 @@
 			"settings": {}
 		},
 		{
-			"name": "TrafficInfoPM107631",
-			"type": "TrafficInfoPM107631",
+			"name": "TrafficInfoPM10611",
+			"type": "TrafficInfoPM10611",
 			"settings": {}
 		},
 		{
@@ -596,8 +596,8 @@
 			"settings": {}
 		},
 		{
-			"name": "NewThresholdsPM107631",
-			"type": "NewThresholdsPM107631",
+			"name": "NewThresholdsPM10611",
+			"type": "NewThresholdsPM10611",
 			"settings": {}
 		}
 	],
