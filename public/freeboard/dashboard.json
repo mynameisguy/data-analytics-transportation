@@ -46,8 +46,8 @@
 					"type": "openMap_with_Markers",
 					"settings": {
 						"marker_latlon_0": [
-							"40.409958",
-							"-3.742095"
+							"40.413653",
+							"-3.728492"
 						],
 						"color_value_0": [
 							"datasources[\"TrafficInfoPM41801\"][\"InfoTraffic\"][\"speedAbnormal\"]",
@@ -55,8 +55,8 @@
 						],
 						"marker_text_0": "<b>PM41801</b>",
 						"marker_latlon_1": [
-							"40.413653",
-							"-3.728492"
+							"40.375486",
+							"-3.694993"
 						],
 						"color_value_1": [
 							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"speedAbnormal\"]",
@@ -64,8 +64,8 @@
 						],
 						"marker_text_1": "<b>PM41301</b>",
 						"marker_latlon_2": [
-							"40.3752126",
-							"-3.6930191"
+							"40.431482",
+							",-3.660814"
 						],
 						"color_value_2": [
 							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
@@ -315,16 +315,16 @@
 					"type": "openMap_with_Markers",
 					"settings": {
 						"marker_latlon_0": [
-							"40.3752126",
-							"-3.6930191"
+							"40.375486",
+							"-3.694993"
 						],
 						"color_value_0": [
 							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"speedAbnormal\"]",
 							"datasources[\"TrafficInfoPM41301\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
 						"marker_text_0": "<b>PM41301</b>",
-						"center_lat": "40.3752126",
-						"center_lon": "-3.6930191",
+						"center_lat": "40.375486",
+						"center_lon": "-3.694993",
 						"map_zoom": "15",
 						"popup_opened": true
 					}
@@ -478,16 +478,16 @@
 					"type": "openMap_with_Markers",
 					"settings": {
 						"marker_latlon_0": [
-							"40.4289174",
-							"-3.6562762"
+							"40.431482",
+							"-3.660814"
 						],
 						"color_value_0": [
 							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
 							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"intensityAbnormal\"]"
 						],
 						"marker_text_0": "<b>PM10611</b>",
-						"center_lat": "40.4289174",
-						"center_lon": "-3.6562762",
+						"center_lat": "40.431482",
+						"center_lon": "-3.660814",
 						"map_zoom": "15",
 						"popup_opened": true
 					}
