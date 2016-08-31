@@ -208,21 +208,6 @@
     ]
   },
   {
-    "id": "3585fc43.c08fa4",
-    "type": "messagehub in",
-    "z": "b460efb5.81d848",
-    "apikey": "PUT_MH_KEY_HERE",
-    "topic": "newOutput",
-    "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-    "x": 132,
-    "y": 940.25,
-    "wires": [
-      [
-        "72d00a0f.d93b84"
-      ]
-    ]
-  },
-  {
     "id": "38444c73.26100c",
     "type": "inject",
     "z": "b460efb5.81d848",
