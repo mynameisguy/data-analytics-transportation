@@ -2,7 +2,7 @@
   {
     "id": "781fa294.9816d4",
     "type": "http request",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Get traffic status from Madrid",
     "method": "GET",
     "ret": "txt",
@@ -19,7 +19,7 @@
   {
     "id": "1f2fa3bd.73f2a4",
     "type": "xml",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "xml2json",
     "attr": "",
     "chr": "",
@@ -34,7 +34,7 @@
   {
     "id": "5ecc1eb1.76ef2",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Filter for Specific Sensors without \"Error\"",
     "func": "var sensors = [\"PM10611\"];\n\nfunction elQueEmpiezaPor(){\n\t\treturn function(item){ \n\t\t        return  (sensors.indexOf(item.codigo.toString()) >= 0 && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor());\n\nreturn msg;",
     "outputs": 1,
@@ -50,7 +50,7 @@
   {
     "id": "2324078e.47e9f",
     "type": "splitter",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Split to multiple messages",
     "property": "payload",
     "x": 1189.5,
@@ -62,41 +62,9 @@
     ]
   },
   {
-    "id": "9bb295cc.07ad58",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Add Timestamp and remove brackets",
-    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 1475.5,
-    "y": 651.5,
-    "wires": [
-      [
-        "b202be80.317fa8"
-      ]
-    ]
-  },
-  {
-    "id": "b202be80.317fa8",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Clean Data",
-    "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n lastObj.codigo =  obj.codigo  \nmsg.payload = lastObj;\n  \n  return msg;  \n// switch(obj.codigo){\n//     case \"PM41801\":\n//         return [msg,null,null];\n//     case \"PM41301\":\n//         return [null,msg,null];\n//     case \"PM107631\":\n//         return [null,null,msg];\n//     default:\n//         return [null,null,null]\n// }",
-    "outputs": "1",
-    "noerr": 0,
-    "x": 1717.75,
-    "y": 651.5,
-    "wires": [
-      [
-        "2bbf31a8.16fa16"
-      ]
-    ]
-  },
-  {
     "id": "b8faf542.b7846",
     "type": "inject",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Every 5 minutes",
     "topic": "",
     "payload": "",
@@ -113,104 +81,9 @@
     ]
   },
   {
-    "id": "6988f75.d058c88",
-    "type": "comment",
-    "z": "b460efb5.81d848",
-    "name": "---------------Freeboard Data from Spark---------------",
-    "info": "",
-    "x": 289.33331298828125,
-    "y": 873.0000305175781,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "eacb3474.6181e",
-    "type": "freeboard",
-    "z": "b460efb5.81d848",
-    "name": "NewThresholdsPM41801",
-    "x": 674.6666870117188,
-    "y": 890,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "62a08f1b.bfb758",
-    "type": "freeboard",
-    "z": "b460efb5.81d848",
-    "name": "NewThresholdsPM41301",
-    "x": 674.6666870117188,
-    "y": 934.9999389648438,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "e0c72657.7dd228",
-    "type": "freeboard",
-    "z": "b460efb5.81d848",
-    "name": "NewThresholdsPM107631",
-    "x": 679,
-    "y": 979.9998779296875,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "72ae33de.e220f4",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Sort TrafficInfo",
-    "func": "var obj = msg.payload;\nvar newThresholds = obj.newThresholds;\n\nvar lastObj = {};\nlastObj.newThresholds = newThresholds;\nmsg.payload = lastObj\n//store a maping codigo -> thresholds to use in other nodes\nif (obj.codigo) context.global.set(obj.codigo,newThresholds);\n\nswitch(obj.codigo){\n     case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM10611\":\n        return [null,null,msg];\n    default:\n        return [null,null,null];\n\n}",
-    "outputs": "3",
-    "noerr": 0,
-    "x": 437,
-    "y": 929,
-    "wires": [
-      [
-        "eacb3474.6181e"
-      ],
-      [
-        "62a08f1b.bfb758"
-      ],
-      [
-        "e0c72657.7dd228"
-      ]
-    ]
-  },
-  {
-    "id": "b6319b67.c3ebf8",
-    "type": "debug",
-    "z": "b460efb5.81d848",
-    "name": "",
-    "active": false,
-    "console": "false",
-    "complete": "false",
-    "x": 281,
-    "y": 1015,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "72d00a0f.d93b84",
-    "type": "json",
-    "z": "b460efb5.81d848",
-    "name": "",
-    "x": 275,
-    "y": 940,
-    "wires": [
-      [
-        "72ae33de.e220f4",
-        "b6319b67.c3ebf8"
-      ]
-    ]
-  },
-  {
     "id": "38444c73.26100c",
     "type": "inject",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Every 5 minutes",
     "topic": "",
     "payload": "",
@@ -230,7 +103,7 @@
   {
     "id": "946354c9.4b926",
     "type": "http request",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Get traffic status from Madrid",
     "method": "GET",
     "ret": "txt",
@@ -246,7 +119,7 @@
   {
     "id": "b9985bf2.68a58",
     "type": "xml",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "xml2json",
     "attr": "",
     "chr": "",
@@ -262,7 +135,7 @@
   {
     "id": "35e5afb4.458e38",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Filter for Specific Sensors without \"Error\"",
     "func": "var sensors = [\"PM41801\"];\n\nfunction elQueEmpiezaPor(){\n\t\treturn function(item){ \n\t\t        return  (sensors.indexOf(item.codigo.toString()) >= 0 && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor());\n\nreturn msg;",
     "outputs": 1,
@@ -276,41 +149,9 @@
     ]
   },
   {
-    "id": "f5ef6e60.8e17c8",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Add Timestamp and remove brackets",
-    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 1462.75,
-    "y": 440,
-    "wires": [
-      [
-        "fb7760b4.75a118"
-      ]
-    ]
-  },
-  {
-    "id": "fb7760b4.75a118",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Clean Data",
-    "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n lastObj.codigo =  obj.codigo  \nmsg.payload = lastObj;\n  \n  return msg;  \n// switch(obj.codigo){\n//     case \"PM41801\":\n//         return [msg,null,null];\n//     case \"PM41301\":\n//         return [null,msg,null];\n//     case \"PM107631\":\n//         return [null,null,msg];\n//     default:\n//         return [null,null,null]\n// }",
-    "outputs": "1",
-    "noerr": 0,
-    "x": 1705,
-    "y": 440,
-    "wires": [
-      [
-        "8fbddb92.e1d7c8"
-      ]
-    ]
-  },
-  {
     "id": "d1d5d7ee.d563b",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Filter for Specific Sensors without \"Error\"",
     "func": "var sensors = [\"PM41301\"];\n\nfunction elQueEmpiezaPor(){\n\t\treturn function(item){ \n\t\t        return  (sensors.indexOf(item.codigo.toString()) >= 0 && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor());\n\nreturn msg;",
     "outputs": 1,
@@ -326,7 +167,7 @@
   {
     "id": "bfb53748.9ec",
     "type": "splitter",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Split to multiple messages",
     "property": "payload",
     "x": 1176.75,
@@ -340,7 +181,7 @@
   {
     "id": "b2605247.2b02a8",
     "type": "inject",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Every 5 minutes",
     "topic": "",
     "payload": "",
@@ -359,7 +200,7 @@
   {
     "id": "d89f4f1d.44788",
     "type": "http request",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Get traffic status from Madrid",
     "method": "GET",
     "ret": "txt",
@@ -375,7 +216,7 @@
   {
     "id": "443be693.b36b58",
     "type": "xml",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "xml2json",
     "attr": "",
     "chr": "",
@@ -388,9 +229,157 @@
     ]
   },
   {
+    "id": "67475d57.73859c",
+    "type": "splitter",
+    "z": "219e1bb0.2e6394",
+    "name": "Split to multiple messages",
+    "property": "payload",
+    "x": 1199.75,
+    "y": 512.5,
+    "wires": [
+      [
+        "8b5a3a40.36e78"
+      ]
+    ]
+  },
+  {
+    "id": "40b1da2c.5bb054",
+    "type": "comment",
+    "z": "219e1bb0.2e6394",
+    "name": "------------------ Specific Measurement Points for Freeboard ------------------",
+    "info": "",
+    "x": 1017,
+    "y": 318,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "2e7927fe.3e65f8",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Get Time",
+    "func": "var d = new Date();\nvar n = d.getTime();\nvar hour    = d.getHours();\nvar minute  = d.getMinutes();\nvar second  = d.getSeconds(); \n\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = hour + \":\" + minute + \":\" + second;\nreturn;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 231,
+    "y": 144,
+    "wires": [
+      [
+        
+      ]
+    ]
+  },
+  {
+    "id": "5850a26f.21d234",
+    "type": "splitter",
+    "z": "219e1bb0.2e6394",
+    "name": "Split to multiple messages",
+    "property": "payload",
+    "x": 1183.25,
+    "y": 161,
+    "wires": [
+      [
+        "43622871.e67178"
+      ]
+    ]
+  },
+  {
+    "id": "28e2fc7.84ff204",
+    "type": "comment",
+    "z": "219e1bb0.2e6394",
+    "name": "------------------ From Ayuntamiento Madrid to Object Storage ------------------",
+    "info": "",
+    "x": 1013,
+    "y": 78,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "6aaf7c48.47341c",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Filter for starting with \"PM\" without \"Error\"",
+    "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn  (item.codigo.toString().indexOf(empiezaPor) === 0  && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 873.5,
+    "y": 160,
+    "wires": [
+      [
+        "5850a26f.21d234"
+      ]
+    ]
+  },
+  {
+    "id": "9bb295cc.07ad58",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Add Timestamp and remove brackets",
+    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1475.5,
+    "y": 651.5,
+    "wires": [
+      [
+        "b202be80.317fa8"
+      ]
+    ]
+  },
+  {
+    "id": "b202be80.317fa8",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Clean Data",
+    "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n lastObj.codigo =  obj.codigo  \nmsg.payload = lastObj;\n  \n  return msg;  \n// switch(obj.codigo){\n//     case \"PM41801\":\n//         return [msg,null,null];\n//     case \"PM41301\":\n//         return [null,msg,null];\n//     case \"PM107631\":\n//         return [null,null,msg];\n//     default:\n//         return [null,null,null]\n// }",
+    "outputs": "1",
+    "noerr": 0,
+    "x": 1717.75,
+    "y": 651.5,
+    "wires": [
+      [
+        "2bbf31a8.16fa16"
+      ]
+    ]
+  },
+  {
+    "id": "f5ef6e60.8e17c8",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Add Timestamp and remove brackets",
+    "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1462.75,
+    "y": 440,
+    "wires": [
+      [
+        "fb7760b4.75a118"
+      ]
+    ]
+  },
+  {
+    "id": "fb7760b4.75a118",
+    "type": "function",
+    "z": "219e1bb0.2e6394",
+    "name": "Clean Data",
+    "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n lastObj.codigo =  obj.codigo  \nmsg.payload = lastObj;\n  \n  return msg;  \n// switch(obj.codigo){\n//     case \"PM41801\":\n//         return [msg,null,null];\n//     case \"PM41301\":\n//         return [null,msg,null];\n//     case \"PM107631\":\n//         return [null,null,msg];\n//     default:\n//         return [null,null,null]\n// }",
+    "outputs": "1",
+    "noerr": 0,
+    "x": 1705,
+    "y": 440,
+    "wires": [
+      [
+        "8fbddb92.e1d7c8"
+      ]
+    ]
+  },
+  {
     "id": "8b5a3a40.36e78",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Add Timestamp and remove brackets",
     "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\n\nreturn msg;",
     "outputs": 1,
@@ -406,7 +395,7 @@
   {
     "id": "d52fb942.c741f8",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Clean Data",
     "func": "var obj = JSON.parse(msg.payload);\n\nvar newObj = {};\nnewObj.tf = obj.tf;\nnewObj.ts = obj.ts;\nif (obj.intensidad == \"-1\") {\n    return;\n}\nnewObj.ValueIntensity = obj.intensidad;\nnewObj.ValueSpeed = obj.velocidad;\nnewObj.DiffIntensity = \"0.000000\";\nnewObj.DiffSpeed = \"0.000000\";\nnewObj.speedAbnormal = 0;\nnewObj.intensityAbnormal = 0;\n\nvar sThreshold = 0;\nvar iThreshold = 0;\n\nvar thresholds = context.global.get(obj.codigo);\nif (thresholds) {\n    sThreshold = thresholds.ThresholdSpeed;\n    iThreshold = thresholds.ThresholdIntensity;\n}\n\nif (sThreshold !== 0 && newObj.ValueSpeed < (0.5 * sThreshold)) {\n    newObj.speedAbnormal = \"1\";\n}\nif (iThreshold !== 0 && newObj.ValueIntensity < (0.5 * iThreshold)) {\n    newObj.intensityAbnormal = \"1\";\n}\n    \nvar lastObj = {};\nlastObj.InfoTraffic = newObj;\n lastObj.codigo =  obj.codigo  \nmsg.payload = lastObj;\n  \n  return msg;  \n// switch(obj.codigo){\n//     case \"PM41801\":\n//         return [msg,null,null];\n//     case \"PM41301\":\n//         return [null,msg,null];\n//     case \"PM107631\":\n//         return [null,null,msg];\n//     default:\n//         return [null,null,null]\n// }",
     "outputs": "1",
@@ -420,51 +409,9 @@
     ]
   },
   {
-    "id": "67475d57.73859c",
-    "type": "splitter",
-    "z": "b460efb5.81d848",
-    "name": "Split to multiple messages",
-    "property": "payload",
-    "x": 1199.75,
-    "y": 512.5,
-    "wires": [
-      [
-        "8b5a3a40.36e78"
-      ]
-    ]
-  },
-  {
-    "id": "40b1da2c.5bb054",
-    "type": "comment",
-    "z": "b460efb5.81d848",
-    "name": "------------------ Specific Measurement Points for Freeboard ------------------",
-    "info": "",
-    "x": 1017,
-    "y": 318,
-    "wires": [
-      
-    ]
-  },
-  {
-    "id": "2e7927fe.3e65f8",
-    "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Get Time",
-    "func": "var d = new Date();\nvar n = d.getTime();\nvar hour    = d.getHours();\nvar minute  = d.getMinutes();\nvar second  = d.getSeconds(); \n\n\ncontext.global.ts3 = n;\ncontext.global.tf3 = hour + \":\" + minute + \":\" + second;\nreturn;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 231,
-    "y": 144,
-    "wires": [
-      [
-        
-      ]
-    ]
-  },
-  {
     "id": "2bbf31a8.16fa16",
     "type": "freeboard",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "TrafficInfoPM10611",
     "x": 1909.911376953125,
     "y": 651.166748046875,
@@ -475,7 +422,7 @@
   {
     "id": "6a835164.aa7938",
     "type": "freeboard",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "TrafficInfoPM41301",
     "x": 1920.161376953125,
     "y": 519.416748046875,
@@ -486,7 +433,7 @@
   {
     "id": "8fbddb92.e1d7c8",
     "type": "freeboard",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "TrafficInfoPM41801",
     "x": 1937.88916015625,
     "y": 442.1112060546875,
@@ -497,7 +444,7 @@
   {
     "id": "b77007f0.c98e5",
     "type": "messagehub out",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "apikey": "PUT_MH_KEY_HERE",
     "topic": "DataServices",
     "kafkaresturl": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
@@ -510,7 +457,7 @@
   {
     "id": "43622871.e67178",
     "type": "function",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "Add Timestamp and remove brackets",
     "func": "var obj = msg.payload;\n\nobj.ts = context.global.ts3;\nobj.tf = context.global.tf3;\n\nmsg.payload = JSON.stringify(obj);\n\nmsg.payload=(msg.payload).replace(/\\[/g,\"\");\nmsg.payload=(msg.payload).replace(/\\]/g,\"\");\n\nreturn msg;",
     "outputs": 1,
@@ -527,7 +474,7 @@
   {
     "id": "7a52412.e3949c",
     "type": "debug",
-    "z": "b460efb5.81d848",
+    "z": "219e1bb0.2e6394",
     "name": "",
     "active": false,
     "console": "false",
@@ -539,45 +486,122 @@
     ]
   },
   {
-    "id": "5850a26f.21d234",
-    "type": "splitter",
-    "z": "b460efb5.81d848",
-    "name": "Split to multiple messages",
-    "property": "payload",
-    "x": 1183.25,
-    "y": 161,
-    "wires": [
-      [
-        "43622871.e67178"
-      ]
-    ]
-  },
-  {
-    "id": "28e2fc7.84ff204",
+    "id": "2563a114.7e1df6",
     "type": "comment",
-    "z": "b460efb5.81d848",
-    "name": "------------------ From Ayuntamiento Madrid to Object Storage ------------------",
+    "z": "219e1bb0.2e6394",
+    "name": "INSERT YOUR  MESSAGEHUB API_KEY",
     "info": "",
-    "x": 1013,
-    "y": 78,
+    "x": 2212,
+    "y": 170,
     "wires": [
       
     ]
   },
   {
-    "id": "6aaf7c48.47341c",
+    "id": "6988f75.d058c88",
+    "type": "comment",
+    "z": "219e1bb0.2e6394",
+    "name": "---------------Freeboard Data from Spark---------------",
+    "info": "",
+    "x": 636.3333129882812,
+    "y": 798.0000305175781,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "eacb3474.6181e",
+    "type": "freeboard",
+    "z": "219e1bb0.2e6394",
+    "name": "NewThresholdsPM41801",
+    "x": 1021.6666870117188,
+    "y": 815,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "62a08f1b.bfb758",
+    "type": "freeboard",
+    "z": "219e1bb0.2e6394",
+    "name": "NewThresholdsPM41301",
+    "x": 1021.6666870117188,
+    "y": 859.9999389648438,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "e0c72657.7dd228",
+    "type": "freeboard",
+    "z": "219e1bb0.2e6394",
+    "name": "NewThresholdsPM107631",
+    "x": 1026,
+    "y": 904.9998779296875,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "72ae33de.e220f4",
     "type": "function",
-    "z": "b460efb5.81d848",
-    "name": "Filter for starting with \"PM\" without \"Error\"",
-    "func": "function elQueEmpiezaPor(empiezaPor){\n\t\treturn function(item){ \n\t\t\t\treturn  (item.codigo.toString().indexOf(empiezaPor) === 0  && \n\t\t\t\t        item.intensidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.ocupacion.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.carga.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.nivelServicio.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.velocidad.toString().indexOf(\"Error\") !== 0 &&\n\t\t\t\t        item.error.toString().indexOf(\"Error\") !== 0\n\t\t\t\t); \n\t\t\t}\n\t}\n\nvar losDatos = msg.payload;\n\nmsg.payload = losDatos.pms.pm.filter(elQueEmpiezaPor(\"PM\"));\n\nreturn msg;",
-    "outputs": 1,
+    "z": "219e1bb0.2e6394",
+    "name": "Sort TrafficInfo",
+    "func": "var obj = msg.payload;\nvar newThresholds = obj.newThresholds;\n\nvar lastObj = {};\nlastObj.newThresholds = newThresholds;\nmsg.payload = lastObj\n//store a maping codigo -> thresholds to use in other nodes\nif (obj.codigo) context.global.set(obj.codigo,newThresholds);\n\nswitch(obj.codigo){\n     case \"PM41801\":\n        return [msg,null,null];\n    case \"PM41301\":\n        return [null,msg,null];\n    case \"PM10611\":\n        return [null,null,msg];\n    default:\n        return [null,null,null];\n\n}",
+    "outputs": "3",
     "noerr": 0,
-    "x": 873.5,
-    "y": 160,
+    "x": 784,
+    "y": 854,
     "wires": [
       [
-        "5850a26f.21d234"
+        "eacb3474.6181e"
+      ],
+      [
+        "62a08f1b.bfb758"
+      ],
+      [
+        "e0c72657.7dd228"
       ]
+    ]
+  },
+  {
+    "id": "b6319b67.c3ebf8",
+    "type": "debug",
+    "z": "219e1bb0.2e6394",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 628,
+    "y": 940,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "72d00a0f.d93b84",
+    "type": "json",
+    "z": "219e1bb0.2e6394",
+    "name": "",
+    "x": 622,
+    "y": 865,
+    "wires": [
+      [
+        "72ae33de.e220f4",
+        "b6319b67.c3ebf8"
+      ]
+    ]
+  },
+  {
+    "id": "5ef19150.d82358",
+    "type": "comment",
+    "z": "219e1bb0.2e6394",
+    "name": "READ ME AND REPLACE",
+    "info": "REPLACE WITH MESSAGEHUB IN NODE \n=> INSERT YOUR API_KEY\n=> INSERT TOPIC : \"newOutput\"",
+    "x": 460,
+    "y": 866,
+    "wires": [
+      
     ]
   }
 ]
