@@ -65,7 +65,7 @@
 						"marker_text_1": "<b>PM41301</b>",
 						"marker_latlon_2": [
 							"40.431482",
-							",-3.660814"
+							"-3.660814"
 						],
 						"color_value_2": [
 							"datasources[\"TrafficInfoPM10611\"][\"InfoTraffic\"][\"speedAbnormal\"]",
